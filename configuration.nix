@@ -5,7 +5,10 @@
   imports = [ ./hardware-configuration.nix ];
 
   # Enable bluetooth
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
 
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -24,7 +27,6 @@
 
   # Use secure boot with lanzaboote
   boot = {
-    bootspec.enable = true;
     loader.systemd-boot.enable = pkgs.lib.mkForce false;
     lanzaboote = {
       enable = true;
@@ -34,7 +36,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable network manager
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.macAddress = "random";
+  };
 
   # Set time zone
   time.timeZone = "Europe/Zurich";
@@ -70,7 +75,6 @@
       go
       golangci-lint
       gopass
-      gopls
       grim
       gron
       hugo
@@ -91,6 +95,7 @@
       ncdu
       nmap
       nodejs
+      stern
       nodePackages.prettier
       nodePackages.svgo
       optipng
@@ -99,9 +104,11 @@
       protobuf
       pwgen
       python3
+      python311Packages.flake8
       quickemu
       realvnc-vnc-viewer
       ripgrep
+      rnix-lsp
       rustc
       shellcheck
       shfmt
@@ -128,6 +135,7 @@
       wofi
       workstyle
       zathura
+      zeroad
       zoxide
     ];
     password = "changeme";
@@ -152,7 +160,6 @@
     unzip
     wget
     zip
-    zsh
   ];
 
   # Enable Neovim and make it the default editor
@@ -184,9 +191,12 @@
   programs.sway.enable = true;
   xdg.portal.wlr.enable = true;
 
-  programs.gnupg.agent = {
-    enable = true;
-  };
+  # Enable GPG agent
+  programs.gnupg.agent.enable = true;
+
+  # Enable Kubernetes
+  services.k3s.enable = true;
+  networking.firewall.allowedTCPPorts = [ 6643 ];
 
   # Enable firmware updater
   services.fwupd.enable = true;
@@ -195,5 +205,5 @@
   services.auto-cpufreq.enable = true;
   services.thermald.enable = true;
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 }
