@@ -4,27 +4,98 @@
   home.username = "lena";
   home.homeDirectory = "/home/lena";
 
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     alacritty
+    autotiling-rs
+    awscli2
+    brave
+    brightnessctl
+    cargo
+    chafa
+    chromium
+    clipman
+    diff-so-fancy
+    dig
+    fd
+    fx
+    fzf
+    gammastep
+    gh
+    gimp
+    go
+    golangci-lint
+    gopass
+    grim
+    gron
+    hugo
+    imv
+    inkscape
+    jpegoptim
+    jq
+    kanshi
+    kubectl
+    kubectx
+    libreoffice-fresh
+    lolcat
+    lutris
+    lynis
+    mako
+    moq
+    mpv
+    ncdu
+    nmap
+    nodejs
+    nodePackages.prettier
+    nodePackages.svgo
+    optipng
+    playerctl
+    poetry
+    protobuf
+    pwgen
+    python3
+    python311Packages.flake8
+    quickemu
+    realvnc-vnc-viewer
+    ripgrep
+    rnix-lsp
+    rustc
+    shellcheck
+    shfmt
+    signal-desktop
+    slurp
+    stern
+    stow
+    stylua
+    swaybg
+    swayidle
+    swaylock
+    taskwarrior
+    terraform
+    tflint
+    timewarrior
+    tldr
+    tmate
+    tree
+    vifm
+    waybar
+    wf-recorder
+    whois
+    wine
+    wl-clipboard
+    wofi
+    workstyle
+    zathura
+    zeroad
+    zoxide
   ];
 
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 
-  # Enable ZSH
-  programs.zsh.enable = true;
-
-  # Enable Git
-  programs.git = {
-    enable = true;
-    userName = "Lena Fuhrimann";
-    userEmail = "6780471+cloudlena@users.noreply.github.com";
-  };
-
   # Enable GPG
   services.gpg-agent.enable = true;
-
-  services.swayidle.enable = true;
 }
