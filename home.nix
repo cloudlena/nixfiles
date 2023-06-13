@@ -5,6 +5,7 @@
   home.homeDirectory = "/home/lena";
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
   home.packages = with pkgs; [
     alacritty
@@ -19,11 +20,13 @@
     diff-so-fancy
     dig
     fd
+    fira-mono
     fx
     fzf
     gammastep
     gh
     gimp
+    gnupg
     go
     golangci-lint
     gopass
@@ -37,18 +40,21 @@
     kanshi
     kubectl
     kubectx
+    lato
     libreoffice-fresh
     lolcat
     lutris
-    lynis
     mako
     moq
     mpv
     ncdu
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
     nmap
     nodejs
     nodePackages.prettier
     nodePackages.svgo
+    noto-fonts-cjk
+    noto-fonts-emoji
     optipng
     playerctl
     poetry
@@ -95,6 +101,9 @@
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
+
+  # Enable password manager
+  programs.browserpass.enable = true;
 
   # Enable GPG
   services.gpg-agent.enable = true;
