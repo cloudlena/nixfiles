@@ -4,9 +4,6 @@
   home.username = "lena";
   home.homeDirectory = "/home/lena";
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = (pkg: true);
-
   home.packages = with pkgs; [
     alacritty
     autotiling-rs
@@ -98,6 +95,9 @@
   ];
 
   home.stateVersion = "23.05";
+
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
