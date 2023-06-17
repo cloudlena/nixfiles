@@ -48,10 +48,94 @@
   # Enable containers
   virtualisation.podman.enable = true;
 
+  # Set up user
   users.users.lena = {
     isNormalUser = true;
     description = "Lena";
     extraGroups = [ "wheel" "networkmanager" ];
+    packages = with pkgs; [
+      alacritty
+      autotiling-rs
+      awscli2
+      brave
+      brightnessctl
+      cargo
+      chafa
+      chromium
+      clipman
+      diff-so-fancy
+      dig
+      fd
+      fx
+      fzf
+      gammastep
+      gh
+      gimp
+      gnupg
+      go
+      golangci-lint
+      gopass
+      grim
+      gron
+      hugo
+      imv
+      inkscape
+      jpegoptim
+      jq
+      kanshi
+      kubectl
+      kubectx
+      libreoffice-fresh
+      lolcat
+      lutris
+      mako
+      moq
+      mpv
+      ncdu
+      nmap
+      nodejs
+      nodePackages.prettier
+      nodePackages.svgo
+      optipng
+      playerctl
+      poetry
+      protobuf
+      pwgen
+      python3
+      python311Packages.flake8
+      quickemu
+      realvnc-vnc-viewer
+      ripgrep
+      rnix-lsp
+      rustc
+      shellcheck
+      shfmt
+      signal-desktop
+      slurp
+      stern
+      stow
+      stylua
+      swaybg
+      swayidle
+      swaylock
+      taskwarrior
+      terraform
+      tflint
+      timewarrior
+      tldr
+      tmate
+      tree
+      vifm
+      waybar
+      wf-recorder
+      whois
+      wine
+      wl-clipboard
+      wofi
+      workstyle
+      zathura
+      zoxide
+    ];
     password = "changeme";
   };
   users.defaultUserShell = pkgs.zsh;
@@ -65,16 +149,25 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Install system packages
   environment.systemPackages = with pkgs; [
     curl
     gcc
     git
     gnumake
-    home-manager
     sbctl
     unzip
     wget
     zip
+  ];
+
+  # Install fonts
+  fonts.fonts = with pkgs; [
+    fira-mono
+    lato
+    noto-fonts-cjk
+    noto-fonts-emoji
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
   # Enable Neovim and make it the default editor
@@ -83,8 +176,14 @@
     defaultEditor = true;
   };
 
+  # Enable password manager
+  programs.browserpass.enable = true;
+
   # Enable ZSH
   programs.zsh.enable = true;
+
+  # Enable GPG agent
+  programs.gnupg.agent.enable = true;
 
   # Enable process viewer
   programs.htop.enable = true;
