@@ -1,0 +1,55 @@
+# Config for workstyle
+#
+# Format:
+# "pattern" = "icon"
+#
+# The pattern will be used to match against the application name, class_id or WM_CLASS.
+# The icon will be used to represent that application.
+#
+# Note if multiple patterns are present in the same application name,
+# precedence is given in order of apparition in this file.
+
+# Apps
+"alacritty" = ""
+"blender" = "󰂫"
+"calendar" = "󰃭"
+"gimp" = "󱇤"
+"imv" = "󰥶"
+"inkscape" = "󰕙"
+"kde connect" = "󰄜"
+"krita" = "󰃣"
+"libreoffice calc" = "󱀭"
+"libreoffice impress" = "󱀵"
+"libreoffice writer" = "󱀾"
+"libreoffice" = "󱀲"
+"mail" = "󰇰"
+"mpv" = "󰐋"
+"pinentry" = "󰌆"
+"qemu" = "󰹑"
+"signal" = "󰻞"
+"slack" = "󰒱"
+"spotify" = "󰓇"
+"steam" = "󰓓"
+"thunderbird" = "󰇰"
+"zathura" = "󰈦"
+
+# Websites
+"discord" = "󰙯"
+"feeds" = ""
+"github" = "󰊤"
+"gitlab" = "󰮠"
+"linkedin" = "󰌻"
+"mastodon" = "󰫑"
+"pinterest" = "󰐇"
+"reddit" = "󰑍"
+"twitter" = "󰕄"
+"youtube" = "󰗃"
+
+# Browsers
+"brave" = "󰊯"
+"chromium" = "󰊯"
+"firefox" = "󰈹"
+
+[other]
+fallback_icon = "󰘔"
+deduplicate_icons = true
