@@ -1,0 +1,65 @@
+/* General */
+* {
+  border-radius: 0;
+  font-family: "FiraCode Nerd Font";
+  font-size: 13px;
+  color: #c0caf5;
+}
+
+window#waybar {
+  background-color: #1a1b26;
+}
+
+tooltip {
+  background-color: #15161e;
+}
+
+/* Workspaces */
+#workspaces button {
+  margin: 4px;
+  padding: 0 8px;
+  border-radius: 9999px;
+}
+
+#workspaces button:hover {
+  border-color: transparent;
+  box-shadow: none;
+  background: #414868;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  padding: 0 13px;
+  background: #2f334d;
+}
+
+/* Modules */
+#clock,
+#network,
+#wireplumber,
+#bluetooth,
+#battery,
+#custom-updates,
+#custom-tasks,
+#custom-containers,
+#mode {
+  margin: 4px;
+  padding: 0 13px;
+  border-radius: 9999px;
+  background-color: #2f334d;
+}
+
+#network {
+  padding: 0 15px 0 11px;
+}
+
+#mode,
+#custom-updates {
+  color: #bb9af7;
+  font-weight: bold;
+}
+
+#battery.critical {
+  color: #f7768e;
+  font-weight: bold;
+}

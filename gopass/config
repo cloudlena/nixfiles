@@ -1,0 +1,5 @@
+[core]
+	notifications = false
+	showsafecontent = true
+[mounts]
+	path = ~/.password-store
