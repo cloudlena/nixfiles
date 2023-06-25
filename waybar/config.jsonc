@@ -2,7 +2,6 @@
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["custom/tasks"],
   "modules-right": [
-    "custom/updates",
     "custom/containers",
     "wireplumber",
     "bluetooth",
@@ -52,13 +51,6 @@
     "exec": "~/.config/waybar/scripts/tasks.sh",
     "exec-if": "which task",
     "interval": 60
-  },
-  "custom/updates": {
-    "format": "<span size=\"110%\">󰣇</span> {}",
-    "exec": "~/.config/waybar/scripts/updates-arch-combined.sh",
-    "interval": 7200,
-    "on-click": "alacritty --command paru -Syu --noconfirm",
-    "signal": 8
   },
   "custom/containers": {
     "exec": "~/.config/waybar/scripts/containers.sh",
