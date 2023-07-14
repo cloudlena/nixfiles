@@ -19,6 +19,7 @@
     diff-so-fancy
     dig
     fd
+    file
     fira-mono
     fx
     gh
@@ -36,6 +37,7 @@
     kubectx
     lato
     libreoffice-fresh
+    lldb
     lolcat
     lutris
     moq
@@ -77,7 +79,6 @@
     tflint
     timewarrior
     tree
-    vifm
     vscode-langservers-extracted
     waybar
     wf-recorder
@@ -94,6 +95,9 @@
 
   home.shellAliases = {
     e = "$EDITOR";
+    f = "joshuto";
+    g = "gitui";
+    t = "task";
     ".." = "cd ..";
     "..." = "cd ../..";
   };
@@ -118,6 +122,10 @@
       };
       diff-so-fancy.enable = true;
     };
+    gitui.enable = true;
+
+    # File manager
+    joshuto.enable = true;
 
     # GPG
     gpg.enable = true;
@@ -218,7 +226,7 @@
       enable = true;
       settings = {
         add_newline = false;
-        format = "$directory$git_branch$git_status$character";
+        format = "$jobs$directory$git_branch$git_state$git_status$character";
       };
     };
 
@@ -370,10 +378,7 @@
   xdg.configFile = {
     "gopass".source = ./gopass;
     "hypr".source = ./hyprland;
-    "nvim/init.lua".source = ./nvim/init.lua;
-    "nvim/lua".source = ./nvim/lua;
     "sway".source = ./sway;
-    "vifm".source = ./vifm;
     "wallpapers".source = ./wallpapers;
     "waybar".source = ./waybar;
     "workstyle".source = ./workstyle;
