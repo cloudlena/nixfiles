@@ -6,7 +6,7 @@ set $mod Mod4
 # Colors
 set $foreground #c0caf5
 set $highlight #bb9af7
-set $wallpaper ~/.config/wallpapers/bespinian.png
+set $wallpaper ~/.local/share/wallpapers/bespinian.png
 set $lock_cmd swaylock --daemonize --image $wallpaper
 set $sleep_cmd systemctl suspend
 set $launcher_cmd wofi --show drun --no-actions --insensitive --prompt 'Run' | xargs swaymsg exec --
@@ -18,20 +18,6 @@ client.focused $highlight $highlight $foreground
 
 # Set wallpaper
 output * bg $wallpaper fill
-
-### Idle
-
-# Lock the screen after 300 seconds of inactivity, then turn off
-# all displays after another 300 seconds, and turn the screens back on when
-# resumed. It will also lock the screen before the computer goes to sleep.
-exec swayidle -w \
-    timeout 900 '$lock_cmd' \
-    timeout 1200 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    timeout 1800 '$sleep_cmd' \
-    before-sleep 'playerctl pause' \
-    before-sleep '$lock_cmd' \
-    lock '$lock_cmd'
 
 # Inhibit idle if a window is in fullscreen
 for_window [shell=".*"] inhibit_idle fullscreen
