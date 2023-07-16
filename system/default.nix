@@ -1,8 +1,13 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Import hardware specific configuration
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./secure-boot.nix
+    ./encryption.nix
+    ./sound.nix
+  ];
 
   # Bluetooth
   hardware.bluetooth = {
@@ -10,40 +15,17 @@
     powerOnBoot = false;
   };
 
-  # Secure boot
-  boot = {
-    loader.systemd-boot.enable = pkgs.lib.mkForce false;
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
-    };
-  };
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Set up keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-58a9f60d-bf2d-4c94-8f08-8e29a4083728".device = "/dev/disk/by-uuid/58a9f60d-bf2d-4c94-8f08-8e29a4083728";
-  boot.initrd.luks.devices."luks-58a9f60d-bf2d-4c94-8f08-8e29a4083728".keyFile = "/crypto_keyfile.bin";
-
   # Network manager
   networking.networkmanager.enable = true;
 
   # Time zone
   time.timeZone = "Europe/Zurich";
 
-  # Sound
-  sound.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
   # AppArmor
   security.apparmor.enable = true;
+
+  # Temporary fix for Swaylock issue
+  security.pam.services.swaylock = { };
 
   # Containers
   virtualisation.podman.enable = true;
@@ -61,7 +43,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Garbage collection
-  nix.gc.automatic = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -79,18 +64,10 @@
   ];
 
   # Window manager
-  programs.sway.enable = true;
-  xdg.portal.wlr.enable = true;
+  programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.sessionVariables.GTK_THEME = "Adwaita:dark";
 
   programs = {
-    # Neovim
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
-
     # ZSH
     zsh.enable = true;
 

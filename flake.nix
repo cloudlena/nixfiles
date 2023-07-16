@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     lanzaboote = {
-      url = "github:nix-community/lanzaboote";
+      url = "github:nix-community/lanzaboote/v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -18,18 +18,19 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
 
-    in {
+    in
+    {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           lanzaboote.nixosModules.lanzaboote
-          ./configuration.nix
+          ./system
         ];
       };
 
       homeConfigurations.lena = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ];
+        modules = [ ./home ];
       };
     };
 }
