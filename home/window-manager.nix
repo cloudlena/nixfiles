@@ -1,9 +1,115 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  # Window manager
-  xdg.configFile = {
-    "hypr/hyprland.conf".source = ./hyprland/hyprland.conf;
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
+      "$mainMod" = "SUPER";
+      "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
+      "$lockCmd" = "${pkgs.swaylock}/bin/swaylock --daemonize";
+      "$sleepCmd" = "systemctl suspend";
+      "$launcherCmd" = "${pkgs.wofi}/bin/wofi --show drun --no-actions --insensitive --prompt 'Run'";
+      general = {
+        border_size = 2;
+        gaps_in = 0;
+        gaps_out = 0;
+        "col.active_border" = "rgb(bb9af7)";
+        "col.group_border_active" = "rgb(bb9af7)";
+        cursor_inactive_timeout = 8;
+      };
+      input = {
+        kb_options = "caps:escape,compose:ralt";
+        touchpad.natural_scroll = true;
+      };
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_min_speed_to_force = 5;
+      };
+      misc = {
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+      };
+      dwindle = {
+        # Put new splits on the right/bottom
+        force_split = 2;
+        no_gaps_when_only = true;
+      };
+      exec-once = [
+        "${pkgs.waybar}/bin/waybar"
+        "${pkgs.gammastep}/bin/gammastep"
+        "${pkgs.swayidle}/bin/swayidle -w timeout 900 '$lockCmd' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 1800 '$sleepCmd' before-sleep 'playerctl pause' before-sleep '$lockCmd' lock '$lockCmd'"
+        "${pkgs.workstyle}/workstyle &> /tmp/workstyle.log"
+        "${pkgs.swaybg}/bin/swaybg --image $wallpaper --mode fill"
+        "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.clipman}/bin/clipman store"
+      ];
+      bind = [
+        # Window manager
+        "$mainMod, Tab, focusurgentorlast"
+        "$mainMod, Q, killactive,"
+        "$mainMod, F, fullscreen"
+
+        # Shortcuts
+        "$mainMod, Space, exec, $launcherCmd"
+        "$mainMod, Return, exec, $TERMINAL"
+        "$mainMod, W, exec, ${pkgs.brave}/bin/brave"
+        "$mainMod, V, exec, ${pkgs.clipman}/bin/clipman pick --tool wofi"
+        "SUPER_CTRL, Q, exec, $lockCmd"
+
+        # Media keys
+        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
+        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%"
+        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+        ", XF86AudioPrev, exec, ${pkgs.playerctl}playerctl previous"
+        ", XF86Search, exec, $launcherCmd"
+
+        # Screenshots
+        ", Print ,exec, ${pkgs.grim}/bin/grim ${config.xdg.userDirs.download}/screenshot-$(date +'%F-%H-%M-%S').png"
+        "$mainMod, Print , exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ${config.xdg.userDirs.download}/screenshot-$(date +'%F-%H-%M-%S').png"
+
+        # Move window focus
+        "$mainMod, H, movefocus, l"
+        "$mainMod, J, movefocus, d"
+        "$mainMod, K, movefocus, u"
+        "$mainMod, L, movefocus, r"
+
+        # Switch workspaces
+        "$mainMod, 1, workspace, 1"
+        "$mainMod, 2, workspace, 2"
+        "$mainMod, 3, workspace, 3"
+        "$mainMod, 4, workspace, 4"
+        "$mainMod, 5, workspace, 5"
+        "$mainMod, 6, workspace, 6"
+        "$mainMod, 7, workspace, 7"
+        "$mainMod, 8, workspace, 8"
+        "$mainMod, 9, workspace, 9"
+        "$mainMod, 0, togglespecialworkspace"
+
+        # Move active window to workspace
+        "$mainMod SHIFT, 1, movetoworkspace, 1"
+        "$mainMod SHIFT, 2, movetoworkspace, 2"
+        "$mainMod SHIFT, 3, movetoworkspace, 3"
+        "$mainMod SHIFT, 4, movetoworkspace, 4"
+        "$mainMod SHIFT, 5, movetoworkspace, 5"
+        "$mainMod SHIFT, 6, movetoworkspace, 6"
+        "$mainMod SHIFT, 7, movetoworkspace, 7"
+        "$mainMod SHIFT, 8, movetoworkspace, 8"
+        "$mainMod SHIFT, 9, movetoworkspace, 9"
+        "$mainMod SHIFT, 0, movetoworkspace, special"
+      ];
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
+      ];
+    };
   };
 
   programs = {
@@ -164,7 +270,6 @@
             background: #414868;
           }
 
-          #workspaces button.focused,
           #workspaces button.active {
             padding: 0 13px;
             background: #2f334d;
@@ -236,7 +341,7 @@
     swaylock = {
       enable = true;
       settings = {
-        image = "~/.local/share/wallpapers/bespinian.png";
+        image = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       };
     };
   };
@@ -260,20 +365,8 @@
     };
   };
 
+  # Fonts
   home.packages = with pkgs; [
-    # Utilities
-    brightnessctl
-    clipman
-    grim
-    gron
-    playerctl
-    slurp
-    swaybg
-    swayidle
-    wf-recorder
-    workstyle
-
-    # Fonts
     fira-mono
     lato
     (nerdfonts.override { fonts = [ "FiraCode" ]; })

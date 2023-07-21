@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   programs = {
@@ -24,6 +24,9 @@
     # Fast grepping
     ripgrep.enable = true;
 
+    # Process viewer
+    htop.enable = true;
+
     # Quick navigation
     zoxide.enable = true;
 
@@ -36,14 +39,17 @@
     # PDF viewer
     zathura.enable = true;
 
+    # Share terminal sessions
+    tmate.enable = true;
+
     # Task management
     taskwarrior = {
       enable = true;
       config = {
         taskd = {
-          certificate = "~/.config/task/private.certificate.pem";
-          key = "~/.config/task/private.key.pem";
-          ca = "~/.config/task/ca.cert.pem";
+          certificate = "${config.xdg.configHome}/task/private.certificate.pem";
+          key = "${config.xdg.configHome}/task/private.key.pem";
+          ca = "${config.xdg.configHome}/task/ca.cert.pem";
           server = "inthe.am:53589";
           credentials = "inthe_am/lena/c214a5a3-b0b2-4132-958c-ebef8d83fd25";
           trust = "strict";
@@ -54,14 +60,14 @@
     # Media player
     mpv.enable = true;
 
+    # GitHub CLI
+    gh.enable = true;
+
     # Image viewer
     imv.enable = true;
 
     # Go
-    go = {
-      enable = true;
-      goPath = ".local/share/go";
-    };
+    go.enable = true;
 
     # Simplified manuals
     tealdeer = {
@@ -83,12 +89,15 @@
     brave
     cargo
     chromium
+    curl
     diff-so-fancy
     dig
     fd
     fx
-    gh
+    gcc
     gimp
+    gnumake
+    golangci-lint
     gopass
     hugo
     inkscape
@@ -111,19 +120,35 @@
     quickemu
     realvnc-vnc-viewer
     rustc
+    shellcheck
     signal-desktop
     termshark
     terraform
+    tflint
     timewarrior
     tree
-    via
+    unzip
+    wget
     whois
     wine
     wl-clipboard
     yq
+    zip
   ];
 
   xdg.configFile = {
-    "gopass/config".source = ./gopass/config;
+    "gopass/config".text = ''
+      [core]
+      	notifications = false
+      	showsafecontent = true
+      [mounts]
+      	path = ${config.home.homeDirectory}/.password-store
+    '';
+  };
+  xdg.dataFile = {
+    "task/hooks/on-modify.timewarrior" = {
+      source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
+      executable = true;
+    };
   };
 }

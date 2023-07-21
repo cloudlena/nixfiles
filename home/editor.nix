@@ -15,18 +15,18 @@
     };
     languages = {
       language = [
-        { name = "bash"; auto-format = true; formatter = { command = "shfmt"; }; }
-        { name = "css"; formatter = { command = "prettier"; args = [ "--parser" "css" ]; }; }
+        { name = "bash"; auto-format = true; formatter = { command = "${pkgs.shfmt}/bin/shfmt"; }; }
+        { name = "css"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "css" ]; }; }
         { name = "go"; config = { formatting.gofumpt = true; }; }
-        { name = "html"; formatter = { command = "prettier"; args = [ "--parser" "html" ]; }; }
-        { name = "javascript"; auto-format = true; formatter = { command = "prettier"; args = [ "--parser" "typescript" ]; }; }
-        { name = "json"; formatter = { command = "prettier"; args = [ "--parser" "json" ]; }; }
-        { name = "markdown"; auto-format = true; formatter = { command = "prettier"; args = [ "--parser" "markdown" ]; }; }
-        { name = "nix"; auto-format = true; formatter = { command = "nixpkgs-fmt"; }; }
-        { name = "python"; auto-format = true; formatter = { command = "black"; args = [ "--quiet" "-" ]; }; }
-        { name = "svelte"; auto-format = true; formatter = { command = "prettier"; args = [ "--parser" "svelte" ]; }; }
-        { name = "typescript"; auto-format = true; formatter = { command = "prettier"; args = [ "--parser" "typescript" ]; }; }
-        { name = "yaml"; auto-format = true; formatter = { command = "prettier"; args = [ "--parser" "yaml" ]; }; }
+        { name = "html"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "html" ]; }; }
+        { name = "javascript"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "typescript" ]; }; }
+        { name = "json"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "json" ]; }; }
+        { name = "markdown"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "markdown" ]; }; }
+        { name = "nix"; auto-format = true; formatter = { command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"; }; }
+        { name = "python"; auto-format = true; formatter = { command = "${pkgs.black}/bin/black"; args = [ "--quiet" "-" ]; }; }
+        { name = "svelte"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "svelte" ]; }; }
+        { name = "typescript"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "typescript" ]; }; }
+        { name = "yaml"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "yaml" ]; }; }
       ];
     };
   };
@@ -50,16 +50,5 @@
     # Debuggers
     delve
     lldb
-
-    # Linters
-    golangci-lint
-    shellcheck
-    tflint
-
-    # Formatters
-    black
-    nixpkgs-fmt
-    nodePackages.prettier
-    shfmt
   ];
 }

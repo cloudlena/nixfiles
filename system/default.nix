@@ -1,19 +1,13 @@
 { pkgs, ... }:
 
 {
-  # Import hardware specific configuration
   imports = [
     ./hardware-configuration.nix
     ./secure-boot.nix
     ./encryption.nix
     ./sound.nix
+    ./bluetooth.nix
   ];
-
-  # Bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-  };
 
   # Network manager
   networking.networkmanager.enable = true;
@@ -35,7 +29,7 @@
     description = "Lena";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    password = "changeme";
+    initialPassword = "changeme";
   };
   users.defaultUserShell = pkgs.zsh;
 
@@ -46,6 +40,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
+    options = "--delete-older-than 30d";
   };
 
   # Allow unfree packages
@@ -53,32 +48,17 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
-    curl
-    gcc
-    gnumake
     home-manager
     sbctl
-    unzip
-    wget
-    zip
   ];
 
-  # Window manager
-  programs.hyprland.enable = true;
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   programs = {
-    # ZSH
+    # Window manager
+    hyprland.enable = true;
+
+    # Shell
     zsh.enable = true;
-
-    # Git
-    git.enable = true;
-
-    # Process viewer
-    htop.enable = true;
-
-    # Terminal multiplexer
-    tmux.enable = true;
 
     # Gaming
     steam.enable = true;
