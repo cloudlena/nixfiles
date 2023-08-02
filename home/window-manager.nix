@@ -38,6 +38,7 @@
         force_split = 2;
         no_gaps_when_only = true;
       };
+      monitor = "eDP-1,preferred,auto,1.5";
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.gammastep}/bin/gammastep"
@@ -54,7 +55,7 @@
 
         # Shortcuts
         "$mainMod, Space, exec, $launcherCmd"
-        "$mainMod, Return, exec, $TERMINAL"
+        "$mainMod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mainMod, W, exec, ${pkgs.brave}/bin/brave"
         "$mainMod, V, exec, ${pkgs.clipman}/bin/clipman pick --tool wofi"
         "SUPER_CTRL, Q, exec, $lockCmd"

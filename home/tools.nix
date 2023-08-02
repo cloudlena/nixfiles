@@ -119,7 +119,6 @@
     python3
     quickemu
     realvnc-vnc-viewer
-    rustc
     shellcheck
     signal-desktop
     termshark
@@ -130,7 +129,6 @@
     unzip
     wget
     whois
-    wine
     wl-clipboard
     yq
     zip

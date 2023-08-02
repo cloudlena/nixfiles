@@ -9,7 +9,13 @@
     ./bluetooth.nix
   ];
 
-  # Network manager
+  # Bootloader
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
+  # Networking
   networking.networkmanager.enable = true;
 
   # Time zone

@@ -1,13 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home.sessionVariables = {
-    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
-    BROWSER = "${pkgs.brave}/bin/brave";
-  };
-
   home.shellAliases = {
-    e = "$EDITOR";
+    e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.joshuto}/bin/joshuto";
     g = "${pkgs.gitui}/bin/gitui";
     t = "${pkgs.taskwarrior}/bin/task";
@@ -25,8 +20,6 @@
             x = 5;
             y = 5;
           };
-          decorations = "none";
-          startup_mode = "Maximized";
         };
         font = {
           normal.family = "FiraCode Nerd Font";
@@ -65,12 +58,41 @@
       };
     };
 
+    # Shell
+    zsh = {
+      enable = true;
+      enableAutosuggestions = true;
+      syntaxHighlighting.enable = true;
+      defaultKeymap = "viins";
+      history.ignoreAllDups = true;
+      historySubstringSearch = {
+        enable = true;
+        searchDownKey = "^N";
+        searchUpKey = "^P";
+      };
+      loginExtra = ''
+        # Start window manager
+        if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+          exec ${pkgs.hyprland}/bin/Hyprland
+        fi
+      '';
+      initExtra = ''
+        HISTORY_SUBSTRING_SEARCH_PREFIXED=true
+        source ${config.xdg.configHome}/zsh/*
+        if [[ $(tty) != /dev/tty[0-9] ]]; then
+          if [ -z "$TMUX" ]; then
+            exec ${pkgs.tmux}/bin/tmux || exit
+          fi
+          ${pkgs.krabby}/bin/krabby random 1 --no-title
+        fi
+      '';
+    };
+
     # Terminal multiplexer
     tmux = {
       enable = true;
       keyMode = "vi";
       escapeTime = 10;
-      customPaneNavigationAndResize = true;
       terminal = "tmux-256color";
       extraConfig = ''
         # Set correct terminal
@@ -94,31 +116,6 @@
         set-option -g status-left ""
         set-window-option -g window-status-format " #I: #W "
         set-window-option -g window-status-current-format " #I: #W "
-      '';
-    };
-
-    # Shell
-    zsh = {
-      enable = true;
-      enableAutosuggestions = true;
-      syntaxHighlighting.enable = true;
-      defaultKeymap = "viins";
-      historySubstringSearch = {
-        enable = true;
-        searchDownKey = "^N";
-        searchUpKey = "^P";
-      };
-      initExtra = ''
-        setopt HIST_IGNORE_ALL_DUPS
-        HISTORY_SUBSTRING_SEARCH_PREFIXED=true
-        source ${config.xdg.configHome}/zsh/*
-        [[ -z "$TMUX" && $(tty) != /dev/tty[0-9] ]] && { ${pkgs.tmux}/bin/tmux || exec ${pkgs.tmux}/bin/tmux new-session && exit }
-      '';
-      loginExtra = ''
-        # Start window manager
-        if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-          exec ${pkgs.hyprland}/bin/Hyprland
-        fi
       '';
     };
 

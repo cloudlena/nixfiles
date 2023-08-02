@@ -50,5 +50,8 @@
     # Debuggers
     delve
     lldb
+
+    # Formatters
+    rustfmt
   ];
 }
