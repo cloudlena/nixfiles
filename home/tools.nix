@@ -43,19 +43,7 @@
     tmate.enable = true;
 
     # Task management
-    taskwarrior = {
-      enable = true;
-      config = {
-        taskd = {
-          certificate = "${config.xdg.configHome}/task/private.certificate.pem";
-          key = "${config.xdg.configHome}/task/private.key.pem";
-          ca = "${config.xdg.configHome}/task/ca.cert.pem";
-          server = "inthe.am:53589";
-          credentials = "inthe_am/lena/c214a5a3-b0b2-4132-958c-ebef8d83fd25";
-          trust = "strict";
-        };
-      };
-    };
+    taskwarrior.enable = true;
 
     # Media player
     mpv.enable = true;
@@ -104,12 +92,13 @@
     jpegoptim
     kubectl
     kubectx
-    libreoffice-fresh
+    libreoffice
     libwebp
     lolcat
     lutris
     moq
     ncdu
+    ncpamixer
     nmap
     nodejs
     nodePackages.svgo
@@ -119,8 +108,10 @@
     python3
     quickemu
     realvnc-vnc-viewer
+    rustc
     shellcheck
     signal-desktop
+    slides
     termshark
     terraform
     tflint

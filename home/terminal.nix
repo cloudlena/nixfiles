@@ -64,11 +64,18 @@
       enableAutosuggestions = true;
       syntaxHighlighting.enable = true;
       defaultKeymap = "viins";
+      completionInit = ''
+        autoload -Uz compinit && compinit
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+      '';
       history.ignoreAllDups = true;
       historySubstringSearch = {
         enable = true;
         searchDownKey = "^N";
         searchUpKey = "^P";
+      };
+      localVariables = {
+        HISTORY_SUBSTRING_SEARCH_PREFIXED = "true";
       };
       loginExtra = ''
         # Start window manager
@@ -77,13 +84,12 @@
         fi
       '';
       initExtra = ''
-        HISTORY_SUBSTRING_SEARCH_PREFIXED=true
         source ${config.xdg.configHome}/zsh/*
         if [[ $(tty) != /dev/tty[0-9] ]]; then
           if [ -z "$TMUX" ]; then
             exec ${pkgs.tmux}/bin/tmux || exit
           fi
-          ${pkgs.krabby}/bin/krabby random 1 --no-title
+          ${pkgs.krabby}/bin/krabby random 1 --no-title --padding-left 1
         fi
       '';
     };
@@ -102,6 +108,12 @@
         bind '"' split-window -v -c '#{pane_current_path}'
         bind % split-window -h -c '#{pane_current_path}'
 
+        # Unclutter status bar
+        set-option -g status-right ""
+        set-option -g status-left ""
+        set-window-option -g window-status-format " #I: #W "
+        set-window-option -g window-status-current-format " #I: #W "
+
         # Color scheme
         set-option -g status-style 'fg=#414868'
         set-option -g window-status-current-style 'fg=#1a1b26,bg=#414868,bold'
@@ -110,12 +122,6 @@
         set-option -g pane-border-style 'fg=#3b4261'
         set-option -g pane-active-border-style 'fg=#3b4261'
         set-option -g message-command-style 'fg=#7aa2f7,bg=#3b4261'
-
-        # Unclutter status bar
-        set-option -g status-right ""
-        set-option -g status-left ""
-        set-window-option -g window-status-format " #I: #W "
-        set-window-option -g window-status-current-format " #I: #W "
       '';
     };
 

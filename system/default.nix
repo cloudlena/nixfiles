@@ -7,6 +7,7 @@
     ./encryption.nix
     ./sound.nix
     ./bluetooth.nix
+    ./upgrade-diff.nix
   ];
 
   # Bootloader
@@ -32,8 +33,8 @@
 
   # Users
   users.users.lena = {
-    description = "Lena";
     isNormalUser = true;
+    description = "Lena";
     extraGroups = [ "wheel" "networkmanager" ];
     initialPassword = "changeme";
   };
@@ -57,7 +58,6 @@
     home-manager
     sbctl
   ];
-
 
   programs = {
     # Window manager

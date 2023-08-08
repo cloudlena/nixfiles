@@ -7,6 +7,7 @@
     ./editor.nix
     ./file-manager.nix
     ./tools.nix
+    ./upgrade-diff.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
