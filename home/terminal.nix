@@ -3,9 +3,10 @@
 {
   home.shellAliases = {
     e = "${pkgs.helix}/bin/hx";
-    f = "${pkgs.joshuto}/bin/joshuto";
+    f = "br";
     g = "${pkgs.gitui}/bin/gitui";
     t = "${pkgs.taskwarrior}/bin/task";
+    o = "${pkgs.xdg-utils}/bin/xdg-open";
     ".." = "cd ..";
     "..." = "cd ../..";
   };

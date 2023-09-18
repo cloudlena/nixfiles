@@ -5,7 +5,6 @@
     ./window-manager.nix
     ./terminal.nix
     ./editor.nix
-    ./file-manager.nix
     ./tools.nix
     ./upgrade-diff.nix
   ];

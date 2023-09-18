@@ -15,6 +15,14 @@
     };
     gitui.enable = true;
 
+    # File manager
+    broot = {
+      enable = true;
+      settings.verbs = [
+        { invocation = "edit"; shortcut = "e"; execution = "$EDITOR {file}:{line}"; }
+      ];
+    };
+
     # Encryption
     gpg.enable = true;
 
@@ -121,6 +129,7 @@
     wget
     whois
     wl-clipboard
+    xdg-utils
     yq
     zip
   ];
@@ -138,6 +147,15 @@
     "task/hooks/on-modify.timewarrior" = {
       source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
       executable = true;
+    };
+  };
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "image/png" = [ "imv.desktop" ];
+      "image/jpeg" = [ "imv.desktop" ];
+      "image/svg" = [ "imv.desktop" ];
     };
   };
 }
