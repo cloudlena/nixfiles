@@ -12,7 +12,7 @@
       "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       "$lockCmd" = "${pkgs.swaylock}/bin/swaylock --daemonize";
       "$sleepCmd" = "systemctl suspend";
-      "$launcherCmd" = "${pkgs.wofi}/bin/wofi --show drun --no-actions --insensitive --prompt 'Run'";
+      "$launcherCmd" = "${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons";
       general = {
         border_size = 2;
         gaps_in = 0;
@@ -45,19 +45,20 @@
         "${pkgs.swayidle}/bin/swayidle -w timeout 900 '$lockCmd' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 1800 '$sleepCmd' before-sleep 'playerctl pause' before-sleep '$lockCmd' lock '$lockCmd'"
         "${pkgs.workstyle}/workstyle &> /tmp/workstyle.log"
         "${pkgs.swaybg}/bin/swaybg --image $wallpaper --mode fill"
-        "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.clipman}/bin/clipman store"
+        "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store --max-items 20"
       ];
       bind = [
         # Window manager
         "$mainMod, Tab, focusurgentorlast"
-        "$mainMod, Q, killactive,"
+        "$mainMod, Q, killactive"
         "$mainMod, F, fullscreen"
 
         # Shortcuts
         "$mainMod, Space, exec, $launcherCmd"
         "$mainMod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
-        "$mainMod, W, exec, ${pkgs.brave}/bin/brave"
-        "$mainMod, V, exec, ${pkgs.clipman}/bin/clipman pick --tool wofi"
+        "$mainMod, B, exec, ${pkgs.brave}/bin/brave"
+        "$mainMod, W, exec, ${pkgs.rofi-wayland}/bin/rofi -show window -show-icons"
+        "$mainMod, V, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.rofi-wayland}/bin/rofi -dmenu -display-columns 2 | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
         "SUPER_CTRL, Q, exec, $lockCmd"
 
         # Media keys
@@ -310,32 +311,46 @@
     };
 
     # Launcher
-    wofi = {
+    rofi = {
       enable = true;
-      style = ''
-        #window {
-          font-family: "Fira Mono";
-          background-color: #1a1b26;
-          color: #c0caf5;
-        }
-
-        #input {
-          border-radius: 0;
-          border-color: transparent;
-          padding: 5px;
-          background-color: #1a1b26;
-          color: #c0caf5;
-        }
-
-        #entry {
-          padding: 5px;
-        }
-
-        #entry:selected {
-          outline: none;
-          background-color: #bb9af7;
-        }
-      '';
+      package = pkgs.rofi-wayland;
+      font = "Fira Mono 12";
+      theme =
+        let
+          inherit (config.lib.formats.rasi) mkLiteral;
+        in
+        {
+          "*" = {
+            background = mkLiteral "#2e3440";
+            background-color = mkLiteral "transparent";
+            text-color = mkLiteral "#c0caf5";
+            accent-color = mkLiteral "#bb9af7";
+          };
+          window = {
+            background-color = mkLiteral "@background";
+          };
+          inputbar = {
+            padding = mkLiteral "8px 12px";
+            spacing = mkLiteral "8px";
+          };
+          listview = {
+            lines = 10;
+          };
+          element = {
+            padding = mkLiteral "8px";
+            spacing = mkLiteral "8px";
+          };
+          "element normal active" = {
+            text-color = mkLiteral "@accent-color";
+          };
+          "element selected" = {
+            background-color = mkLiteral "@accent-color";
+            text-color = mkLiteral "@background";
+          };
+          element-text = {
+            text-color = mkLiteral "inherit";
+          };
+        };
     };
 
     # Lock screen manager
