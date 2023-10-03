@@ -12,7 +12,7 @@
       "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       "$lockCmd" = "${pkgs.swaylock}/bin/swaylock --daemonize";
       "$sleepCmd" = "systemctl suspend";
-      "$launcherCmd" = "${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons";
+      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt 'Run '";
       general = {
         border_size = 2;
         gaps_in = 0;
@@ -43,7 +43,6 @@
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.gammastep}/bin/gammastep"
         "${pkgs.swayidle}/bin/swayidle -w timeout 900 '$lockCmd' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 1800 '$sleepCmd' before-sleep 'playerctl pause' before-sleep '$lockCmd' lock '$lockCmd'"
-        "${pkgs.workstyle}/workstyle &> /tmp/workstyle.log"
         "${pkgs.swaybg}/bin/swaybg --image $wallpaper --mode fill"
         "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store --max-items 20"
       ];
@@ -56,9 +55,8 @@
         # Shortcuts
         "$mainMod, Space, exec, $launcherCmd"
         "$mainMod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
-        "$mainMod, B, exec, ${pkgs.brave}/bin/brave"
-        "$mainMod, W, exec, ${pkgs.rofi-wayland}/bin/rofi -show window -show-icons"
-        "$mainMod, V, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.rofi-wayland}/bin/rofi -dmenu -display-columns 2 | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
+        "$mainMod, W, exec, ${pkgs.brave}/bin/brave"
+        "$mainMod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt 'Copy ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
         "SUPER_CTRL, Q, exec, $lockCmd"
 
         # Media keys
@@ -94,6 +92,7 @@
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, togglespecialworkspace"
+        "$mainMod, N, workspace, empty"
 
         # Move active window to workspace
         "$mainMod SHIFT, 1, movetoworkspace, 1"
@@ -311,46 +310,26 @@
     };
 
     # Launcher
-    rofi = {
+    fuzzel = {
       enable = true;
-      package = pkgs.rofi-wayland;
-      font = "Fira Mono 12";
-      theme =
-        let
-          inherit (config.lib.formats.rasi) mkLiteral;
-        in
-        {
-          "*" = {
-            background = mkLiteral "#2e3440";
-            background-color = mkLiteral "transparent";
-            text-color = mkLiteral "#c0caf5";
-            accent-color = mkLiteral "#bb9af7";
-          };
-          window = {
-            background-color = mkLiteral "@background";
-          };
-          inputbar = {
-            padding = mkLiteral "8px 12px";
-            spacing = mkLiteral "8px";
-          };
-          listview = {
-            lines = 10;
-          };
-          element = {
-            padding = mkLiteral "8px";
-            spacing = mkLiteral "8px";
-          };
-          "element normal active" = {
-            text-color = mkLiteral "@accent-color";
-          };
-          "element selected" = {
-            background-color = mkLiteral "@accent-color";
-            text-color = mkLiteral "@background";
-          };
-          element-text = {
-            text-color = mkLiteral "inherit";
-          };
+      settings = {
+        main = {
+          width = 70;
+          horizontal-pad = 10;
+          vertical-pad = 10;
+          inner-pad = 10;
+          line-height = 25;
         };
+        colors = {
+          background = "1a1b26ff";
+          text = "c0caf5ff";
+          match = "ffffffff";
+          selection = "bb9af7ff";
+          selection-text = "ffffffff";
+          selection-match = "1a1b26ff";
+        };
+        border.radius = 0;
+      };
     };
 
     # Lock screen manager
@@ -366,7 +345,7 @@
     # Notification daemon
     mako = {
       enable = true;
-      font = "Fira Mono 9";
+      font = "FiraCode Nerd Font 9";
       backgroundColor = "#1a1b26";
       textColor = "#c0caf5";
       borderColor = "#bb9af7";
@@ -382,12 +361,10 @@
   };
 
   # Fonts
+  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    fira-mono
     lato
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    noto-fonts-cjk
-    noto-fonts-emoji
   ];
 
   # Wallpaper

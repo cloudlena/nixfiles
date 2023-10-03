@@ -33,7 +33,6 @@
 
   home.packages = with pkgs; [
     # Language servers
-    cmake-language-server
     gopls
     marksman
     nil

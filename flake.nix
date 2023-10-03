@@ -32,5 +32,7 @@
         inherit pkgs;
         modules = [ ./home ];
       };
+
+      formatter.${system} = pkgs.nixpkgs-fmt;
     };
 }

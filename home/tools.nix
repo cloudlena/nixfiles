@@ -33,7 +33,7 @@
     ripgrep.enable = true;
 
     # Process viewer
-    htop.enable = true;
+    bottom.enable = true;
 
     # Quick navigation
     zoxide.enable = true;
@@ -46,9 +46,6 @@
 
     # PDF viewer
     zathura.enable = true;
-
-    # Share terminal sessions
-    tmate.enable = true;
 
     # Task management
     taskwarrior.enable = true;
@@ -106,12 +103,12 @@
     lutris
     moq
     ncdu
-    ncpamixer
     nmap
     nodejs
     nodePackages.svgo
     optipng
     poetry
+    pulsemixer
     pwgen
     python3
     quickemu
@@ -126,6 +123,7 @@
     timewarrior
     tree
     unzip
+    upterm
     wget
     whois
     wl-clipboard
@@ -134,28 +132,30 @@
     zip
   ];
 
-  xdg.configFile = {
-    "gopass/config".text = ''
-      [core]
-      	notifications = false
-      	showsafecontent = true
-      [mounts]
-      	path = ${config.home.homeDirectory}/.password-store
-    '';
-  };
-  xdg.dataFile = {
-    "task/hooks/on-modify.timewarrior" = {
-      source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
-      executable = true;
+  xdg = {
+    configFile = {
+      "gopass/config".text = ''
+        [core]
+        	notifications = false
+        	showsafecontent = true
+        [mounts]
+        	path = ${config.home.homeDirectory}/.password-store
+      '';
     };
-  };
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-      "image/png" = [ "imv.desktop" ];
-      "image/jpeg" = [ "imv.desktop" ];
-      "image/svg" = [ "imv.desktop" ];
+    dataFile = {
+      "task/hooks/on-modify.timewarrior" = {
+        source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
+        executable = true;
+      };
+    };
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+        "image/png" = [ "imv.desktop" ];
+        "image/jpeg" = [ "imv.desktop" ];
+        "image/svg" = [ "imv.desktop" ];
+      };
     };
   };
 }
