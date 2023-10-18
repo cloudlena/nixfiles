@@ -82,6 +82,7 @@
     brave
     cargo
     chromium
+    clippy
     curl
     diff-so-fancy
     dig
@@ -106,6 +107,7 @@
     nmap
     nodejs
     nodePackages.svgo
+    opentofu
     optipng
     poetry
     pulsemixer
@@ -118,7 +120,6 @@
     signal-desktop
     slides
     termshark
-    terraform
     tflint
     timewarrior
     tree

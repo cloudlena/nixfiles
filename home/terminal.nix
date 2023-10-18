@@ -23,7 +23,7 @@
           };
         };
         font = {
-          normal.family = "FiraCode Nerd Font";
+          normal.family = "Fira Code";
           size = 12;
         };
         colors = {
@@ -245,10 +245,10 @@
       		poetry show --outdated
       	fi
 
-      	# Terraform
+      	# OpenTofu
       	if [ -e .terraform.lock.hcl ]; then
-      		printf "Updating Terraform dependencies for %s...\n\n" "''${PWD##*/}"
-      		terraform init -upgrade
+      		printf "Updating OpenTofu dependencies for %s...\n\n" "''${PWD##*/}"
+      		tofu init -upgrade
       	fi
       }
     '';

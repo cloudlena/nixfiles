@@ -192,7 +192,7 @@
               echo "󰳟 $ready_task"
             '';
             exec-if = "which task";
-            interval = 6;
+            interval = 60;
           };
           "custom/containers" = {
             exec = pkgs.writeShellScript "waybar-containers" ''
@@ -345,7 +345,7 @@
     # Notification daemon
     mako = {
       enable = true;
-      font = "FiraCode Nerd Font 9";
+      font = "Fira Code 9";
       backgroundColor = "#1a1b26";
       textColor = "#c0caf5";
       borderColor = "#bb9af7";
@@ -363,9 +363,26 @@
   # Fonts
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    fira-mono
+    fira-code-nerdfont
     lato
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
+  xdg.configFile = {
+    "fontconfig/conf.d/75-prefer-emoji.conf".text = ''
+      <?xml version="1.0"?>
+      <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+      <fontconfig>
+        <description>Prefer color emoji to nerd font icons</description>
+        <alias>
+          <family>Fira Code</family>
+          <prefer>
+            <family>Noto Color Emoji</family>
+            <family>FiraCode Nerd Font</family>
+          </prefer>
+        </alias>
+      </fontconfig>
+    '';
+  };
 
   # Wallpaper
   xdg.dataFile = {
