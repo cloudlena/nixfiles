@@ -27,7 +27,7 @@
     gpg.enable = true;
 
     # Fuzzy finder
-    fzf.enable = true;
+    skim.enable = true;
 
     # Fast grepping
     ripgrep.enable = true;

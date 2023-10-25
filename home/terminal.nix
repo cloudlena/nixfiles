@@ -148,32 +148,26 @@
 
       # Checkout Git branches or tags using fuzzy search
       fco() {
-      	local tags branches target
-      	tags=$(
-      		${pkgs.git}/bin/git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}'
-      	) || return
-      	branches=$(
-      		${pkgs.git}/bin/git branch --all | grep -v HEAD |
-      			sed "s/.* //" | sed "s#remotes/[^/]*/##" |
-      			sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}'
-      	) || return
-      	target=$(
-      		(
-      			echo "$tags"
-      			echo "$branches"
-      		) |
-      			${pkgs.fzf}/bin/fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2
-      	) || return
-      	${pkgs.git}/bin/git checkout "$(echo "$target" | awk '{print $2}')"
+        local tags branches target
+        branches=$(
+          ${pkgs.git}/bin/git --no-pager branch --all \
+            --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)" \
+            | sed '/^$/d') || return
+        tags=$(${pkgs.git}/bin/git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
+        target=$(
+          (echo "$branches"; echo "$tags") |
+          ${pkgs.skim}/bin/sk --no-hscroll --no-multi -n 2 \
+              --ansi --preview="git --no-pager log -150 --pretty=format:%s '..{2}'") || return
+        ${pkgs.git}/bin/git checkout $(awk '{print $2}' <<<"$target" )
       }
 
       # Kill any process with fuzzy search
       fkill() {
       	local pid
       	if [ "$UID" != "0" ]; then
-      		pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+      		pid=$(ps -f -u $UID | sed 1d | ${pkgs.skim}/bin/sk -m | awk '{print $2}')
       	else
-      		pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+      		pid=$(ps -ef | sed 1d | ${pkgs.skim}/bin/sk -m | awk '{print $2}')
       	fi
 
       	if [ "x$pid" != "x" ]; then
@@ -185,12 +179,12 @@
       fshow() {
       	${pkgs.git}/bin/git log --graph --color=always \
       		--format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-      		${pkgs.fzf}/bin/fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      		${pkgs.skim}/bin/sk --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
       			--bind "ctrl-m:execute:
                   (grep -o '[a-f0-9]\{7\}' | head -1 |
-                  xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                  xargs -I % sh -c 'git show --color=always % | less -R') << 'SK-EOF'
                   {}
-      FZF-EOF"
+      SK-EOF"
       }
 
       # Update system

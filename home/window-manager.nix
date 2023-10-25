@@ -18,7 +18,6 @@
         gaps_in = 0;
         gaps_out = 0;
         "col.active_border" = "rgb(bb9af7)";
-        "col.group_border_active" = "rgb(bb9af7)";
         cursor_inactive_timeout = 8;
       };
       input = {
