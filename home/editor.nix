@@ -14,7 +14,9 @@
       };
     };
     languages = {
-      language-server.gopls.config = { "formatting.gofumpt" = true; };
+      language-server = {
+        gopls = { config."formatting.gofumpt" = true; };
+      };
       language = [
         { name = "bash"; auto-format = true; formatter = { command = "${pkgs.shfmt}/bin/shfmt"; }; }
         { name = "css"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "css" ]; }; }

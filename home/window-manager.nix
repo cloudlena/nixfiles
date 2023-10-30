@@ -50,6 +50,7 @@
         "$mainMod, Tab, focusurgentorlast"
         "$mainMod, Q, killactive"
         "$mainMod, F, fullscreen"
+        "$mainMod, S, togglefloating"
 
         # Shortcuts
         "$mainMod, Space, exec, $launcherCmd"
@@ -103,7 +104,7 @@
         "$mainMod SHIFT, 7, movetoworkspace, 7"
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, special"
+        "$mainMod SHIFT, 0, movetoworkspacesilent, special"
       ];
       bindm = [
         "$mainMod, mouse:272, movewindow"
