@@ -23,7 +23,7 @@
           };
         };
         font = {
-          normal.family = "Fira Code";
+          normal.family = "FiraCode Nerd Font";
           size = 12;
         };
         colors = {
