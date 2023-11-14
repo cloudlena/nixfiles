@@ -208,7 +208,7 @@
 
       	# Nix flakes
       	if [ -e flake.nix ]; then
-      		printf "Updating Nix flake for %s...\n\n" "''${PWD##*/}"
+      		printf "Updating Nix flake inputs for %s...\n\n" "''${PWD##*/}"
       		nix flake update
       	fi
 
