@@ -300,6 +300,7 @@
           #custom-updates {
             color: #bb9af7;
             font-weight: bold;
+            padding: 0 15px 0 12px;
           }
 
           #battery.critical {

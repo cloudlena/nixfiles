@@ -27,7 +27,7 @@
     gpg.enable = true;
 
     # Fuzzy finder
-    skim.enable = true;
+    fzf.enable = true;
 
     # Fast grepping
     ripgrep.enable = true;
@@ -125,6 +125,7 @@
     tree
     unzip
     upterm
+    wf-recorder
     wget
     whois
     wl-clipboard

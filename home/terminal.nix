@@ -156,18 +156,19 @@
         tags=$(${pkgs.git}/bin/git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
         target=$(
           (echo "$branches"; echo "$tags") |
-          ${pkgs.skim}/bin/sk --no-hscroll --no-multi -n 2 \
+          ${pkgs.fzf}/bin/fzf --no-hscroll --no-multi -n 2 \
               --ansi --preview="git --no-pager log -150 --pretty=format:%s '..{2}'") || return
-        ${pkgs.git}/bin/git checkout $(awk '{print $2}' <<<"$target" )
+        echo "$target"
+        ${pkgs.git}/bin/git checkout $(awk '{print $2}' <<<"$target" | sed 's/^[^\/]*\///')
       }
 
       # Kill any process with fuzzy search
       fkill() {
       	local pid
       	if [ "$UID" != "0" ]; then
-      		pid=$(ps -f -u $UID | sed 1d | ${pkgs.skim}/bin/sk -m | awk '{print $2}')
+      		pid=$(ps -f -u $UID | sed 1d | ${pkgs.fzf}/bin/fzf -m | awk '{print $2}')
       	else
-      		pid=$(ps -ef | sed 1d | ${pkgs.skim}/bin/sk -m | awk '{print $2}')
+      		pid=$(ps -ef | sed 1d | ${pkgs.fzf}/bin/fzf -m | awk '{print $2}')
       	fi
 
       	if [ "x$pid" != "x" ]; then
@@ -179,12 +180,12 @@
       fshow() {
       	${pkgs.git}/bin/git log --graph --color=always \
       		--format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-      		${pkgs.skim}/bin/sk --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      		${pkgs.fzf}/bin/fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
       			--bind "ctrl-m:execute:
                   (grep -o '[a-f0-9]\{7\}' | head -1 |
-                  xargs -I % sh -c 'git show --color=always % | less -R') << 'SK-EOF'
+                  xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
                   {}
-      SK-EOF"
+      FZF-EOF"
       }
 
       # Update system
