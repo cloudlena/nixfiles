@@ -140,7 +140,7 @@
 
   # Helper functions
   xdg.configFile = {
-    "zsh/functions.zsh".source = pkgs.writeShellScript "waybar-tasks" ''
+    "zsh/functions.zsh".source = pkgs.writeShellScript "shell-functions" ''
       # Create a directory and enter it
       mkcd() {
       	mkdir --parents "$@" && cd "$_" || exit
