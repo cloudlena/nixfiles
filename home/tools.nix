@@ -73,7 +73,10 @@
 
   services = {
     # GPG
-    gpg-agent.enable = true;
+    gpg-agent = {
+      enable = true;
+      pinentryFlavor = "qt";
+    };
   };
 
   home.packages = with pkgs; [
@@ -81,7 +84,6 @@
     awscli2
     brave
     cargo
-    chromium
     clippy
     curl
     diff-so-fancy
@@ -114,7 +116,6 @@
     pwgen
     python3
     quickemu
-    realvnc-vnc-viewer
     rustc
     shellcheck
     signal-desktop

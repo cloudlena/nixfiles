@@ -10,7 +10,6 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = _: true;
 
   home.username = "lena";
   home.homeDirectory = "/home/${config.home.username}";
