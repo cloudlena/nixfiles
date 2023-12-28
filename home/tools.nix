@@ -88,6 +88,7 @@
     curl
     diff-so-fancy
     dig
+    dua
     fd
     fx
     gcc
@@ -105,7 +106,6 @@
     lolcat
     lutris
     moq
-    ncdu
     nmap
     nodejs
     nodePackages.svgo
