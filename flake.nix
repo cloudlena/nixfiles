@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,7 +14,7 @@
     };
   };
 
-  outputs = { nixpkgs, lanzaboote, home-manager, ... }:
+  outputs = { nixpkgs, nixos-hardware, lanzaboote, home-manager, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -22,6 +23,7 @@
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           lanzaboote.nixosModules.lanzaboote
           ./system
         ];

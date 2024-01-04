@@ -195,8 +195,8 @@
         ${pkgs.gnumake}/bin/make system
         ${pkgs.gnumake}/bin/make home
         popd
-        ${pkgs.fwupd}/bin/fwupdmgr refresh
-        ${pkgs.fwupd}/bin/fwupdmgr update
+        fwupdmgr refresh
+        fwupdmgr update
       }
 
       # Update project dependencies

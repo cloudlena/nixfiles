@@ -8,7 +8,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      "$mainMod" = "SUPER";
+      "$mod" = "SUPER";
       "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       "$lockCmd" = "${pkgs.swaylock}/bin/swaylock --daemonize";
       "$sleepCmd" = "systemctl suspend";
@@ -47,16 +47,18 @@
       ];
       bind = [
         # Window manager
-        "$mainMod, Tab, focusurgentorlast"
-        "$mainMod, Q, killactive"
-        "$mainMod, F, fullscreen"
-        "$mainMod, S, togglefloating"
+        "$mod, Tab, focusurgentorlast"
+        "$mod, Q, killactive"
+        "$mod, F, fullscreen"
+        "$mod, S, togglefloating"
 
         # Shortcuts
-        "$mainMod, Space, exec, $launcherCmd"
-        "$mainMod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
-        "$mainMod, W, exec, ${pkgs.brave}/bin/brave"
-        "$mainMod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt 'Copy ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
+        "$mod, Space, exec, $launcherCmd"
+        "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
+        "$mod, W, exec, ${pkgs.brave}/bin/brave"
+        "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt 'Copy ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
+        "$mod, E, exec, BEMOJI_PICKER_CMD='${pkgs.fuzzel}/bin/fuzzel --dmenu' ${pkgs.bemoji}/bin/bemoji -n"
+        "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker"
         "SUPER_CTRL, Q, exec, $lockCmd"
 
         # Media keys
@@ -72,43 +74,42 @@
         ", XF86Search, exec, $launcherCmd"
 
         # Screenshots
-        ", Print ,exec, ${pkgs.grim}/bin/grim ${config.xdg.userDirs.download}/screenshot-$(date +'%F-%H-%M-%S').png"
-        "$mainMod, Print , exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ${config.xdg.userDirs.download}/screenshot-$(date +'%F-%H-%M-%S').png"
+        ", Print , exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ${config.xdg.userDirs.download}/screenshot-$(date +'%F-%H-%M-%S').png"
 
         # Move window focus
-        "$mainMod, H, movefocus, l"
-        "$mainMod, J, movefocus, d"
-        "$mainMod, K, movefocus, u"
-        "$mainMod, L, movefocus, r"
+        "$mod, H, movefocus, l"
+        "$mod, J, movefocus, d"
+        "$mod, K, movefocus, u"
+        "$mod, L, movefocus, r"
 
         # Switch workspaces
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, togglespecialworkspace"
-        "$mainMod, N, workspace, empty"
+        "$mod, 1, workspace, 1"
+        "$mod, 2, workspace, 2"
+        "$mod, 3, workspace, 3"
+        "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+        "$mod, 0, togglespecialworkspace"
+        "$mod, N, workspace, empty"
 
         # Move active window to workspace
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspacesilent, special"
+        "$mod SHIFT, 1, movetoworkspace, 1"
+        "$mod SHIFT, 2, movetoworkspace, 2"
+        "$mod SHIFT, 3, movetoworkspace, 3"
+        "$mod SHIFT, 4, movetoworkspace, 4"
+        "$mod SHIFT, 5, movetoworkspace, 5"
+        "$mod SHIFT, 6, movetoworkspace, 6"
+        "$mod SHIFT, 7, movetoworkspace, 7"
+        "$mod SHIFT, 8, movetoworkspace, 8"
+        "$mod SHIFT, 9, movetoworkspace, 9"
+        "$mod SHIFT, 0, movetoworkspacesilent, special"
       ];
       bindm = [
-        "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
       ];
     };
   };

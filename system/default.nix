@@ -95,13 +95,6 @@
 
     # Geolocation service
     geoclue2.enable = true;
-
-    # Power optimization
-    auto-cpufreq.enable = true;
-    thermald.enable = true;
-
-    # Periodically trim SSD
-    fstrim.enable = true;
   };
 
   system.stateVersion = "23.11";

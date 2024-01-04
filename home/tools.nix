@@ -82,6 +82,7 @@
   home.packages = with pkgs; [
     altair
     awscli2
+    bottles
     brave
     cargo
     clippy
@@ -104,7 +105,6 @@
     libreoffice
     libwebp
     lolcat
-    lutris
     moq
     nmap
     nodejs
