@@ -11,7 +11,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Install Nix
-        uses: cachix/install-nix-action@v22
+        uses: cachix/install-nix-action@v25
       - name: Check formatting
         run: nix run nixpkgs#nixpkgs-fmt -- --check .
       - name: Check flake

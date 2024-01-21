@@ -85,6 +85,7 @@
     bottles
     brave
     cargo
+    chatgpt-cli
     clippy
     curl
     diff-so-fancy
