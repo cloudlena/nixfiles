@@ -90,7 +90,7 @@
     curl
     diff-so-fancy
     dig
-    dua
+    dust
     fd
     fx
     gcc
