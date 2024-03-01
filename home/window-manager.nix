@@ -11,7 +11,6 @@
       "$mod" = "SUPER";
       "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       "$lockCmd" = "${pkgs.swaylock}/bin/swaylock --daemonize";
-      "$sleepCmd" = "systemctl suspend";
       "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt 'Run '";
       general = {
         border_size = 2;
@@ -41,7 +40,7 @@
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.gammastep}/bin/gammastep"
-        "${pkgs.swayidle}/bin/swayidle -w timeout 900 '$lockCmd' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 1800 '$sleepCmd' before-sleep 'playerctl pause' before-sleep '$lockCmd' lock '$lockCmd'"
+        "${pkgs.swayidle}/bin/swayidle -w timeout 900 '$lockCmd' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 1800 'systemctl suspend' before-sleep 'playerctl pause' before-sleep '$lockCmd' lock '$lockCmd'"
         "${pkgs.swaybg}/bin/swaybg --image $wallpaper --mode fill"
         "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store --max-items 20"
       ];
@@ -57,7 +56,7 @@
         "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
         "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt 'Copy ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "$mod, E, exec, BEMOJI_PICKER_CMD='${pkgs.fuzzel}/bin/fuzzel --dmenu' ${pkgs.bemoji}/bin/bemoji -n"
+        "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker"
         "SUPER_CTRL, Q, exec, $lockCmd"
 
@@ -74,7 +73,7 @@
         ", XF86Search, exec, $launcherCmd"
 
         # Screenshots
-        ", Print , exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ${config.xdg.userDirs.download}/screenshot-$(date +'%F-%H-%M-%S').png"
+        ", Print , exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ${config.xdg.userDirs.pictures}/screenshot-$(date +'%F-%H-%M-%S').png"
 
         # Move window focus
         "$mod, H, movefocus, l"
