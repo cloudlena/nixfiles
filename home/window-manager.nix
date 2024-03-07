@@ -11,7 +11,7 @@
       "$mod" = "SUPER";
       "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       "$lockCmd" = "${pkgs.swaylock}/bin/swaylock --daemonize";
-      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt 'Run '";
+      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '▶️ '";
       general = {
         border_size = 2;
         gaps_in = 0;
@@ -34,7 +34,7 @@
       dwindle = {
         # Put new splits on the right/bottom
         force_split = 2;
-        no_gaps_when_only = true;
+        no_gaps_when_only = 1;
       };
       monitor = "eDP-1,preferred,auto,1.5";
       exec-once = [
@@ -42,7 +42,7 @@
         "${pkgs.gammastep}/bin/gammastep"
         "${pkgs.swayidle}/bin/swayidle -w timeout 900 '$lockCmd' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 1800 'systemctl suspend' before-sleep 'playerctl pause' before-sleep '$lockCmd' lock '$lockCmd'"
         "${pkgs.swaybg}/bin/swaybg --image $wallpaper --mode fill"
-        "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store --max-items 20"
+        "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist"
       ];
       bind = [
         # Window manager
@@ -55,7 +55,7 @@
         "$mod, Space, exec, $launcherCmd"
         "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
-        "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt 'Copy ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
+        "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt '📋 ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
         "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker"
         "SUPER_CTRL, Q, exec, $lockCmd"
@@ -80,6 +80,12 @@
         "$mod, J, movefocus, d"
         "$mod, K, movefocus, u"
         "$mod, L, movefocus, r"
+
+        # Move window
+        "$mod SHIFT, H, movewindow, l"
+        "$mod SHIFT, J, movewindow, d"
+        "$mod SHIFT, K, movewindow, u"
+        "$mod SHIFT, L, movewindow, r"
 
         # Switch workspaces
         "$mod, 1, workspace, 1"

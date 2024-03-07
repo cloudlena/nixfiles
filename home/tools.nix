@@ -16,11 +16,9 @@
     gitui.enable = true;
 
     # File manager
-    broot = {
+    yazi = {
       enable = true;
-      settings.verbs = [
-        { invocation = "edit"; shortcut = "e"; execution = "$EDITOR {file}:{line}"; }
-      ];
+      enableZshIntegration = true;
     };
 
     # Encryption
