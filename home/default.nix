@@ -4,6 +4,7 @@
   imports = [
     ./window-manager.nix
     ./terminal.nix
+    ./shell.nix
     ./editor.nix
     ./tools.nix
     ./upgrade-diff.nix
