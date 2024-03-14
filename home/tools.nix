@@ -69,14 +69,6 @@
     };
   };
 
-  services = {
-    # GPG
-    gpg-agent = {
-      enable = true;
-      pinentryFlavor = "qt";
-    };
-  };
-
   home.packages = with pkgs; [
     altair
     awscli2

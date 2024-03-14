@@ -349,6 +349,12 @@
   };
 
   services = {
+    # GPG
+    gpg-agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-qt;
+    };
+
     # Notification daemon
     mako = {
       enable = true;
