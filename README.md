@@ -9,6 +9,12 @@ It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
 1. Run `make system` to install the system level components
 1. Run `make home` to install the user level components
 
+## Update
+
+1. Run `make update` to update the Flake lockfile
+1. Run `make system` to update the system level components
+1. Run `make home` to update the user level components
+
 ## Colors
 
 The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nvim) color scheme.
@@ -23,34 +29,34 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 
 ## Keybindings
 
-| Function                         | Keys                                                    |
-| :------------------------------- | :------------------------------------------------------ |
-| Open App Launcher                | `Super + Space`                                         |
-| Open Terminal                    | `Super + Enter`                                         |
-| Focus Last Window                | `Super + Tab`                                           |
-| Open Web Browser                 | `Super + W`                                             |
-| Kill Active Window               | `Super + Q`                                             |
-| Fullscreen                       | `Super + F`                                             |
-| Toggle Floating Window           | `Super + S`                                             |
-| Open Clipboard History           | `Super + C`                                             |
-| Open Emoji Picker                | `Super + E`                                             |
-| Open Color Picker                | `Super + P`                                             |
-| Lock Screen                      | `Super + Ctrl + Q`                                      |
-| Switch to Workspace              | `Super + [1-9]`                                         |
-| Move Window to Workspace         | `Super + Shift + [1-9]`                                 |
-| Switch to Special Workspace      | `Super + 0`                                             |
-| Move Window to Special Workspace | `Super + Shift + 0`                                     |
-| Switch to Window                 | `Super + [hjkl]`                                        |
-| Move Window                      | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
-| Resize Window                    | `Super + Right Mouse Button`                            |
+| Function                  | Keys                                                    |
+| :------------------------ | :------------------------------------------------------ |
+| Open App Launcher         | `Super + Space`                                         |
+| Open Terminal             | `Super + Enter`                                         |
+| Focus Last Window         | `Super + Tab`                                           |
+| Open Web Browser          | `Super + W`                                             |
+| Kill Active Window        | `Super + Q`                                             |
+| Toggle Fullscreen Window  | `Super + F`                                             |
+| Toggle Floating Window    | `Super + S`                                             |
+| Open Clipboard History    | `Super + C`                                             |
+| Open Emoji Picker         | `Super + E`                                             |
+| Open Color Picker         | `Super + P`                                             |
+| Lock Screen               | `Super + Ctrl + Q`                                      |
+| Switch to Workspace       | `Super + [1-9]`                                         |
+| Move Window to Workspace  | `Super + Shift + [1-9]`                                 |
+| Switch to Scratchpad      | `Super + 0`                                             |
+| Move Window to Scratchpad | `Super + Shift + 0`                                     |
+| Switch to Window          | `Super + [hjkl]` or `Move Mouse`                        |
+| Move Window               | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
+| Resize Window             | `Super + Right Mouse Button`                            |
 
 ## Terminal Commands
 
 | Function            | Command |
 | :------------------ | :------ |
-| Open File Manager   | `f`     |
 | Open Text Editor    | `e`     |
+| Open File Manager   | `f`     |
 | Open Git Browser    | `g`     |
-| Open Task Manager   | `t`     |
 | Open System Monitor | `m`     |
 | Open File           | `o`     |
+| Open Task Manager   | `t`     |

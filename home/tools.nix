@@ -37,7 +37,10 @@
     zoxide.enable = true;
 
     # Password manager
-    browserpass.enable = true;
+    browserpass = {
+      enable = true;
+      browsers = [ "brave" ];
+    };
 
     # JSON parser
     jq.enable = true;

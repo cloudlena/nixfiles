@@ -10,7 +10,6 @@
     settings = {
       "$mod" = "SUPER";
       "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
-      "$lockCmd" = "${pkgs.swaylock}/bin/swaylock --daemonize";
       "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '▶️ '";
       general = {
         border_size = 2;
@@ -39,10 +38,7 @@
       monitor = "eDP-1,preferred,auto,1.5";
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
-        "${pkgs.gammastep}/bin/gammastep"
-        "${pkgs.swayidle}/bin/swayidle -w timeout 900 '$lockCmd' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 1800 'systemctl suspend' before-sleep 'playerctl pause' before-sleep '$lockCmd' lock '$lockCmd'"
         "${pkgs.swaybg}/bin/swaybg --image $wallpaper --mode fill"
-        "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist"
       ];
       bind = [
         # Window manager
@@ -58,7 +54,7 @@
         "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt '📋 ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
         "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker"
-        "SUPER_CTRL, Q, exec, $lockCmd"
+        "SUPER_CTRL, Q, exec, ${pkgs.swaylock}/bin/swaylock --daemonize"
 
         # Media keys
         ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
@@ -349,11 +345,32 @@
   };
 
   services = {
+    # Idle manager
+    swayidle = {
+      enable = true;
+      timeouts = [
+        { timeout = 600; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
+        { timeout = 900; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"; }
+        { timeout = 1200; command = "${pkgs.systemd}/bin/systemctl suspend"; }
+      ];
+      events = [
+        { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
+        { event = "after-resume"; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; }
+        { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
+      ];
+    };
+
+    # Clipboard manager
+    cliphist.enable = true;
+
     # GPG
     gpg-agent = {
       enable = true;
       pinentryPackage = pkgs.pinentry-qt;
     };
+
+    # Notifications for low battery
+    batsignal.enable = true;
 
     # Notification daemon
     mako = {

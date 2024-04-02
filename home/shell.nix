@@ -2,14 +2,14 @@
 
 {
   home.shellAliases = {
+    ".." = "cd ..";
+    "..." = "cd ../..";
     e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.yazi}/bin/yazi";
     g = "${pkgs.gitui}/bin/gitui";
-    t = "${pkgs.taskwarrior}/bin/task";
-    o = "${pkgs.xdg-utils}/bin/xdg-open";
     m = "${pkgs.bottom}/bin/btm";
-    ".." = "cd ..";
-    "..." = "cd ../..";
+    o = "${pkgs.xdg-utils}/bin/xdg-open";
+    t = "${pkgs.taskwarrior}/bin/task";
   };
 
   programs = {

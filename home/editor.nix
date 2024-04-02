@@ -36,6 +36,7 @@
   home.packages = with pkgs; [
     # Language servers
     gopls
+    golangci-lint-langserver
     marksman
     nil
     nodePackages.bash-language-server
@@ -53,6 +54,7 @@
     lldb
 
     # Formatters
+    nodePackages.prettier
     rustfmt
   ];
 }
