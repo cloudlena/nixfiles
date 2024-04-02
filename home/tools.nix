@@ -118,7 +118,7 @@
     unzip
     upterm
     wf-recorder
-    wget
+    wget2
     whois
     wl-clipboard
     xdg-utils
