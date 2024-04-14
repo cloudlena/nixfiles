@@ -3,6 +3,7 @@
 {
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
   };
 
   wayland.windowManager.hyprland = {
@@ -10,7 +11,7 @@
     settings = {
       "$mod" = "SUPER";
       "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
-      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '▶️ '";
+      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 '";
       general = {
         border_size = 2;
         gaps_in = 0;
@@ -51,7 +52,7 @@
         "$mod, Space, exec, $launcherCmd"
         "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
-        "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt '📋 ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
+        "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt '󰆏 ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
         "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker"
         "SUPER_CTRL, Q, exec, ${pkgs.swaylock}/bin/swaylock --daemonize"
@@ -176,19 +177,19 @@
               set -u
 
               if [ ! -x "$(command -v task)" ]; then
-              	exit 1
+                exit 1
               fi
 
               active_task=$(task rc.verbose=nothing rc.report.activedesc.filter=+ACTIVE rc.report.activedesc.columns:description rc.report.activedesc.sort:urgency- rc.report.activedesc.columns:description activedesc limit:1 | head -n 1)
               if [ -n "$active_task" ]; then
-              	echo "󰐌 $active_task"
-              	exit 0
+                echo "󰐌 $active_task"
+                exit 0
               fi
 
               ready_task=$(task rc.verbose=nothing rc.report.readydesc.filter=+READY rc.report.readydesc.columns:description rc.report.readydesc.sort:urgency- rc.report.readydesc.columns:description readydesc limit:1 | head -n 1)
               if [ -z "$ready_task" ]; then
-              	echo ""
-              	exit 0
+                echo ""
+                exit 0
               fi
 
               echo "󰳟 $ready_task"
@@ -201,14 +202,14 @@
               set -u
 
               if [ ! -x "$(command -v podman)" ]; then
-              	exit 1
+                exit 1
               fi
 
               running_container_count=$(podman ps --noheading | wc -l)
 
               if [ "$running_container_count" -eq 0 ]; then
-              	echo ""
-              exit 0
+                echo ""
+                exit 0
               fi
 
               suffix=""
@@ -246,69 +247,69 @@
       style = ''
         /* General */
         * {
-            border-radius: 0;
-            font-family: "FiraCode Nerd Font";
-            font-size: 13px;
-            color: #c0caf5;
-          }
+          border-radius: 0;
+          font-family: "FiraCode Nerd Font";
+          font-size: 13px;
+          color: #c0caf5;
+        }
 
-          window#waybar {
-            background-color: #1a1b26;
-          }
+        window#waybar {
+          background-color: #1a1b26;
+        }
 
-          tooltip {
-            background-color: #15161e;
-          }
+        tooltip {
+          background-color: #15161e;
+        }
 
-          /* Workspaces */
-          #workspaces button {
-            margin: 4px;
-            padding: 0 8px;
-            border-radius: 9999px;
-          }
+        /* Workspaces */
+        #workspaces button {
+          margin: 4px;
+          padding: 0 8px;
+          border-radius: 9999px;
+        }
 
-          #workspaces button:hover {
-            border-color: transparent;
-            box-shadow: none;
-            background: #414868;
-          }
+        #workspaces button:hover {
+          border-color: transparent;
+          box-shadow: none;
+          background: #414868;
+        }
 
-          #workspaces button.active {
-            padding: 0 13px;
-            background: #2f334d;
-          }
+        #workspaces button.active {
+          padding: 0 13px;
+          background: #2f334d;
+        }
 
-          /* Modules */
-          #clock,
-          #network,
-          #wireplumber,
-          #bluetooth,
-          #battery,
-          #custom-updates,
-          #custom-tasks,
-          #custom-containers,
-          #mode {
-            margin: 4px;
-            padding: 0 13px;
-            border-radius: 9999px;
-            background-color: #2f334d;
-          }
+        /* Modules */
+        #clock,
+        #network,
+        #wireplumber,
+        #bluetooth,
+        #battery,
+        #custom-updates,
+        #custom-tasks,
+        #custom-containers,
+        #mode {
+          margin: 4px;
+          padding: 0 13px;
+          border-radius: 9999px;
+          background-color: #2f334d;
+        }
 
-          #network {
-            padding: 0 15px 0 11px;
-          }
+        #network {
+          padding: 0 15px 0 11px;
+        }
 
-          #mode,
-          #custom-updates {
-            color: #bb9af7;
-            font-weight: bold;
-            padding: 0 15px 0 12px;
-          }
+        #mode,
+        #custom-updates {
+          color: #bb9af7;
+          font-weight: bold;
+          padding: 0 15px 0 12px;
+        }
 
-          #battery.critical {
-            color: #f7768e;
-            font-weight: bold;
-          }
+        #battery.critical {
+          color: #f7768e;
+          font-weight: bold;
+        }
       '';
     };
 
