@@ -54,8 +54,8 @@
       escapeTime = 10;
       terminal = "tmux-256color";
       extraConfig = ''
-        # Set correct terminal
-        set-option -sa terminal-features ',alacritty:RGB'
+        # Use 24-bit color
+        set-option -sa terminal-features ',alacritty*:RGB'
 
         # Open new splits from current directory
         bind '"' split-window -v -c '#{pane_current_path}'

@@ -17,7 +17,7 @@
         gaps_in = 0;
         gaps_out = 0;
         "col.active_border" = "rgb(bb9af7)";
-        cursor_inactive_timeout = 8;
+        "cursor_inactive_timeout" = 8;
       };
       input = {
         kb_options = "caps:escape,compose:ralt";
@@ -46,6 +46,7 @@
         "$mod, Tab, focusurgentorlast"
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
+        "SUPER_SHIFT, F, fakefullscreen"
         "$mod, S, togglefloating"
 
         # Shortcuts
@@ -53,7 +54,7 @@
         "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
         "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt '󰆏 ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji"
+        "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji -n"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker"
         "SUPER_CTRL, Q, exec, ${pkgs.swaylock}/bin/swaylock --daemonize"
 
@@ -85,6 +86,7 @@
         "$mod SHIFT, L, movewindow, r"
 
         # Switch workspaces
+        "$mod, N, workspace, empty"
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
         "$mod, 3, workspace, 3"
@@ -95,7 +97,6 @@
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
         "$mod, 0, togglespecialworkspace"
-        "$mod, N, workspace, empty"
 
         # Move active window to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"
@@ -136,8 +137,7 @@
           ];
           battery = {
             states = {
-              warning = 20;
-              critical = 1;
+              critical = 10;
             };
             format = "<span size=\"96%\">{icon}</span>";
             format-icons = {
@@ -351,12 +351,11 @@
       enable = true;
       timeouts = [
         { timeout = 600; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
-        { timeout = 900; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"; }
+        { timeout = 900; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"; resumeCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; }
         { timeout = 1200; command = "${pkgs.systemd}/bin/systemctl suspend"; }
       ];
       events = [
         { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
-        { event = "after-resume"; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; }
         { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
       ];
     };

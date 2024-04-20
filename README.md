@@ -42,6 +42,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Open Emoji Picker         | `Super + E`                                             |
 | Open Color Picker         | `Super + P`                                             |
 | Lock Screen               | `Super + Ctrl + Q`                                      |
+| Open Empty Workspace      | `Super + N`                                             |
 | Switch to Workspace       | `Super + [1-9]`                                         |
 | Move Window to Workspace  | `Super + Shift + [1-9]`                                 |
 | Switch to Scratchpad      | `Super + 0`                                             |

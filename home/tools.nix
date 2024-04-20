@@ -27,6 +27,9 @@
     # Fuzzy finder
     fzf.enable = true;
 
+    # Faster find
+    fd.enable = true;
+
     # Fast grepping
     ripgrep.enable = true;
 
@@ -49,7 +52,10 @@
     zathura.enable = true;
 
     # Task management
-    taskwarrior.enable = true;
+    taskwarrior = {
+      enable = true;
+      package = pkgs.taskwarrior3;
+    };
 
     # Media player
     mpv.enable = true;
@@ -70,12 +76,16 @@
         updates.auto_update = true;
       };
     };
+
+    # AWS CLI
+    awscli.enable = true;
+
+    # Python dependency management
+    poetry.enable = true;
   };
 
   home.packages = with pkgs; [
     altair
-    awscli2
-    bottles
     brave
     cargo
     clippy
@@ -83,7 +93,6 @@
     diff-so-fancy
     dig
     dust
-    fd
     fx
     gcc
     gimp
@@ -99,12 +108,11 @@
     libwebp
     lolcat
     moq
-    nmap
     nodejs
     nodePackages.svgo
     opentofu
     optipng
-    poetry
+    podman-compose
     pulsemixer
     pwgen
     python3
@@ -112,7 +120,6 @@
     rustc
     shellcheck
     signal-desktop
-    slides
     termshark
     tflint
     timewarrior

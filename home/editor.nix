@@ -35,6 +35,7 @@
 
   home.packages = with pkgs; [
     # Language servers
+    docker-compose-language-service
     gopls
     golangci-lint-langserver
     marksman
