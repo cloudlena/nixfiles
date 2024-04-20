@@ -136,8 +136,7 @@
           ];
           battery = {
             states = {
-              warning = 20;
-              critical = 1;
+              critical = 10;
             };
             format = "<span size=\"96%\">{icon}</span>";
             format-icons = {
@@ -351,12 +350,11 @@
       enable = true;
       timeouts = [
         { timeout = 600; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
-        { timeout = 900; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"; }
+        { timeout = 900; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"; resumeCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; }
         { timeout = 1200; command = "${pkgs.systemd}/bin/systemctl suspend"; }
       ];
       events = [
         { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
-        { event = "after-resume"; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; }
         { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
       ];
     };

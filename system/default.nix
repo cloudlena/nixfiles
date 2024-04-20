@@ -79,11 +79,11 @@
   ];
 
   programs = {
-    # Window manager
-    hyprland.enable = true;
-
     # Shell
     zsh.enable = true;
+
+    # Window manager
+    hyprland.enable = true;
 
     # Gaming
     steam.enable = true;
