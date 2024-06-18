@@ -31,9 +31,6 @@
   # AppArmor
   security.apparmor.enable = true;
 
-  # Temporary fix for Swaylock issue
-  security.pam.services.swaylock = { };
-
   # Containers
   virtualisation.podman.enable = true;
 

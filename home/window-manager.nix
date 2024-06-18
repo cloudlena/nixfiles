@@ -10,19 +10,18 @@
     enable = true;
     settings = {
       "$mod" = "SUPER";
-      "$wallpaper" = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 '";
       general = {
         border_size = 2;
         gaps_in = 0;
         gaps_out = 0;
         "col.active_border" = "rgb(bb9af7)";
-        "cursor_inactive_timeout" = 8;
       };
       input = {
         kb_options = "caps:escape,compose:ralt";
         touchpad.natural_scroll = true;
       };
+      cursor.inactive_timeout = 8;
       gestures = {
         workspace_swipe = true;
         workspace_swipe_min_speed_to_force = 5;
@@ -39,7 +38,6 @@
       monitor = "eDP-1,preferred,auto,1.5";
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
-        "${pkgs.swaybg}/bin/swaybg --image $wallpaper --mode fill"
       ];
       bind = [
         # Window manager
@@ -55,8 +53,8 @@
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
         "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt '󰆏 ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
         "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji -n"
-        "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker"
-        "SUPER_CTRL, Q, exec, ${pkgs.swaylock}/bin/swaylock --daemonize"
+        "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker --autocopy"
+        "SUPER_CTRL, Q, exec, ${pkgs.systemd}/bin/loginctl lock-session"
 
         # Media keys
         ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
@@ -336,28 +334,59 @@
       };
     };
 
-    # Lock screen manager
-    swaylock = {
+    # Screen lock
+    hyprlock = {
       enable = true;
       settings = {
-        image = "${config.xdg.dataHome}/wallpapers/bespinian.png";
+        general = {
+          hide_cursor = true;
+        };
+        background = [
+          {
+            path = "${config.xdg.dataHome}/wallpapers/bespinian.png";
+            blur_passes = 3;
+          }
+        ];
+        input-field = [
+          {
+            font_color = "rgb(c0caf5)";
+            inner_color = "rgb(1a1b26)";
+            outer_color = "rgb(1a1b26)";
+            check_color = "rgb(e0af68)";
+            fail_color = "rgb(f7768e)";
+          }
+        ];
       };
     };
   };
 
   services = {
-    # Idle manager
-    swayidle = {
+    # Background image
+    hyprpaper = {
       enable = true;
-      timeouts = [
-        { timeout = 600; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
-        { timeout = 900; command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"; resumeCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; }
-        { timeout = 1200; command = "${pkgs.systemd}/bin/systemctl suspend"; }
-      ];
-      events = [
-        { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
-        { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --daemonize"; }
-      ];
+      settings = {
+        preload = [ "${config.xdg.dataHome}/wallpapers/bespinian.png" ];
+        wallpaper = [ ",${config.xdg.dataHome}/wallpapers/bespinian.png" ];
+        splash = false;
+        ipc = false;
+      };
+    };
+
+    # Idle manager
+    hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+          before_sleep_cmd = "${pkgs.systemd}/bin/loginctl lock-session";
+          after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        };
+        listener = [
+          { timeout = 600; on-timeout = "${pkgs.systemd}/bin/loginctl lock-session"; }
+          { timeout = 900; on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"; on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; }
+          { timeout = 1200; on-timeout = "${pkgs.systemd}/bin/systemctl suspend"; }
+        ];
+      };
     };
 
     # Clipboard manager
