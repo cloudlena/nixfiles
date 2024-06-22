@@ -15,47 +15,157 @@
     };
     languages = {
       language-server = {
-        gopls = { config."formatting.gofumpt" = true; };
+        gopls = {
+          config."formatting.gofumpt" = true;
+        };
+        nil = {
+          config."nil.nix.flake.autoEvalInputs" = true;
+        };
       };
       language = [
-        { name = "bash"; auto-format = true; formatter = { command = "${pkgs.shfmt}/bin/shfmt"; }; }
-        { name = "css"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "css" ]; }; }
-        { name = "html"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "html" ]; }; }
-        { name = "javascript"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "typescript" ]; }; }
-        { name = "json"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "json" ]; }; }
-        { name = "markdown"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "markdown" ]; }; }
-        { name = "nix"; auto-format = true; formatter = { command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"; }; }
-        { name = "python"; auto-format = true; formatter = { command = "${pkgs.black}/bin/black"; args = [ "--quiet" "-" ]; }; }
-        { name = "svelte"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "svelte" ]; }; }
-        { name = "typescript"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "typescript" ]; }; }
-        { name = "yaml"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "yaml" ]; }; }
+        {
+          name = "bash";
+          auto-format = true;
+          formatter = {
+            command = "shfmt";
+          };
+        }
+        {
+          name = "css";
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "css"
+            ];
+          };
+        }
+        {
+          name = "html";
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "html"
+            ];
+          };
+        }
+        {
+          name = "javascript";
+          auto-format = true;
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "typescript"
+            ];
+          };
+        }
+        {
+          name = "json";
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "json"
+            ];
+          };
+        }
+        {
+          name = "markdown";
+          auto-format = true;
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "markdown"
+            ];
+          };
+        }
+        {
+          name = "nix";
+          auto-format = true;
+          formatter = {
+            command = "nix";
+            args = [
+              "fmt"
+              "--"
+              "-"
+            ];
+          };
+        }
+        {
+          name = "python";
+          auto-format = true;
+          formatter = {
+            command = "black";
+            args = [
+              "--quiet"
+              "-"
+            ];
+          };
+        }
+        {
+          name = "svelte";
+          auto-format = true;
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "svelte"
+            ];
+          };
+        }
+        {
+          name = "typescript";
+          auto-format = true;
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "typescript"
+            ];
+          };
+        }
+        {
+          name = "yaml";
+          auto-format = true;
+          formatter = {
+            command = "prettier";
+            args = [
+              "--parser"
+              "yaml"
+            ];
+          };
+        }
       ];
     };
+    extraPackages = with pkgs; [
+      # Language servers
+      docker-compose-language-service
+      gopls
+      golangci-lint-langserver
+      marksman
+      nil
+      nodePackages.bash-language-server
+      nodePackages.dockerfile-language-server-nodejs
+      nodePackages.svelte-language-server
+      nodePackages.typescript-language-server
+      nodePackages.yaml-language-server
+      python311Packages.python-lsp-server
+      rust-analyzer
+      terraform-ls
+      vscode-langservers-extracted
+
+      # Debuggers
+      delve
+      lldb
+
+      # Formatters
+      nodePackages.prettier
+      rustfmt
+      black
+      shfmt
+    ];
   };
-
-  home.packages = with pkgs; [
-    # Language servers
-    docker-compose-language-service
-    gopls
-    golangci-lint-langserver
-    marksman
-    nil
-    nodePackages.bash-language-server
-    nodePackages.dockerfile-language-server-nodejs
-    nodePackages.svelte-language-server
-    nodePackages.typescript-language-server
-    nodePackages.yaml-language-server
-    python311Packages.python-lsp-server
-    rust-analyzer
-    terraform-ls
-    vscode-langservers-extracted
-
-    # Debuggers
-    delve
-    lldb
-
-    # Formatters
-    nodePackages.prettier
-    rustfmt
-  ];
 }
