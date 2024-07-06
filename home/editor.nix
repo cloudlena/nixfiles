@@ -25,7 +25,7 @@
         { name = "json"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "json" ]; }; }
         { name = "markdown"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "markdown" ]; }; }
         { name = "nix"; auto-format = true; formatter = { command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"; }; }
-        { name = "python"; auto-format = true; formatter = { command = "${pkgs.black}/bin/black"; args = [ "--quiet" "-" ]; }; }
+        { name = "python"; auto-format = true; formatter = { command = "${pkgs.ruff}/bin/ruff"; args = [ "format" "-" ]; }; }
         { name = "svelte"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "svelte" ]; }; }
         { name = "typescript"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "typescript" ]; }; }
         { name = "yaml"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "yaml" ]; }; }
