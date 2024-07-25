@@ -44,7 +44,6 @@
         "$mod, Tab, focusurgentorlast"
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
-        "SUPER_SHIFT, F, fakefullscreen"
         "$mod, S, togglefloating"
 
         # Shortcuts
