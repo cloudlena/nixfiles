@@ -426,6 +426,12 @@
     lato
   ];
 
+  # Cursor
+  home.pointerCursor = {
+    package = pkgs.posy-cursors;
+    name = "Posy_Cursor";
+  };
+
   # Wallpaper
   xdg.dataFile = {
     "wallpapers/bespinian.png".source = ./wallpapers/bespinian.png;
