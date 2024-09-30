@@ -10,7 +10,7 @@
     enable = true;
     settings = {
       "$mod" = "SUPER";
-      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 '";
+      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 ' --icon-theme Papirus";
       general = {
         border_size = 2;
         gaps_in = 0;
@@ -435,5 +435,17 @@
   # Wallpaper
   xdg.dataFile = {
     "wallpapers/bespinian.png".source = ./wallpapers/bespinian.png;
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Tokyonight-Dark";
+      package = pkgs.tokyo-night-gtk;
+    };
+    iconTheme = {
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
+    };
   };
 }
