@@ -120,7 +120,6 @@
     rustc
     shellcheck
     signal-desktop
-    termshark
     tflint
     timewarrior
     tree
