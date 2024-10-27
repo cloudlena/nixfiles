@@ -50,13 +50,19 @@
   users.users.lena = {
     isNormalUser = true;
     description = "Lena";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
     initialPassword = "changeme";
   };
   users.defaultUserShell = pkgs.zsh;
 
   # Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Garbage collection
   nix.gc = {

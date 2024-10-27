@@ -40,10 +40,23 @@
             white = "#c0caf5";
           };
           indexed_colors = [
-            { index = 16; color = "#ff9e64"; }
-            { index = 17; color = "#db4b4b"; }
+            {
+              index = 16;
+              color = "#ff9e64";
+            }
+            {
+              index = 17;
+              color = "#db4b4b";
+            }
           ];
         };
+        keyboard.bindings = [
+          {
+            key = "N";
+            mods = "Control|Shift";
+            action = "CreateNewWindow";
+          }
+        ];
       };
     };
 

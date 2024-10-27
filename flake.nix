@@ -14,7 +14,14 @@
     };
   };
 
-  outputs = { nixpkgs, nixos-hardware, lanzaboote, home-manager, ... }:
+  outputs =
+    {
+      nixpkgs,
+      nixos-hardware,
+      lanzaboote,
+      home-manager,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -34,6 +41,6 @@
         modules = [ ./home ];
       };
 
-      formatter.${system} = pkgs.nixpkgs-fmt;
+      formatter.${system} = pkgs.nixfmt-rfc-style;
     };
 }

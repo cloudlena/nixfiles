@@ -18,11 +18,11 @@
       enable = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      defaultKeymap = "viins";
       completionInit = ''
         autoload -Uz compinit && compinit
         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
       '';
+      defaultKeymap = "viins";
       history.ignoreAllDups = true;
       historySubstringSearch = {
         enable = true;
@@ -41,9 +41,6 @@
       initExtra = ''
         source ${config.xdg.configHome}/zsh/*
         if [[ $(tty) != /dev/tty[0-9] ]]; then
-          if [ -z "$TMUX" ]; then
-            exec ${pkgs.tmux}/bin/tmux || exit
-          fi
           ${pkgs.krabby}/bin/krabby random 1 --no-title --padding-left 1
         fi
       '';

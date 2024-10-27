@@ -15,20 +15,121 @@
     };
     languages = {
       language-server = {
-        gopls = { config."formatting.gofumpt" = true; };
+        gopls = {
+          config."formatting.gofumpt" = true;
+        };
       };
       language = [
-        { name = "bash"; auto-format = true; formatter = { command = "${pkgs.shfmt}/bin/shfmt"; }; }
-        { name = "css"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "css" ]; }; }
-        { name = "html"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "html" ]; }; }
-        { name = "javascript"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "typescript" ]; }; }
-        { name = "json"; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "json" ]; }; }
-        { name = "markdown"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "markdown" ]; }; }
-        { name = "nix"; auto-format = true; formatter = { command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"; }; }
-        { name = "python"; auto-format = true; formatter = { command = "${pkgs.ruff}/bin/ruff"; args = [ "format" "-" ]; }; }
-        { name = "svelte"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "svelte" ]; }; }
-        { name = "typescript"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "typescript" ]; }; }
-        { name = "yaml"; auto-format = true; formatter = { command = "${pkgs.nodePackages.prettier}/bin/prettier"; args = [ "--parser" "yaml" ]; }; }
+        {
+          name = "bash";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.shfmt}/bin/shfmt";
+          };
+        }
+        {
+          name = "css";
+          formatter = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "css"
+            ];
+          };
+        }
+        {
+          name = "html";
+          formatter = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "html"
+            ];
+          };
+        }
+        {
+          name = "javascript";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "typescript"
+            ];
+          };
+        }
+        {
+          name = "json";
+          formatter = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "json"
+            ];
+          };
+        }
+        {
+          name = "markdown";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "markdown"
+            ];
+          };
+        }
+        {
+          name = "nix";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+          };
+        }
+        {
+          name = "python";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.ruff}/bin/ruff";
+            args = [
+              "format"
+              "-"
+            ];
+          };
+        }
+        {
+          name = "svelte";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "svelte"
+            ];
+          };
+        }
+        {
+          name = "typescript";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "typescript"
+            ];
+          };
+        }
+        {
+          name = "yaml";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "yaml"
+            ];
+          };
+        }
       ];
     };
   };
@@ -36,8 +137,8 @@
   home.packages = with pkgs; [
     # Language servers
     docker-compose-language-service
-    gopls
     golangci-lint-langserver
+    gopls
     marksman
     nil
     nodePackages.bash-language-server

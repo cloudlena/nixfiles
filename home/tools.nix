@@ -159,29 +159,5 @@
         "image/svg" = [ "imv.desktop" ];
       };
     };
-    desktopEntries = {
-      bottom = {
-        name = "Bottom";
-        genericName = "System Monitor";
-        terminal = true;
-        exec = "${pkgs.bottom}/bin/btm";
-      };
-      taskwarrior = {
-        name = "Taskwarrior";
-        genericName = "Task Manager";
-        terminal = true;
-        exec = "${pkgs.taskwarrior-tui}/bin/taskwarrior-tui";
-      };
-      chatgpt = {
-        name = "ChatGPT";
-        genericName = "Chat Bot";
-        exec = "${pkgs.brave}/bin/brave --app=https://chat.openai.com/";
-      };
-      spotify = {
-        name = "Spotify";
-        genericName = "Music Player";
-        exec = "${pkgs.brave}/bin/brave --app=https://open.spotify.com";
-      };
-    };
   };
 }

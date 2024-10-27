@@ -138,8 +138,29 @@
             };
             format = "<span size=\"96%\">{icon}</span>";
             format-icons = {
-              default = [ "󰁺" "󰁻" "󰁼" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
-              charging = [ "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰂋" "󰂅" ];
+              default = [
+                "󰁺"
+                "󰁻"
+                "󰁼"
+                "󰁾"
+                "󰁿"
+                "󰂀"
+                "󰂁"
+                "󰂂"
+                "󰁹"
+              ];
+              charging = [
+                "󰢜"
+                "󰂆"
+                "󰂇"
+                "󰂈"
+                "󰢝"
+                "󰂉"
+                "󰢞"
+                "󰂊"
+                "󰂋"
+                "󰂅"
+              ];
               critical = [ "󱃍" ];
             };
             tooltip-format = "Battery at {capacity}%";
@@ -153,13 +174,23 @@
             format-wifi = "{icon}";
             format-linked = "󰈀";
             format-disconnected = "󰖪";
-            format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
+            format-icons = [
+              "󰤯"
+              "󰤟"
+              "󰤢"
+              "󰤥"
+              "󰤨"
+            ];
             tooltip-format-wifi = "{essid} at {signalStrength}%";
           };
           wireplumber = {
             format = "<span size=\"120%\">{icon}</span>";
             format-muted = "<span size=\"120%\">󰸈</span>";
-            format-icons = [ "󰕿" "󰖀" "󰕾" ];
+            format-icons = [
+              "󰕿"
+              "󰖀"
+              "󰕾"
+            ];
             tooltip-format = "Volume at {volume}%";
           };
           bluetooth = {
@@ -381,9 +412,19 @@
           after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
         };
         listener = [
-          { timeout = 600; on-timeout = "${pkgs.systemd}/bin/loginctl lock-session"; }
-          { timeout = 900; on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"; on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; }
-          { timeout = 1200; on-timeout = "${pkgs.systemd}/bin/systemctl suspend"; }
+          {
+            timeout = 600;
+            on-timeout = "${pkgs.systemd}/bin/loginctl lock-session";
+          }
+          {
+            timeout = 900;
+            on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+            on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+          }
+          {
+            timeout = 1200;
+            on-timeout = "${pkgs.systemd}/bin/systemctl suspend";
+          }
         ];
       };
     };
