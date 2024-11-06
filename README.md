@@ -53,11 +53,12 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 
 ## Terminal Commands
 
-| Function            | Command |
-| :------------------ | :------ |
-| Open Text Editor    | `e`     |
-| Open File Manager   | `f`     |
-| Open Git Browser    | `g`     |
-| Open System Monitor | `m`     |
-| Open File           | `o`     |
-| Open Task Manager   | `t`     |
+| Function                | Command |
+| :---------------------- | :------ |
+| Open Text Editor        | `e`     |
+| Open File Manager       | `f`     |
+| Open Git Browser        | `g`     |
+| List Directory Contents | `l`     |
+| Open System Monitor     | `m`     |
+| Open File               | `o`     |
+| Open Task Manager       | `t`     |

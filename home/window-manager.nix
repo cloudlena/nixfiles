@@ -21,7 +21,6 @@
         kb_options = "caps:escape,compose:ralt";
         touchpad.natural_scroll = true;
       };
-      cursor.inactive_timeout = 8;
       gestures = {
         workspace_swipe = true;
         workspace_swipe_min_speed_to_force = 5;
@@ -30,12 +29,14 @@
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
       };
+      cursor.inactive_timeout = 8;
+      monitor = "eDP-1,preferred,auto,1.5";
+      # Smart gaps
+      windowrulev2 = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
       dwindle = {
         # Put new splits on the right/bottom
         force_split = 2;
-        no_gaps_when_only = 1;
       };
-      monitor = "eDP-1,preferred,auto,1.5";
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
       ];
