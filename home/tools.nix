@@ -11,7 +11,20 @@
         key = null;
         signByDefault = true;
       };
-      diff-so-fancy.enable = true;
+      delta = {
+        enable = true;
+        options = {
+          minus-style = "red #37222c";
+          minus-emph-style = "red #713137";
+          plus-style = "green #20303b";
+          plus-emph-style = "green #2c5a66";
+          zero-style = "white";
+          line-numbers = true;
+          line-numbers-minus-style = "white #37222c";
+          line-numbers-plus-style = "white #20303b";
+          line-numbers-zero-style = "white";
+        };
+      };
     };
     gitui.enable = true;
 
@@ -90,7 +103,7 @@
     cargo
     clippy
     curl
-    diff-so-fancy
+    delta
     dig
     dust
     fx
