@@ -37,9 +37,6 @@
         # Put new splits on the right/bottom
         force_split = 2;
       };
-      exec-once = [
-        "${pkgs.waybar}/bin/waybar"
-      ];
       bind = [
         # Window manager
         "$mod, Tab, focusurgentorlast"
@@ -119,6 +116,7 @@
     # Status bar
     waybar = {
       enable = true;
+      systemd.enable = true;
       settings = {
         mainBar = {
           layer = "top";
@@ -274,23 +272,21 @@
         };
       };
       style = ''
-        /* General */
         * {
           border-radius: 0;
           font-family: "FiraCode Nerd Font";
           font-size: 13px;
-          color: #c0caf5;
         }
 
         window#waybar {
           background-color: #1a1b26;
+          color: #c0caf5;
         }
 
         tooltip {
           background-color: #15161e;
         }
 
-        /* Workspaces */
         #workspaces button {
           margin: 4px;
           padding: 0 8px;
@@ -305,10 +301,10 @@
 
         #workspaces button.active {
           padding: 0 13px;
-          background: #2f334d;
+          background: #bb9af7;
+          color: #1a1b26;
         }
 
-        /* Modules */
         #clock,
         #network,
         #wireplumber,
@@ -464,8 +460,8 @@
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     fira-mono
-    fira-code-nerdfont
     lato
+    nerd-fonts.fira-code
   ];
 
   # Cursor

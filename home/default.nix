@@ -15,7 +15,7 @@
   home.username = "lena";
   home.homeDirectory = "/home/${config.home.username}";
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
