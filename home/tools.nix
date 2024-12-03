@@ -141,6 +141,7 @@
     wf-recorder
     wget2
     whois
+    wireguard-tools
     wl-clipboard
     xdg-utils
     yq
