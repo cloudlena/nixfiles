@@ -29,10 +29,7 @@
     gitui.enable = true;
 
     # File manager
-    yazi = {
-      enable = true;
-      enableZshIntegration = true;
-    };
+    yazi.enable = true;
 
     # Encryption
     gpg.enable = true;
@@ -141,6 +138,7 @@
     wf-recorder
     wget2
     whois
+    wireguard-tools
     wl-clipboard
     xdg-utils
     yq

@@ -7,9 +7,9 @@
         content = {
           type = "gpt";
           partitions = {
-            ESP = {
-              size = "500M";
+            esp = {
               type = "EF00";
+              size = "500M";
               content = {
                 type = "filesystem";
                 format = "vfat";

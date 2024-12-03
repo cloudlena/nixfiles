@@ -92,6 +92,8 @@
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
         "$mod, 0, togglespecialworkspace"
+        "$mod, mouse_down, workspace, m+1"
+        "$mod, mouse_up, workspace, m-1"
 
         # Move active window to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"
