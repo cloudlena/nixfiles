@@ -33,6 +33,7 @@
       monitor = "eDP-1,preferred,auto,1.5";
       # Smart gaps
       windowrulev2 = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
+      animations.enabled = false;
       dwindle = {
         # Put new splits on the right/bottom
         force_split = 2;
@@ -66,7 +67,7 @@
         ", XF86Search, exec, $launcherCmd"
 
         # Screenshots
-        ", Print , exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ${config.xdg.userDirs.pictures}/screenshot-$(date +'%F-%H-%M-%S').png"
+        ", Print, exec, mkdir -p ${config.xdg.userDirs.pictures}; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"${config.xdg.userDirs.pictures}/Screenshot-$(date +'%F-%H-%M-%S').png\""
 
         # Move window focus
         "$mod, H, movefocus, l"
@@ -81,7 +82,7 @@
         "$mod SHIFT, L, movewindow, r"
 
         # Switch workspaces
-        "$mod, N, workspace, empty"
+        "$mod, N, workspace, emptym"
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
         "$mod, 3, workspace, 3"
@@ -96,6 +97,7 @@
         "$mod, mouse_up, workspace, m-1"
 
         # Move active window to workspace
+        "$mod SHIFT, N, movetoworkspace, emptym"
         "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod SHIFT, 2, movetoworkspace, 2"
         "$mod SHIFT, 3, movetoworkspace, 3"
@@ -351,15 +353,16 @@
           inner-pad = 10;
           line-height = 25;
         };
+        border.width = 3;
         colors = {
-          background = "1a1b26ff";
+          background = "15161eff";
           text = "c0caf5ff";
-          match = "ffffffff";
-          selection = "bb9af7ff";
-          selection-text = "ffffffff";
-          selection-match = "1a1b26ff";
+          match = "bb9af7ff";
+          selection = "343a55ff";
+          selection-match = "bb9af7ff";
+          selection-text = "c0caf5ff";
+          border = "bb9af7ff";
         };
-        border.radius = 0;
       };
     };
 
@@ -444,7 +447,11 @@
     mako = {
       enable = true;
       font = "FiraCode Nerd Font 9";
-      backgroundColor = "#1a1b26";
+      backgroundColor = "#15161e";
+      borderRadius = 5;
+      width = 350;
+      height = 120;
+      padding = "8,10";
       textColor = "#c0caf5";
       borderColor = "#bb9af7";
       defaultTimeout = 8000;

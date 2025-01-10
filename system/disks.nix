@@ -16,11 +16,18 @@
                 mountpoint = "/boot";
               };
             };
-            luks = {
+            swap = {
+              size = "24G"; # 1.5x RAM
+              content = {
+                type = "swap";
+                randomEncryption = true;
+              };
+            };
+            root = {
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted";
+                name = "root";
                 passwordFile = "/tmp/secret.key";
                 content = {
                   type = "filesystem";
