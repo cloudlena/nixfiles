@@ -29,27 +29,28 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 
 ## Keybindings
 
-| Function                  | Keys                                                    |
-| :------------------------ | :------------------------------------------------------ |
-| Open App Launcher         | `Super + Space`                                         |
-| Open Terminal             | `Super + Enter`                                         |
-| Focus Last Window         | `Super + Tab`                                           |
-| Open Web Browser          | `Super + W`                                             |
-| Kill Active Window        | `Super + Q`                                             |
-| Toggle Fullscreen Window  | `Super + F`                                             |
-| Toggle Floating Window    | `Super + S`                                             |
-| Open Clipboard History    | `Super + C`                                             |
-| Open Emoji Picker         | `Super + E`                                             |
-| Open Color Picker         | `Super + P`                                             |
-| Lock Screen               | `Super + Ctrl + Q`                                      |
-| Open Empty Workspace      | `Super + N`                                             |
-| Switch to Workspace       | `Super + [1-9]`                                         |
-| Move Window to Workspace  | `Super + Shift + [1-9]`                                 |
-| Switch to Scratchpad      | `Super + 0`                                             |
-| Move Window to Scratchpad | `Super + Shift + 0`                                     |
-| Switch to Window          | `Super + [hjkl]` or `Move Mouse`                        |
-| Move Window               | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
-| Resize Window             | `Super + Right Mouse Button`                            |
+| Function                       | Keys                                                    |
+| :----------------------------- | :------------------------------------------------------ |
+| Open App Launcher              | `Super + Space`                                         |
+| Open Terminal                  | `Super + Enter`                                         |
+| Focus Last Window              | `Super + Tab`                                           |
+| Open Web Browser               | `Super + W`                                             |
+| Kill Active Window             | `Super + Q`                                             |
+| Toggle Fullscreen Window       | `Super + F`                                             |
+| Toggle Floating Window         | `Super + S`                                             |
+| Open Clipboard History         | `Super + C`                                             |
+| Open Emoji Picker              | `Super + E`                                             |
+| Open Color Picker              | `Super + P`                                             |
+| Lock Screen                    | `Super + Ctrl + Q`                                      |
+| Open Empty Workspace           | `Super + N`                                             |
+| Switch to Workspace            | `Super + [1-9]`                                         |
+| Move Window to Empty Workspace | `Super + Shift + N`                                     |
+| Move Window to Workspace       | `Super + Shift + [1-9]`                                 |
+| Switch to Scratchpad           | `Super + 0`                                             |
+| Move Window to Scratchpad      | `Super + Shift + 0`                                     |
+| Switch to Window               | `Super + [hjkl]` or `Move Mouse`                        |
+| Move Window                    | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
+| Resize Window                  | `Super + Right Mouse Button`                            |
 
 ## Terminal Commands
 
