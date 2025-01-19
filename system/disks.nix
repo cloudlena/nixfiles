@@ -28,7 +28,6 @@
               content = {
                 type = "luks";
                 name = "root";
-                passwordFile = "/tmp/secret.key";
                 content = {
                   type = "filesystem";
                   format = "ext4";
