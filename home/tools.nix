@@ -89,23 +89,22 @@
 
     # AWS CLI
     awscli.enable = true;
-
-    # Python dependency management
-    poetry.enable = true;
   };
 
   home.packages = with pkgs; [
+    air
     altair
     brave
     cargo
     clippy
-    curl
     delta
     dig
     dust
+    fabric-ai
     fx
     gcc
     gimp
+    glow
     gnumake
     golangci-lint
     gopass
@@ -135,12 +134,13 @@
     tree
     unzip
     upterm
+    uv
     wf-recorder
-    wget2
     whois
     wireguard-tools
     wl-clipboard
     xdg-utils
+    xh
     yq
     zip
   ];
