@@ -8,15 +8,20 @@
       theme = "tokyonight";
       editor = {
         line-number = "relative";
-        soft-wrap.enable = true;
         cursor-shape.insert = "bar";
         file-picker.hidden = false;
+        end-of-line-diagnostics = "hint";
+        inline-diagnostics.cursor-line = "warning";
       };
     };
     languages = {
       language-server = {
         gopls = {
           config."formatting.gofumpt" = true;
+        };
+        harper-ls = {
+          command = "harper-ls";
+          args = [ "--stdio" ];
         };
       };
       language = [
@@ -70,6 +75,10 @@
         }
         {
           name = "markdown";
+          language-servers = [
+            "marksman"
+            "harper-ls"
+          ];
           auto-format = true;
           formatter = {
             command = "${pkgs.nodePackages.prettier}/bin/prettier";
@@ -88,6 +97,10 @@
         }
         {
           name = "python";
+          language-servers = [
+            "ruff"
+            "pyright"
+          ];
           auto-format = true;
           formatter = {
             command = "${pkgs.ruff}/bin/ruff";
@@ -130,26 +143,40 @@
             ];
           };
         }
+        {
+          name = "toml";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.taplo}/bin/taplo";
+            args = [
+              "fmt"
+              "-"
+            ];
+          };
+        }
       ];
     };
   };
 
   home.packages = with pkgs; [
     # Language servers
+    bash-language-server
     docker-compose-language-service
+    dockerfile-language-server-nodejs
     golangci-lint-langserver
     gopls
+    harper
     marksman
-    nil
-    nodePackages.bash-language-server
-    nodePackages.dockerfile-language-server-nodejs
-    nodePackages.svelte-language-server
-    nodePackages.typescript-language-server
-    nodePackages.yaml-language-server
-    python311Packages.python-lsp-server
+    nixd
+    pyright
+    ruff
     rust-analyzer
+    svelte-language-server
+    taplo
     terraform-ls
+    typescript-language-server
     vscode-langservers-extracted
+    yaml-language-server
 
     # Debuggers
     delve

@@ -4,6 +4,7 @@
   home.shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../..";
+    a = "${pkgs.fabric-ai}/bin/fabric";
     e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.yazi}/bin/yazi";
     g = "${pkgs.gitui}/bin/gitui";
@@ -72,14 +73,13 @@
         branches=$(
           ${pkgs.git}/bin/git --no-pager branch --all \
             --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)" \
-            | sed '/^$/d') || return
+          | sed '/^$/d') || return
         tags=$(${pkgs.git}/bin/git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
         target=$(
           (echo "$branches"; echo "$tags") |
           ${pkgs.fzf}/bin/fzf --no-hscroll --no-multi -n 2 \
               --ansi --preview="git --no-pager log -150 --pretty=format:%s '..{2}'") || return
-        echo "$target"
-        ${pkgs.git}/bin/git checkout $(awk '{print $2}' <<<"$target" | sed 's/^[^\/]*\///')
+        ${pkgs.git}/bin/git checkout $(awk '{print $2}' <<<"$target" )
       }
 
       # Kill any process with fuzzy search
@@ -154,10 +154,9 @@
       	fi
 
       	# Python
-      	if [ -e poetry.lock ]; then
+      	if [ -e uv.lock ]; then
       		printf "Updating Python dependencies for %s...\n\n" "''${PWD##*/}"
-      		poetry update
-      		poetry show --outdated
+      		uv sync --upgrade
       	fi
 
       	# OpenTofu
