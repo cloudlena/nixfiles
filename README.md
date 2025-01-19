@@ -56,6 +56,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 
 | Function                | Command |
 | :---------------------- | :------ |
+| AI Tool                 | `a`     |
 | Open Text Editor        | `e`     |
 | Open File Manager       | `f`     |
 | Open Git Browser        | `g`     |

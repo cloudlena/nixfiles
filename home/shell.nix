@@ -4,6 +4,7 @@
   home.shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../..";
+    a = "${pkgs.fabric-ai}/bin/fabric";
     e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.yazi}/bin/yazi";
     g = "${pkgs.gitui}/bin/gitui";
@@ -154,10 +155,9 @@
       	fi
 
       	# Python
-      	if [ -e poetry.lock ]; then
+      	if [ -e uv.lock ]; then
       		printf "Updating Python dependencies for %s...\n\n" "''${PWD##*/}"
-      		poetry update
-      		poetry show --outdated
+      		uv sync --upgrade
       	fi
 
       	# OpenTofu
