@@ -100,11 +100,9 @@
     delta
     dig
     dust
-    fabric-ai
     fx
     gcc
     gimp
-    glow
     gnumake
     golangci-lint
     gopass
