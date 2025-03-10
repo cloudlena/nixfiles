@@ -4,7 +4,7 @@
   home.shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../..";
-    a = "${pkgs.fabric-ai}/bin/fabric";
+    a = "${pkgs.aichat}/bin/aichat";
     e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.yazi}/bin/yazi";
     g = "${pkgs.gitui}/bin/gitui";
@@ -39,7 +39,7 @@
           exec ${pkgs.hyprland}/bin/Hyprland
         fi
       '';
-      initExtra = ''
+      initContent = ''
         source ${config.xdg.configHome}/zsh/*
         if [[ $(tty) != /dev/tty[0-9] ]]; then
           ${pkgs.krabby}/bin/krabby random 1 --no-title --padding-left 1

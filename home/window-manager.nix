@@ -32,7 +32,7 @@
       cursor.inactive_timeout = 8;
       monitor = "eDP-1,preferred,auto,1.5";
       # Smart gaps
-      windowrulev2 = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
+      windowrule = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
       animations.enabled = false;
       dwindle = {
         # Put new splits on the right/bottom
@@ -441,7 +441,7 @@
     # GPG
     gpg-agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-qt;
+      pinentry.package = pkgs.pinentry-qt;
     };
 
     # Notifications for low battery
@@ -450,16 +450,18 @@
     # Notification daemon
     mako = {
       enable = true;
-      font = "FiraCode Nerd Font 9";
-      backgroundColor = "#15161e";
-      borderRadius = 5;
-      width = 350;
-      height = 120;
-      padding = "8,10";
-      textColor = "#c0caf5";
-      borderColor = "#bb9af7";
-      defaultTimeout = 8000;
-      groupBy = "app-name,summary";
+      settings = {
+        font = "FiraCode Nerd Font 9";
+        background-color = "#15161e";
+        text-color = "#c0caf5";
+        width = "350";
+        height = "120";
+        padding = "8,10";
+        border-color = "#bb9af7";
+        border-radius = "5";
+        default-timeout = "8000";
+        group-by = "app-name,summary";
+      };
     };
 
     # Adjust color temperature to reduce eye strain

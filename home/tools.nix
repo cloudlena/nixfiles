@@ -100,11 +100,9 @@
     delta
     dig
     dust
-    fabric-ai
     fx
     gcc
-    gimp
-    glow
+    gimp3
     gnumake
     golangci-lint
     gopass
@@ -128,19 +126,20 @@
     quickemu
     rustc
     shellcheck
-    signal-desktop
+    signal-desktop-bin
     tflint
     timewarrior
     tree
     unzip
     upterm
+    usbutils
     uv
     wf-recorder
+    wget2
     whois
     wireguard-tools
     wl-clipboard
     xdg-utils
-    xh
     yq
     zip
   ];
