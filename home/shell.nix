@@ -4,7 +4,7 @@
   home.shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../..";
-    a = "${pkgs.fabric-ai}/bin/fabric";
+    a = "${pkgs.aichat}/bin/aichat";
     e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.yazi}/bin/yazi";
     g = "${pkgs.gitui}/bin/gitui";
