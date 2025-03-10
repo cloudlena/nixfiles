@@ -100,11 +100,9 @@
     delta
     dig
     dust
-    fabric-ai
     fx
     gcc
     gimp
-    glow
     gnumake
     golangci-lint
     gopass
@@ -128,7 +126,7 @@
     quickemu
     rustc
     shellcheck
-    signal-desktop
+    signal-desktop-bin
     tflint
     timewarrior
     tree
