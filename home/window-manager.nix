@@ -32,7 +32,7 @@
       cursor.inactive_timeout = 8;
       monitor = "eDP-1,preferred,auto,1.5";
       # Smart gaps
-      windowrulev2 = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
+      windowrule = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
       animations.enabled = false;
       dwindle = {
         # Put new splits on the right/bottom
