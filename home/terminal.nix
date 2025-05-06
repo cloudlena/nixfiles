@@ -10,10 +10,7 @@
             y = 5;
           };
         };
-        font = {
-          normal.family = "FiraCode Nerd Font";
-          size = 12;
-        };
+        font.normal.family = "FiraCode Nerd Font";
         colors = {
           primary = {
             background = "#1a1b26";
