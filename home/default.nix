@@ -10,8 +10,6 @@
     ./upgrade-diff.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   home.username = "lena";
   home.homeDirectory = "/home/${config.home.username}";
 

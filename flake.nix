@@ -24,11 +24,14 @@
     }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
+        inherit system pkgs;
         modules = [
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           lanzaboote.nixosModules.lanzaboote

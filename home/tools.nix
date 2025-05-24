@@ -120,6 +120,7 @@
     opentofu
     optipng
     podman-compose
+    presenterm
     pulsemixer
     pwgen
     python3

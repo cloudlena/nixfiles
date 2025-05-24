@@ -3,7 +3,7 @@
 {
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
+    TERMINAL = "${pkgs.kitty}/bin/kitty";
   };
 
   wayland.windowManager.hyprland = {
@@ -47,7 +47,7 @@
 
         # Shortcuts
         "$mod, Space, exec, $launcherCmd"
-        "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
+        "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
         "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt '󰆏 ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
         "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji -n"
