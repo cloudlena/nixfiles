@@ -1,59 +1,15 @@
 {
   programs = {
     # Terminal emulator
-    alacritty = {
+    kitty = {
       enable = true;
+      font.name = "FiraCode Nerd Font";
+      themeFile = "tokyo_night_night";
+      keybindings = {
+        "ctrl+shift+n" = "new_os_window_with_cwd";
+      };
       settings = {
-        window = {
-          padding = {
-            x = 5;
-            y = 5;
-          };
-        };
-        font.normal.family = "FiraCode Nerd Font";
-        colors = {
-          primary = {
-            background = "#1a1b26";
-            foreground = "#c0caf5";
-          };
-          normal = {
-            black = "#15161e";
-            red = "#f7768e";
-            green = "#9ece6a";
-            yellow = "#e0af68";
-            blue = "#7aa2f7";
-            magenta = "#bb9af7";
-            cyan = "#7dcfff";
-            white = "#a9b1d6";
-          };
-          bright = {
-            black = "#414868";
-            red = "#f7768e";
-            green = "#9ece6a";
-            yellow = "#e0af68";
-            blue = "#7aa2f7";
-            magenta = "#bb9af7";
-            cyan = "#7dcfff";
-            white = "#c0caf5";
-          };
-          indexed_colors = [
-            {
-              index = 16;
-              color = "#ff9e64";
-            }
-            {
-              index = 17;
-              color = "#db4b4b";
-            }
-          ];
-        };
-        keyboard.bindings = [
-          {
-            key = "N";
-            mods = "Control|Shift";
-            action = "CreateNewWindow";
-          }
-        ];
+        window_padding_width = 5;
       };
     };
 
@@ -65,7 +21,7 @@
       terminal = "tmux-256color";
       extraConfig = ''
         # Use 24-bit color
-        set-option -sa terminal-features ',alacritty*:RGB'
+        set-option -sa terminal-features ',kitty*:RGB'
 
         # Open new splits from current directory
         bind '"' split-window -v -c '#{pane_current_path}'
