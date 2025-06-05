@@ -109,6 +109,7 @@
     hugo
     inkscape
     jpegoptim
+    kooha
     kubectl
     kubectx
     libreoffice
@@ -135,7 +136,6 @@
     upterm
     usbutils
     uv
-    wf-recorder
     wget2
     whois
     wireguard-tools
