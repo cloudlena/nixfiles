@@ -46,6 +46,7 @@
         "$mod, S, togglefloating"
 
         # Shortcuts
+        ", XF86Search, exec, $launcherCmd"
         "$mod, Space, exec, $launcherCmd"
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
@@ -53,18 +54,6 @@
         "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji -n"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker --autocopy"
         "SUPER_CTRL, Q, exec, ${pkgs.systemd}/bin/loginctl lock-session"
-
-        # Media keys
-        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
-        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%"
-        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-        ", XF86AudioPrev, exec, ${pkgs.playerctl}playerctl previous"
-        ", XF86Search, exec, $launcherCmd"
 
         # Screenshots
         ", Print, exec, mkdir -p ${config.xdg.userDirs.pictures}; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"${config.xdg.userDirs.pictures}/Screenshot-$(date +'%F-%H-%M-%S').png\""
@@ -108,6 +97,19 @@
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod SHIFT, 0, movetoworkspacesilent, special"
+      ];
+      bindl = [
+        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+        ", XF86AudioPrev, exec, ${pkgs.playerctl}playerctl previous"
+      ];
+      bindel = [
+        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume --limit 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%+"
+        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
       ];
       bindm = [
         "$mod, mouse:272, movewindow"

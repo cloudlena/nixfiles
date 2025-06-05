@@ -97,6 +97,13 @@
 
     # Geolocation service
     geoclue2.enable = true;
+
+    # mDNS service
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
   };
 
   system.stateVersion = "25.11";
