@@ -11,6 +11,7 @@
     settings = {
       "$mod" = "SUPER";
       "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 ' --icon-theme Papirus";
+      "$screenshotsDir" = "${config.xdg.userDirs.pictures}/Screenshots";
       general = {
         border_size = 2;
         gaps_in = 0;
@@ -56,7 +57,8 @@
         "SUPER_CTRL, Q, exec, ${pkgs.systemd}/bin/loginctl lock-session"
 
         # Screenshots
-        ", Print, exec, mkdir -p ${config.xdg.userDirs.pictures}; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"${config.xdg.userDirs.pictures}/Screenshot-$(date +'%F-%H-%M-%S').png\""
+        ", Print, exec, mkdir -p $screenshotsDir; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"$screenshotsDir/$(date +'%F-%H%M%S').png\""
+        "SHIFT, Print, exec, mkdir -p $screenshotsDir; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" -t ppm - | ${pkgs.satty}/bin/satty --early-exit --initial-tool brush --filename - --output-filename \"$screenshotsDir/$(date +'%F-%H%M%S').png\""
 
         # Move window focus
         "$mod, H, movefocus, l"
