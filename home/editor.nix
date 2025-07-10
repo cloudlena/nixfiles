@@ -77,6 +77,7 @@
           name = "markdown";
           language-servers = [
             "marksman"
+            "markdown-oxide"
             "harper-ls"
           ];
           auto-format = true;
@@ -98,7 +99,10 @@
         {
           name = "python";
           language-servers = [
+            "ty"
             "ruff"
+            "jedi-language-server"
+            "pylsp"
             "pyright"
           ];
           auto-format = true;

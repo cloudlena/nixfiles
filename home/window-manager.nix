@@ -137,6 +137,7 @@
           modules-right = [
             "custom/updates"
             "custom/containers"
+            "privacy"
             "wireplumber"
             "bluetooth"
             "network"
@@ -176,6 +177,13 @@
             };
             tooltip-format = "Battery at {capacity}%";
           };
+          bluetooth = {
+            format = "";
+            format-on = "<span size=\"105%\">󰂯</span>";
+            format-connected = "<span size=\"105%\">󰂱</span>";
+            tooltip-format-on = "Bluetooth {status}";
+            tooltip-format-connected = "Connected to {device_alias}";
+          };
           clock = {
             format = "{:%a %d %b %H:%M}";
             tooltip-format = "<big>{:%B %Y}</big>\n\n<tt><small>{calendar}</small></tt>";
@@ -194,6 +202,9 @@
             ];
             tooltip-format-wifi = "{essid} at {signalStrength}%";
           };
+          privacy = {
+            icon-size = 12;
+          };
           wireplumber = {
             format = "<span size=\"120%\">{icon}</span>";
             format-muted = "<span size=\"120%\">󰸈</span>";
@@ -203,13 +214,6 @@
               "󰕾"
             ];
             tooltip-format = "Volume at {volume}%";
-          };
-          bluetooth = {
-            format = "";
-            format-on = "<span size=\"105%\">󰂯</span>";
-            format-connected = "<span size=\"105%\">󰂱</span>";
-            tooltip-format-on = "Bluetooth {status}";
-            tooltip-format-connected = "Connected to {device_alias}";
           };
           "custom/tasks" = {
             exec = pkgs.writeShellScript "waybar-tasks" ''
@@ -317,15 +321,16 @@
           color: #1a1b26;
         }
 
-        #clock,
-        #network,
-        #wireplumber,
-        #bluetooth,
         #battery,
+        #bluetooth,
+        #clock,
+        #mode,
+        #network,
+        #privacy,
+        #wireplumber,
         #custom-updates,
         #custom-tasks,
-        #custom-containers,
-        #mode {
+        #custom-containers {
           margin: 4px;
           padding: 0 13px;
           border-radius: 9999px;
@@ -343,6 +348,7 @@
           padding: 0 15px 0 12px;
         }
 
+        #privacy,
         #battery.critical {
           color: #f7768e;
           font-weight: bold;
