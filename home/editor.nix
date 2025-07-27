@@ -19,10 +19,6 @@
         gopls = {
           config."formatting.gofumpt" = true;
         };
-        harper-ls = {
-          command = "harper-ls";
-          args = [ "--stdio" ];
-        };
       };
       language = [
         {
@@ -77,6 +73,7 @@
           name = "markdown";
           language-servers = [
             "marksman"
+            "markdown-oxide"
             "harper-ls"
           ];
           auto-format = true;
@@ -91,14 +88,14 @@
         {
           name = "nix";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
-          };
         }
         {
           name = "python";
           language-servers = [
+            "ty"
             "ruff"
+            "jedi-language-server"
+            "pylsp"
             "pyright"
           ];
           auto-format = true;
@@ -122,6 +119,10 @@
           };
         }
         {
+          name = "toml";
+          auto-format = true;
+        }
+        {
           name = "typescript";
           auto-format = true;
           formatter = {
@@ -140,17 +141,6 @@
             args = [
               "--parser"
               "yaml"
-            ];
-          };
-        }
-        {
-          name = "toml";
-          auto-format = true;
-          formatter = {
-            command = "${pkgs.taplo}/bin/taplo";
-            args = [
-              "fmt"
-              "-"
             ];
           };
         }
@@ -183,6 +173,7 @@
     lldb
 
     # Formatters
+    nixfmt-rfc-style
     nodePackages.prettier
     rustfmt
   ];
