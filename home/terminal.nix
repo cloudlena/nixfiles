@@ -28,6 +28,7 @@
         bind % split-window -h -c '#{pane_current_path}'
 
         # Unclutter status bar
+        set-option -g renumber-windows on
         set-option -g status-right ""
         set-option -g status-left ""
         set-window-option -g window-status-format " #I: #W "
