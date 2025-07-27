@@ -76,8 +76,14 @@
     # Image viewer
     imv.enable = true;
 
+    # AI CLI
+    aichat.enable = true;
+
     # Go
     go.enable = true;
+
+    # Python
+    uv.enable = true;
 
     # Simplified manuals
     tealdeer = {
@@ -135,8 +141,6 @@
     unzip
     upterm
     usbutils
-    uv
-    wget2
     whois
     wireguard-tools
     wl-clipboard
