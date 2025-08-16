@@ -4,8 +4,8 @@ update:
 
 .PHONY: system
 system:
-	sudo nixos-rebuild switch --flake .
+	nh os switch
 
 .PHONY: home
 home:
-	home-manager switch --flake .
+	nh home switch

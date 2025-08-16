@@ -2,6 +2,12 @@
 
 {
   programs = {
+    # Nix helper
+    nh = {
+      enable = true;
+      flake = "${config.home.homeDirectory}/.nixfiles";
+    };
+
     # Git
     git = {
       enable = true;

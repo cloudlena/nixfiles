@@ -7,7 +7,6 @@
     ./shell.nix
     ./editor.nix
     ./tools.nix
-    ./upgrade-diff.nix
   ];
 
   home.username = "lena";

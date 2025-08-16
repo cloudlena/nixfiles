@@ -4,7 +4,6 @@
   imports = [
     ./hardware-configuration.nix
     ./secure-boot.nix
-    ./upgrade-diff.nix
   ];
 
   # Bootloader
