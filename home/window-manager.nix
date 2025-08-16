@@ -11,6 +11,8 @@
     settings = {
       "$mod" = "SUPER";
       "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 ' --icon-theme Papirus";
+      "$osdCmd" =
+        "${pkgs.swayosd}/bin/swayosd-client --monitor \"$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[] | select(.focused == true).name')\"";
       "$screenshotsDir" = "${config.xdg.userDirs.pictures}/Screenshots";
       general = {
         border_size = 2;
@@ -109,12 +111,12 @@
         ", XF86AudioPrev, exec, ${pkgs.playerctl}playerctl previous"
       ];
       bindel = [
-        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume --limit 1 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%+"
-        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
+        ", XF86AudioRaiseVolume, exec, $osdCmd --output-volume raise --max-volume 120"
+        ", XF86AudioLowerVolume, exec, $osdCmd --output-volume lower --max-volume 120"
+        ", XF86AudioMute, exec, $osdCmd --output-volume mute-toggle"
+        ", XF86AudioMicMute, exec, $osdCmd --input-volume mute-toggle"
+        ", XF86MonBrightnessUp, exec, $osdCmd --brightness raise"
+        ", XF86MonBrightnessDown, exec, $osdCmd --brightness lower"
       ];
       bindm = [
         "$mod, mouse:272, movewindow"
@@ -219,6 +221,9 @@
 
     # Clipboard manager
     cliphist.enable = true;
+
+    # Volume and brightness indicator
+    swayosd.enable = true;
 
     # GPG
     gpg-agent = {

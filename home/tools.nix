@@ -113,7 +113,6 @@
     dig
     dust
     fx
-    gcc
     gimp3
     gnumake
     golangci-lint
@@ -140,7 +139,7 @@
     quickemu
     rustc
     shellcheck
-    signal-desktop-bin
+    signal-desktop
     tflint
     timewarrior
     tree
@@ -148,7 +147,6 @@
     upterm
     usbutils
     whois
-    wireguard-tools
     wl-clipboard
     xdg-utils
     yq

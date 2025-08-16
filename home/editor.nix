@@ -31,7 +31,7 @@
         {
           name = "css";
           formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            command = "${pkgs.prettier}/bin/prettier";
             args = [
               "--parser"
               "css"
@@ -41,7 +41,7 @@
         {
           name = "html";
           formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            command = "${pkgs.prettier}/bin/prettier";
             args = [
               "--parser"
               "html"
@@ -52,7 +52,7 @@
           name = "javascript";
           auto-format = true;
           formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            command = "${pkgs.prettier}/bin/prettier";
             args = [
               "--parser"
               "typescript"
@@ -62,7 +62,7 @@
         {
           name = "json";
           formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            command = "${pkgs.prettier}/bin/prettier";
             args = [
               "--parser"
               "json"
@@ -78,7 +78,7 @@
           ];
           auto-format = true;
           formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            command = "${pkgs.prettier}/bin/prettier";
             args = [
               "--parser"
               "markdown"
@@ -111,7 +111,7 @@
           name = "svelte";
           auto-format = true;
           formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            command = "${pkgs.prettier}/bin/prettier";
             args = [
               "--parser"
               "svelte"
@@ -126,7 +126,7 @@
           name = "typescript";
           auto-format = true;
           formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            command = "${pkgs.prettier}/bin/prettier";
             args = [
               "--parser"
               "typescript"
@@ -137,7 +137,7 @@
           name = "yaml";
           auto-format = true;
           formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
+            command = "${pkgs.prettier}/bin/prettier";
             args = [
               "--parser"
               "yaml"
@@ -173,8 +173,8 @@
     lldb
 
     # Formatters
-    nixfmt-rfc-style
-    nodePackages.prettier
+    nixfmt
+    prettier
     rustfmt
   ];
 }
