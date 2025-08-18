@@ -85,6 +85,12 @@
     # AI CLI
     aichat.enable = true;
 
+    # AI coding agent
+    opencode = {
+      enable = true;
+      settings.theme = "tokyonight";
+    };
+
     # Go
     go.enable = true;
 
@@ -113,6 +119,7 @@
     dig
     dust
     fx
+    gcc
     gimp3
     gnumake
     golangci-lint
@@ -176,6 +183,18 @@
         "image/png" = [ "imv.desktop" ];
         "image/jpeg" = [ "imv.desktop" ];
         "image/svg" = [ "imv.desktop" ];
+      };
+    };
+    desktopEntries = {
+      spotify = {
+        name = "Spotify";
+        genericName = "Music Player";
+        exec = "brave --app=https://open.spotify.com/";
+        categories = [
+          "Application"
+          "Music"
+        ];
+        icon = "${config.gtk.iconTheme.package}/share/icons/Papirus/32x32/apps/spotify.svg";
       };
     };
   };

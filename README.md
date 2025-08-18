@@ -27,7 +27,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Warning    | ![#e0af68](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23e0af68&textColor=rgba(0,0,0,0)>) |
 | Danger     | ![#f7768e](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23f7768e&textColor=rgba(0,0,0,0)>) |
 
-## Keybindings
+## Key Bindings
 
 | Function                       | Keys                                                    |
 | :----------------------------- | :------------------------------------------------------ |
@@ -64,3 +64,4 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Open System Monitor     | `m`     |
 | Open File               | `o`     |
 | Open Task Manager       | `t`     |
+| Open AI Coding Agent    | `v`     |

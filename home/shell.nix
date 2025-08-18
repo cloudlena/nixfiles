@@ -11,6 +11,7 @@
     m = "${pkgs.bottom}/bin/btm";
     o = "${pkgs.xdg-utils}/bin/xdg-open";
     t = "${pkgs.taskwarrior3}/bin/task";
+    v = "${pkgs.opencode}/bin/opencode";
   };
 
   programs = {
