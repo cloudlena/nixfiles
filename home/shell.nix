@@ -83,32 +83,6 @@
         ${pkgs.git}/bin/git checkout $(awk '{print $2}' <<<"$target" )
       }
 
-      # Kill any process with fuzzy search
-      fkill() {
-      	local pid
-      	if [ "$UID" != "0" ]; then
-      		pid=$(ps -f -u $UID | sed 1d | ${pkgs.fzf}/bin/fzf -m | awk '{print $2}')
-      	else
-      		pid=$(ps -ef | sed 1d | ${pkgs.fzf}/bin/fzf -m | awk '{print $2}')
-      	fi
-
-      	if [ "x$pid" != "x" ]; then
-      		echo "$pid" | xargs kill "-''${1:-9}"
-      	fi
-      }
-
-      # Git commit browser with fuzzy search
-      fshow() {
-      	${pkgs.git}/bin/git log --graph --color=always \
-      		--format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-      		${pkgs.fzf}/bin/fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-      			--bind "ctrl-m:execute:
-                  (grep -o '[a-f0-9]\{7\}' | head -1 |
-                  xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                  {}
-      FZF-EOF"
-      }
-
       # Update system
       pacu() {
         pushd ${config.home.homeDirectory}/.nixfiles

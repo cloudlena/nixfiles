@@ -34,6 +34,9 @@
     };
     gitui.enable = true;
 
+    # System information
+    fastfetch.enable = true;
+
     # File manager
     yazi.enable = true;
 
@@ -127,6 +130,7 @@
     hugo
     inkscape
     jpegoptim
+    killall
     kooha
     kubectl
     kubectx
@@ -140,7 +144,6 @@
     optipng
     podman-compose
     presenterm
-    pulsemixer
     pwgen
     python3
     quickemu
@@ -149,11 +152,13 @@
     signal-desktop
     tflint
     timewarrior
+    traceroute
     tree
     unzip
     upterm
     usbutils
     whois
+    wiremix
     wl-clipboard
     xdg-utils
     yq
@@ -194,7 +199,7 @@
           "Application"
           "Music"
         ];
-        icon = "${config.gtk.iconTheme.package}/share/icons/Papirus/32x32/apps/spotify.svg";
+        icon = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark/32x32/apps/spotify.svg";
       };
     };
   };

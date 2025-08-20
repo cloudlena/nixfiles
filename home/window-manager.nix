@@ -10,7 +10,7 @@
     enable = true;
     settings = {
       "$mod" = "SUPER";
-      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 ' --icon-theme Papirus";
+      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 ' --icon-theme Papirus-Dark";
       "$osdCmd" =
         "${pkgs.swayosd}/bin/swayosd-client --monitor \"$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[] | select(.focused == true).name')\"";
       "$screenshotsDir" = "${config.xdg.userDirs.pictures}/Screenshots";
@@ -106,9 +106,9 @@
         "$mod SHIFT, 0, movetoworkspacesilent, special"
       ];
       bindl = [
-        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-        ", XF86AudioPrev, exec, ${pkgs.playerctl}playerctl previous"
+        ", XF86AudioPlay, exec, $osdCmd --playerctl play-pause"
+        ", XF86AudioNext, exec, $osdCmd --playerctl next"
+        ", XF86AudioPrev, exec, $osdCmd --playerctl previous"
       ];
       bindel = [
         ", XF86AudioRaiseVolume, exec, $osdCmd --output-volume raise --max-volume 120"
@@ -279,13 +279,18 @@
 
   gtk = {
     enable = true;
+    font = {
+      name = "FiraCode Nerd Font";
+      package = pkgs.nerd-fonts.fira-code;
+      size = 10;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
     theme = {
       name = "Tokyonight-Dark";
       package = pkgs.tokyonight-gtk-theme;
-    };
-    iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
     };
   };
 }
