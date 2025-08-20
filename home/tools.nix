@@ -140,7 +140,6 @@
     optipng
     podman-compose
     presenterm
-    pulsemixer
     pwgen
     python3
     quickemu
@@ -154,6 +153,7 @@
     upterm
     usbutils
     whois
+    wiremix
     wl-clipboard
     xdg-utils
     yq

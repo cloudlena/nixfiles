@@ -106,9 +106,9 @@
         "$mod SHIFT, 0, movetoworkspacesilent, special"
       ];
       bindl = [
-        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-        ", XF86AudioPrev, exec, ${pkgs.playerctl}playerctl previous"
+        ", XF86AudioPlay, exec, $osdCmd --playerctl play-pause"
+        ", XF86AudioNext, exec, $osdCmd --playerctl next"
+        ", XF86AudioPrev, exec, $osdCmd --playerctl previous"
       ];
       bindel = [
         ", XF86AudioRaiseVolume, exec, $osdCmd --output-volume raise --max-volume 120"
@@ -279,13 +279,17 @@
 
   gtk = {
     enable = true;
-    theme = {
-      name = "Tokyonight-Dark";
-      package = pkgs.tokyonight-gtk-theme;
+    font = {
+      name = "FiraCode Nerd Font";
+      package = pkgs.nerd-fonts.fira-code;
     };
     iconTheme = {
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
+    };
+    theme = {
+      name = "Tokyonight-Dark";
+      package = pkgs.tokyonight-gtk-theme;
     };
   };
 }

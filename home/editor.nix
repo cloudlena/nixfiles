@@ -91,13 +91,6 @@
         }
         {
           name = "python";
-          language-servers = [
-            "ty"
-            "ruff"
-            "jedi-language-server"
-            "pylsp"
-            "pyright"
-          ];
           auto-format = true;
           formatter = {
             command = "${pkgs.ruff}/bin/ruff";
@@ -158,12 +151,12 @@
     harper
     marksman
     nixd
-    pyright
     ruff
     rust-analyzer
     svelte-language-server
     taplo
     terraform-ls
+    ty
     typescript-language-server
     vscode-langservers-extracted
     yaml-language-server
