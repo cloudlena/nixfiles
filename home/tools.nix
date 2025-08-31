@@ -115,6 +115,7 @@
   home.packages = with pkgs; [
     air
     altair
+    bluetui
     brave
     cargo
     clippy
