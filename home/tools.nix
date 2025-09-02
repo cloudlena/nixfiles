@@ -162,19 +162,20 @@
     wiremix
     wl-clipboard
     xdg-utils
-    yq
+    yq-go
     zip
   ];
 
   xdg = {
     configFile = {
-      "gopass/config".text = ''
-        [core]
-        	notifications = false
-        	showsafecontent = true
-        [mounts]
-        	path = ${config.home.homeDirectory}/.password-store
-      '';
+      "gopass/config".text = # ini
+        ''
+          [core]
+          	notifications = false
+          	showsafecontent = true
+          [mounts]
+          	path = ${config.home.homeDirectory}/.password-store
+        '';
     };
     dataFile = {
       "task/hooks/on-modify.timewarrior" = {

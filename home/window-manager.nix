@@ -23,6 +23,7 @@
       input = {
         kb_options = "caps:escape,compose:ralt";
         touchpad.natural_scroll = true;
+        special_fallthrough = true;
       };
       gestures = {
         workspace_swipe = true;
@@ -43,13 +44,14 @@
       dwindle = {
         # Put new splits on the right/bottom
         force_split = 2;
+        special_scale_factor = 0.95;
       };
       bind = [
         # Window manager
         "$mod, Tab, focusurgentorlast"
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
-        "$mod, S, togglefloating"
+        "$mod, V, togglefloating"
 
         # Shortcuts
         ", XF86Search, exec, $launcherCmd"
@@ -78,7 +80,6 @@
         "$mod SHIFT, L, movewindow, r"
 
         # Switch workspaces
-        "$mod, N, workspace, emptym"
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
         "$mod, 3, workspace, 3"
@@ -88,7 +89,9 @@
         "$mod, 7, workspace, 7"
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
-        "$mod, 0, togglespecialworkspace"
+        "$mod, 0, workspace, 10"
+        "$mod, N, workspace, emptym"
+        "$mod, S, togglespecialworkspace"
         "$mod, mouse_down, workspace, m+1"
         "$mod, mouse_up, workspace, m-1"
 
@@ -103,7 +106,8 @@
         "$mod SHIFT, 7, movetoworkspace, 7"
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
-        "$mod SHIFT, 0, movetoworkspacesilent, special"
+        "$mod SHIFT, 0, movetoworkspace, 10"
+        "$mod SHIFT, S, movetoworkspacesilent, special"
       ];
       bindl = [
         ", XF86AudioPlay, exec, $osdCmd --playerctl play-pause"

@@ -24,6 +24,7 @@
             critical = 10;
           };
           format = "<span size=\"96%\">{icon}</span>";
+          format-critical = "<span size=\"96%\">{icon} {capacity}%</span>";
           format-icons = {
             default = [
               "󰁺"
@@ -163,72 +164,73 @@
       };
     };
 
-    style = ''
-      * {
-        border-radius: 0;
-        font-family: "FiraCode Nerd Font";
-        font-size: 13px;
-      }
+    style = # css
+      ''
+        * {
+          border-radius: 0;
+          font-family: "FiraCode Nerd Font";
+          font-size: 13px;
+        }
 
-      window#waybar {
-        background-color: #1a1b26;
-        color: #c0caf5;
-      }
+        window#waybar {
+          background-color: #1a1b26;
+          color: #c0caf5;
+        }
 
-      tooltip {
-        background-color: #15161e;
-      }
+        tooltip {
+          background-color: #15161e;
+        }
 
-      #workspaces button {
-        margin: 4px;
-        padding: 0 8px;
-        border-radius: 9999px;
-      }
+        #workspaces button {
+          margin: 4px;
+          padding: 0 8px;
+          border-radius: 9999px;
+        }
 
-      #workspaces button:hover {
-        border-color: transparent;
-        box-shadow: none;
-        background: #414868;
-      }
+        #workspaces button:hover {
+          border-color: transparent;
+          box-shadow: none;
+          background: #414868;
+        }
 
-      #workspaces button.active {
-        padding: 0 13px;
-        background: #bb9af7;
-        color: #1a1b26;
-      }
+        #workspaces button.active {
+          padding: 0 13px;
+          background: #bb9af7;
+          color: #1a1b26;
+        }
 
-      #battery,
-      #bluetooth,
-      #clock,
-      #mode,
-      #network,
-      #privacy,
-      #wireplumber,
-      #custom-updates,
-      #custom-tasks,
-      #custom-containers {
-        margin: 4px;
-        padding: 0 13px;
-        border-radius: 9999px;
-        background-color: #2f334d;
-      }
+        #battery,
+        #bluetooth,
+        #clock,
+        #mode,
+        #network,
+        #privacy,
+        #wireplumber,
+        #custom-updates,
+        #custom-tasks,
+        #custom-containers {
+          margin: 4px;
+          padding: 0 13px;
+          border-radius: 9999px;
+          background-color: #2f334d;
+        }
 
-      #network {
-        padding: 0 15px 0 11px;
-      }
+        #network {
+          padding: 0 15px 0 11px;
+        }
 
-      #mode,
-      #custom-updates {
-        color: #bb9af7;
-        font-weight: bold;
-        padding: 0 15px 0 12px;
-      }
+        #mode,
+        #custom-updates {
+          color: #bb9af7;
+          font-weight: bold;
+          padding: 0 15px 0 12px;
+        }
 
-      #privacy,
-      #battery.critical {
-        color: #f7768e;
-        font-weight: bold;
-      }
-    '';
+        #privacy,
+        #battery.critical {
+          color: #f7768e;
+          font-weight: bold;
+        }
+      '';
   };
 }
