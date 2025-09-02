@@ -20,10 +20,11 @@
       enable = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      completionInit = ''
-        autoload -Uz compinit && compinit
-        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-      '';
+      completionInit = # shell
+        ''
+          autoload -Uz compinit && compinit
+          zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+        '';
       defaultKeymap = "viins";
       history.ignoreAllDups = true;
       historySubstringSearch = {
@@ -34,18 +35,19 @@
       localVariables = {
         HISTORY_SUBSTRING_SEARCH_PREFIXED = "true";
       };
-      loginExtra = ''
-        # Start window manager
-        if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-          exec ${pkgs.hyprland}/bin/Hyprland
-        fi
-      '';
-      initContent = ''
-        source ${config.xdg.configHome}/zsh/*
-        if [[ $(tty) != /dev/tty[0-9] ]]; then
-          ${pkgs.krabby}/bin/krabby random 1 --no-title --padding-left 1
-        fi
-      '';
+      loginExtra = # shell
+        ''
+          if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+            exec ${pkgs.hyprland}/bin/Hyprland
+          fi
+        '';
+      initContent = # shell
+        ''
+          source ${config.xdg.configHome}/zsh/*
+          if [[ $(tty) != /dev/tty[0-9] ]]; then
+            ${pkgs.krabby}/bin/krabby random 1 --no-title --padding-left 1
+          fi
+        '';
     };
 
     # Prompt

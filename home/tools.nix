@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  theme = import ./theme.nix;
+in
 {
   programs = {
     # Nix helper
@@ -20,14 +23,14 @@
       delta = {
         enable = true;
         options = {
-          minus-style = "red #37222c";
-          minus-emph-style = "red #713137";
-          plus-style = "green #20303b";
-          plus-emph-style = "green #2c5a66";
+          minus-style = "red #${theme.colors.dangerDark}";
+          minus-emph-style = "red #${theme.colors.dangerLight}";
+          plus-style = "green #${theme.colors.successDark}";
+          plus-emph-style = "green #${theme.colors.successLight}";
           zero-style = "white";
           line-numbers = true;
-          line-numbers-minus-style = "white #37222c";
-          line-numbers-plus-style = "white #20303b";
+          line-numbers-minus-style = "white #${theme.colors.dangerDark}";
+          line-numbers-plus-style = "white #${theme.colors.successDark}";
           line-numbers-zero-style = "white";
         };
       };
@@ -91,7 +94,7 @@
     # AI coding agent
     opencode = {
       enable = true;
-      settings.theme = "tokyonight";
+      settings.theme = theme.slug;
     };
 
     # Go
@@ -141,6 +144,7 @@
     moq
     nodejs
     nodePackages.svgo
+    onefetch
     opentofu
     optipng
     podman-compose
@@ -162,19 +166,20 @@
     wiremix
     wl-clipboard
     xdg-utils
-    yq
+    yq-go
     zip
   ];
 
   xdg = {
     configFile = {
-      "gopass/config".text = ''
-        [core]
-        	notifications = false
-        	showsafecontent = true
-        [mounts]
-        	path = ${config.home.homeDirectory}/.password-store
-      '';
+      "gopass/config".text = # ini
+        ''
+          [core]
+          	notifications = false
+          	showsafecontent = true
+          [mounts]
+          	path = ${config.home.homeDirectory}/.password-store
+        '';
     };
     dataFile = {
       "task/hooks/on-modify.timewarrior" = {
@@ -200,7 +205,7 @@
           "Application"
           "Music"
         ];
-        icon = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark/32x32/apps/spotify.svg";
+        icon = "${config.gtk.iconTheme.package}/share/icons/${theme.icons}/32x32/apps/spotify.svg";
       };
     };
   };

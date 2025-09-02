@@ -1,11 +1,14 @@
 { pkgs, ... }:
 
+let
+  theme = import ./theme.nix;
+in
 {
   programs.helix = {
     enable = true;
     defaultEditor = true;
     settings = {
-      theme = "tokyonight";
+      theme = theme.slug;
       editor = {
         line-number = "relative";
         cursor-shape.insert = "bar";

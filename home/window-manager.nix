@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  theme = import ./theme.nix;
+in
 {
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -10,7 +13,7 @@
     enable = true;
     settings = {
       "$mod" = "SUPER";
-      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 ' --icon-theme Papirus-Dark";
+      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 ' --icon-theme ${theme.icons}";
       "$osdCmd" =
         "${pkgs.swayosd}/bin/swayosd-client --monitor \"$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[] | select(.focused == true).name')\"";
       "$screenshotsDir" = "${config.xdg.userDirs.pictures}/Screenshots";
@@ -18,11 +21,12 @@
         border_size = 2;
         gaps_in = 0;
         gaps_out = 0;
-        "col.active_border" = "rgb(bb9af7)";
+        "col.active_border" = "rgb(${theme.colors.primary})";
       };
       input = {
         kb_options = "caps:escape,compose:ralt";
         touchpad.natural_scroll = true;
+        special_fallthrough = true;
       };
       gestures = {
         workspace_swipe = true;
@@ -35,7 +39,7 @@
       cursor.inactive_timeout = 8;
       monitor = [
         "eDP-1,preferred,auto,1.5"
-        ",preferred,auto-center-up,1.5"
+        ",preferred,auto-center-up,auto"
       ];
       # Smart gaps
       windowrule = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
@@ -43,13 +47,14 @@
       dwindle = {
         # Put new splits on the right/bottom
         force_split = 2;
+        special_scale_factor = 0.95;
       };
       bind = [
         # Window manager
         "$mod, Tab, focusurgentorlast"
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
-        "$mod, S, togglefloating"
+        "$mod, V, togglefloating"
 
         # Shortcuts
         ", XF86Search, exec, $launcherCmd"
@@ -78,7 +83,6 @@
         "$mod SHIFT, L, movewindow, r"
 
         # Switch workspaces
-        "$mod, N, workspace, emptym"
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
         "$mod, 3, workspace, 3"
@@ -88,7 +92,9 @@
         "$mod, 7, workspace, 7"
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
-        "$mod, 0, togglespecialworkspace"
+        "$mod, 0, workspace, 10"
+        "$mod, N, workspace, emptym"
+        "$mod, S, togglespecialworkspace"
         "$mod, mouse_down, workspace, m+1"
         "$mod, mouse_up, workspace, m-1"
 
@@ -103,7 +109,8 @@
         "$mod SHIFT, 7, movetoworkspace, 7"
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
-        "$mod SHIFT, 0, movetoworkspacesilent, special"
+        "$mod SHIFT, 0, movetoworkspace, 10"
+        "$mod SHIFT, S, movetoworkspacesilent, special"
       ];
       bindl = [
         ", XF86AudioPlay, exec, $osdCmd --playerctl play-pause"
@@ -143,13 +150,13 @@
         };
         border.width = 3;
         colors = {
-          background = "15161eff";
-          text = "c0caf5ff";
-          match = "bb9af7ff";
-          selection = "343a55ff";
-          selection-match = "bb9af7ff";
-          selection-text = "c0caf5ff";
-          border = "bb9af7ff";
+          background = "${theme.colors.background}ff";
+          text = "${theme.colors.foreground}ff";
+          match = "${theme.colors.primary}ff";
+          selection = "${theme.colors.backgroundLight}ff";
+          selection-match = "${theme.colors.primary}ff";
+          selection-text = "${theme.colors.foreground}ff";
+          border = "${theme.colors.primary}ff";
         };
       };
     };
@@ -169,11 +176,11 @@
         ];
         input-field = [
           {
-            font_color = "rgb(c0caf5)";
-            inner_color = "rgb(1a1b26)";
-            outer_color = "rgb(1a1b26)";
-            check_color = "rgb(e0af68)";
-            fail_color = "rgb(f7768e)";
+            font_color = "rgb(${theme.colors.foreground})";
+            inner_color = "rgb(${theme.colors.background})";
+            outer_color = "rgb(${theme.colors.background})";
+            check_color = "rgb(${theme.colors.warning})";
+            fail_color = "rgb(${theme.colors.danger})";
           }
         ];
       };
@@ -238,16 +245,16 @@
     mako = {
       enable = true;
       settings = {
-        font = "FiraCode Nerd Font 9";
-        background-color = "#15161e";
-        text-color = "#c0caf5";
         width = "350";
         height = "120";
         padding = "8,10";
-        border-color = "#bb9af7";
         border-radius = "5";
         default-timeout = "8000";
         group-by = "app-name,summary";
+        font = "${theme.font} 9";
+        text-color = "#${theme.colors.foreground}";
+        background-color = "#${theme.colors.background}";
+        border-color = "#${theme.colors.primary}";
       };
     };
 
@@ -279,18 +286,18 @@
 
   gtk = {
     enable = true;
+    theme = {
+      name = theme.name;
+      package = pkgs.tokyonight-gtk-theme;
+    };
     font = {
-      name = "FiraCode Nerd Font";
+      name = theme.font;
       package = pkgs.nerd-fonts.fira-code;
       size = 10;
     };
     iconTheme = {
-      name = "Papirus-Dark";
+      name = theme.icons;
       package = pkgs.papirus-icon-theme;
-    };
-    theme = {
-      name = "Tokyonight-Dark";
-      package = pkgs.tokyonight-gtk-theme;
     };
   };
 }

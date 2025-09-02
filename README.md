@@ -17,7 +17,7 @@ It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
 
 ## Colors
 
-The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nvim) color scheme.
+The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nvim) color scheme as defined in `home/theme.nix`.
 
 | Purpose    | Color                                                                                                       |
 | :--------- | :---------------------------------------------------------------------------------------------------------- |
@@ -37,17 +37,17 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Open Web Browser               | `Super + W`                                             |
 | Kill Active Window             | `Super + Q`                                             |
 | Toggle Fullscreen Window       | `Super + F`                                             |
-| Toggle Floating Window         | `Super + S`                                             |
+| Toggle Floating Window         | `Super + V`                                             |
 | Open Clipboard History         | `Super + C`                                             |
 | Open Emoji Picker              | `Super + E`                                             |
 | Open Color Picker              | `Super + P`                                             |
 | Lock Screen                    | `Super + Ctrl + Q`                                      |
 | Open Empty Workspace           | `Super + N`                                             |
-| Switch to Workspace            | `Super + [1-9]`                                         |
+| Switch to Workspace            | `Super + [0-9]`                                         |
 | Move Window to Empty Workspace | `Super + Shift + N`                                     |
-| Move Window to Workspace       | `Super + Shift + [1-9]`                                 |
-| Switch to Scratchpad           | `Super + 0`                                             |
-| Move Window to Scratchpad      | `Super + Shift + 0`                                     |
+| Move Window to Workspace       | `Super + Shift + [0-9]`                                 |
+| Switch to Scratchpad           | `Super + S`                                             |
+| Move Window to Scratchpad      | `Super + Shift + S`                                     |
 | Switch to Window               | `Super + [hjkl]` or `Move Mouse`                        |
 | Move Window                    | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
 | Resize Window                  | `Super + Right Mouse Button`                            |
