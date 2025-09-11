@@ -300,4 +300,8 @@ in
       package = pkgs.papirus-icon-theme;
     };
   };
+
+  qt = {
+    style.name = "Adwaita-dark";
+  };
 }
