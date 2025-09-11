@@ -62,6 +62,7 @@ in
           format-connected = "<span size=\"105%\">󰂱</span>";
           tooltip-format-on = "Bluetooth {status}";
           tooltip-format-connected = "Connected to {device_alias} ({device_battery_percentage}% battery)";
+          on-click = "${pkgs.kitty}/bin/kitty -e ${pkgs.bluetui}/bin/bluetui";
         };
         clock = {
           format = "{:%a %d %b %H:%M}";
@@ -80,6 +81,7 @@ in
             "󰤨"
           ];
           tooltip-format-wifi = "Conntected to {essid} at {signalStrength}%";
+          on-click = "${pkgs.kitty}/bin/kitty -e ${pkgs.networkmanager}/bin/nmtui";
         };
         privacy = {
           icon-size = 12;
@@ -93,6 +95,7 @@ in
             "󰕾"
           ];
           tooltip-format = "Volume at {volume}%";
+          on-click = "${pkgs.kitty}/bin/kitty -e ${pkgs.wiremix}/bin/wiremix --tab output";
         };
         "custom/tasks" = {
           exec = pkgs.writeShellScript "waybar-tasks" ''
@@ -118,6 +121,7 @@ in
           '';
           exec-if = "which task";
           interval = 60;
+          on-click = "${pkgs.kitty}/bin/kitty -e ${pkgs.taskwarrior-tui}/bin/taskwarrior-tui";
         };
         "custom/containers" = {
           exec = pkgs.writeShellScript "waybar-containers" ''
@@ -182,6 +186,8 @@ in
 
         tooltip {
           background-color: #${theme.colors.backgroundDark};
+          color: #${theme.colors.foreground};
+          border: 1px solid #${theme.colors.foreground};
         }
 
         #workspaces button {

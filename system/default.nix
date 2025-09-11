@@ -103,6 +103,12 @@
       nssmdns4 = true;
       openFirewall = true;
     };
+
+    printing = {
+      enable = true;
+      openFirewall = true;
+      drivers = [ pkgs.brlaser ];
+    };
   };
 
   system.stateVersion = "25.11";
