@@ -1,8 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 
-let
-  theme = import ./theme.nix;
-in
 {
   programs.helix = {
     enable = true;
@@ -115,6 +112,17 @@ in
           };
         }
         {
+          name = "astro";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.prettier}/bin/prettier";
+            args = [
+              "--parser"
+              "astro"
+            ];
+          };
+        }
+        {
           name = "toml";
           auto-format = true;
         }
@@ -146,9 +154,10 @@ in
 
   home.packages = with pkgs; [
     # Language servers
+    astro-language-server
     bash-language-server
     docker-compose-language-service
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     golangci-lint-langserver
     gopls
     harper
@@ -157,7 +166,7 @@ in
     ruff
     rust-analyzer
     svelte-language-server
-    taplo
+    tombi
     terraform-ls
     ty
     typescript-language-server

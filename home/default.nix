@@ -10,6 +10,9 @@
     ./tools.nix
   ];
 
+  # Pass theme to all imported modules
+  _module.args.theme = import ./theme.nix;
+
   home.username = "lena";
   home.homeDirectory = "/home/${config.home.username}";
 
