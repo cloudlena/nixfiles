@@ -148,7 +148,7 @@ in
     # Language servers
     bash-language-server
     docker-compose-language-service
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     golangci-lint-langserver
     gopls
     harper
