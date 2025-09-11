@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  theme,
+  ...
+}:
 
-let
-  theme = import ./theme.nix;
-in
 {
   programs = {
     # Nix helper
@@ -14,31 +16,57 @@ in
     # Git
     git = {
       enable = true;
-      userName = "Lena Fuhrimann";
-      userEmail = "6780471+cloudlena@users.noreply.github.com";
       signing = {
         key = null;
         signByDefault = true;
       };
-      delta = {
-        enable = true;
-        options = {
-          minus-style = "red #${theme.colors.dangerDark}";
-          minus-emph-style = "red #${theme.colors.dangerLight}";
-          plus-style = "green #${theme.colors.successDark}";
-          plus-emph-style = "green #${theme.colors.successLight}";
-          zero-style = "white";
-          line-numbers = true;
-          line-numbers-minus-style = "white #${theme.colors.dangerDark}";
-          line-numbers-plus-style = "white #${theme.colors.successDark}";
-          line-numbers-zero-style = "white";
+      settings = {
+        user = {
+          name = "Lena Fuhrimann";
+          email = "6780471+cloudlena@users.noreply.github.com";
         };
       };
     };
+
+    # Git TUI
     gitui.enable = true;
 
-    # System information
+    # Diff viewer
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        minus-style = "red #${theme.colors.dangerDark}";
+        minus-emph-style = "red #${theme.colors.dangerLight}";
+        plus-style = "green #${theme.colors.successDark}";
+        plus-emph-style = "green #${theme.colors.successLight}";
+        zero-style = "white";
+        line-numbers = true;
+        line-numbers-minus-style = "white #${theme.colors.dangerDark}";
+        line-numbers-plus-style = "white #${theme.colors.successDark}";
+        line-numbers-zero-style = "white";
+      };
+    };
+
+    # Merge tool
+    mergiraf.enable = true;
+
+    # System information tool
     fastfetch.enable = true;
+
+    # Screenshot annotation tool
+    satty = {
+      enable = true;
+      settings = {
+        general = {
+          early-exit = true;
+          initial-tool = "brush";
+        };
+      };
+    };
+
+    # Agentic coding tool
+    claude-code.enable = true;
 
     # File manager
     yazi.enable = true;
@@ -52,7 +80,7 @@ in
     # Faster find
     fd.enable = true;
 
-    # Fast grepping
+    # Faster grepping
     ripgrep.enable = true;
 
     # Process viewer
@@ -73,10 +101,11 @@ in
     # PDF viewer
     zathura.enable = true;
 
-    # Task management
+    # Task manager
     taskwarrior = {
       enable = true;
       package = pkgs.taskwarrior3;
+      colorTheme = "dark-violets-256";
     };
 
     # Media player
@@ -88,22 +117,7 @@ in
     # Image viewer
     imv.enable = true;
 
-    # AI CLI
-    aichat.enable = true;
-
-    # AI coding agent
-    opencode = {
-      enable = true;
-      settings.theme = theme.slug;
-    };
-
-    # Go
-    go.enable = true;
-
-    # Python
-    uv.enable = true;
-
-    # Simplified manuals
+    # Simplified man pages
     tealdeer = {
       enable = true;
       settings = {
@@ -113,6 +127,12 @@ in
 
     # AWS CLI
     awscli.enable = true;
+
+    # Go
+    go.enable = true;
+
+    # Python package manager
+    uv.enable = true;
   };
 
   home.packages = with pkgs; [
@@ -122,7 +142,6 @@ in
     brave
     cargo
     clippy
-    delta
     dig
     dust
     fx
@@ -151,6 +170,7 @@ in
     presenterm
     pwgen
     python3
+    qrencode
     quickemu
     rustc
     shellcheck
@@ -200,12 +220,13 @@ in
       spotify = {
         name = "Spotify";
         genericName = "Music Player";
+        icon = "${config.gtk.iconTheme.package}/share/icons/${theme.icons}/32x32/apps/spotify.svg";
         exec = "brave --app=https://open.spotify.com/";
         categories = [
-          "Application"
-          "Music"
+          "AudioVideo"
+          "Audio"
+          "Player"
         ];
-        icon = "${config.gtk.iconTheme.package}/share/icons/${theme.icons}/32x32/apps/spotify.svg";
       };
     };
   };

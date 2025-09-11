@@ -4,14 +4,13 @@
   home.shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../..";
-    a = "${pkgs.aichat}/bin/aichat";
+    a = "${pkgs.claude-code}/bin/claude --dangerously-skip-permissions";
     e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.yazi}/bin/yazi";
     g = "${pkgs.gitui}/bin/gitui";
     m = "${pkgs.bottom}/bin/btm";
     o = "${pkgs.xdg-utils}/bin/xdg-open";
     t = "${pkgs.taskwarrior3}/bin/task";
-    v = "${pkgs.opencode}/bin/opencode";
   };
 
   programs = {
@@ -87,7 +86,7 @@
 
       # Update system
       pacu() {
-        pushd ${config.home.homeDirectory}/.nixfiles
+        pushd ${config.programs.nh.flake}
         ${pkgs.gnumake}/bin/make update
         ${pkgs.gnumake}/bin/make system
         ${pkgs.gnumake}/bin/make home

@@ -54,14 +54,13 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 
 ## Terminal Commands
 
-| Function                | Command |
-| :---------------------- | :------ |
-| AI Tool                 | `a`     |
-| Open Text Editor        | `e`     |
-| Open File Manager       | `f`     |
-| Open Git Browser        | `g`     |
-| List Directory Contents | `l`     |
-| Open System Monitor     | `m`     |
-| Open File               | `o`     |
-| Open Task Manager       | `t`     |
-| Open AI Coding Agent    | `v`     |
+| Function                 | Command |
+| :----------------------- | :------ |
+| Open Agentic Coding Tool | `a`     |
+| Open Text Editor         | `e`     |
+| Open File Manager        | `f`     |
+| Open Git Browser         | `g`     |
+| List Directory Contents  | `l`     |
+| Open System Monitor      | `m`     |
+| Open File                | `o`     |
+| Open Task Manager        | `t`     |

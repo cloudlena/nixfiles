@@ -1,7 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 
 let
-  theme = import ./theme.nix;
+  prettierFormatter = parser: {
+    command = "${pkgs.prettier}/bin/prettier";
+    args = [
+      "--parser"
+      parser
+    ];
+  };
 in
 {
   programs.helix = {
@@ -33,44 +39,20 @@ in
         }
         {
           name = "css";
-          formatter = {
-            command = "${pkgs.prettier}/bin/prettier";
-            args = [
-              "--parser"
-              "css"
-            ];
-          };
+          formatter = prettierFormatter "css";
         }
         {
           name = "html";
-          formatter = {
-            command = "${pkgs.prettier}/bin/prettier";
-            args = [
-              "--parser"
-              "html"
-            ];
-          };
+          formatter = prettierFormatter "html";
         }
         {
           name = "javascript";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.prettier}/bin/prettier";
-            args = [
-              "--parser"
-              "typescript"
-            ];
-          };
+          formatter = prettierFormatter "typescript";
         }
         {
           name = "json";
-          formatter = {
-            command = "${pkgs.prettier}/bin/prettier";
-            args = [
-              "--parser"
-              "json"
-            ];
-          };
+          formatter = prettierFormatter "json";
         }
         {
           name = "markdown";
@@ -80,13 +62,7 @@ in
             "harper-ls"
           ];
           auto-format = true;
-          formatter = {
-            command = "${pkgs.prettier}/bin/prettier";
-            args = [
-              "--parser"
-              "markdown"
-            ];
-          };
+          formatter = prettierFormatter "markdown";
         }
         {
           name = "nix";
@@ -106,13 +82,12 @@ in
         {
           name = "svelte";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.prettier}/bin/prettier";
-            args = [
-              "--parser"
-              "svelte"
-            ];
-          };
+          formatter = prettierFormatter "svelte";
+        }
+        {
+          name = "astro";
+          auto-format = true;
+          formatter = prettierFormatter "astro";
         }
         {
           name = "toml";
@@ -121,24 +96,12 @@ in
         {
           name = "typescript";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.prettier}/bin/prettier";
-            args = [
-              "--parser"
-              "typescript"
-            ];
-          };
+          formatter = prettierFormatter "typescript";
         }
         {
           name = "yaml";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.prettier}/bin/prettier";
-            args = [
-              "--parser"
-              "yaml"
-            ];
-          };
+          formatter = prettierFormatter "yaml";
         }
       ];
     };
@@ -146,9 +109,10 @@ in
 
   home.packages = with pkgs; [
     # Language servers
+    astro-language-server
     bash-language-server
     docker-compose-language-service
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     golangci-lint-langserver
     gopls
     harper
@@ -157,7 +121,7 @@ in
     ruff
     rust-analyzer
     svelte-language-server
-    taplo
+    tombi
     terraform-ls
     ty
     typescript-language-server

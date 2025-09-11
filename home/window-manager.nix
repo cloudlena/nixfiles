@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  theme,
+  ...
+}:
 
-let
-  theme = import ./theme.nix;
-in
 {
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -23,38 +25,35 @@ in
         gaps_out = 0;
         "col.active_border" = "rgb(${theme.colors.primary})";
       };
+      animations.enabled = false;
       input = {
         kb_options = "caps:escape,compose:ralt";
-        touchpad.natural_scroll = true;
         special_fallthrough = true;
+        touchpad.natural_scroll = true;
       };
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_min_speed_to_force = 5;
-      };
+      gestures.workspace_swipe_min_speed_to_force = 5;
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
       };
       cursor.inactive_timeout = 8;
+      ecosystem = {
+        no_update_news = true;
+        no_donation_nag = true;
+      };
       monitor = [
         "eDP-1,preferred,auto,1.5"
         ",preferred,auto-center-up,auto"
       ];
-      # Smart gaps
-      windowrule = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
-      animations.enabled = false;
-      dwindle = {
-        # Put new splits on the right/bottom
-        force_split = 2;
-        special_scale_factor = 0.95;
-      };
       bind = [
         # Window manager
         "$mod, Tab, focusurgentorlast"
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
         "$mod, V, togglefloating"
+        "$mod, Y, pin"
+        "$mod, G, togglegroup"
+        "$mod, T, changegroupactive"
 
         # Shortcuts
         ", XF86Search, exec, $launcherCmd"
@@ -68,7 +67,7 @@ in
 
         # Screenshots
         ", Print, exec, mkdir -p $screenshotsDir; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"$screenshotsDir/$(date +'%F-%H%M%S').png\""
-        "SHIFT, Print, exec, mkdir -p $screenshotsDir; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" -t ppm - | ${pkgs.satty}/bin/satty --early-exit --initial-tool brush --filename - --output-filename \"$screenshotsDir/$(date +'%F-%H%M%S').png\""
+        "SHIFT, Print, exec, mkdir -p $screenshotsDir; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" -t ppm - | ${pkgs.satty}/bin/satty --filename - --output-filename \"$screenshotsDir/$(date +'%F-%H%M%S').png\""
 
         # Move window focus
         "$mod, H, movefocus, l"
@@ -95,8 +94,10 @@ in
         "$mod, 0, workspace, 10"
         "$mod, N, workspace, emptym"
         "$mod, S, togglespecialworkspace"
-        "$mod, mouse_down, workspace, m+1"
+        "$mod, bracketleft, workspace, m-1"
+        "$mod, bracketright, workspace, m+1"
         "$mod, mouse_up, workspace, m-1"
+        "$mod, mouse_down, workspace, m+1"
 
         # Move active window to workspace
         "$mod SHIFT, N, movetoworkspace, emptym"
@@ -111,6 +112,8 @@ in
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod SHIFT, 0, movetoworkspace, 10"
         "$mod SHIFT, S, movetoworkspacesilent, special"
+        "$mod SHIFT, bracketleft, movetoworkspace, m-1"
+        "$mod SHIFT, bracketright, movetoworkspace, m+1"
       ];
       bindl = [
         ", XF86AudioPlay, exec, $osdCmd --playerctl play-pause"
@@ -129,9 +132,15 @@ in
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
-      ecosystem = {
-        "no_update_news" = true;
-        "no_donation_nag" = true;
+      windowrule = [
+        "bordersize 0, floating:0, onworkspace:w[tv1]"
+      ];
+      gesture = [
+        "3, horizontal, workspace"
+      ];
+      dwindle = {
+        force_split = 2; # Put new splits on the right/bottom
+        special_scale_factor = 0.95;
       };
     };
   };
@@ -299,5 +308,10 @@ in
       name = theme.icons;
       package = pkgs.papirus-icon-theme;
     };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk3";
   };
 }

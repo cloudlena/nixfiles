@@ -1,6 +1,5 @@
-let
-  theme = import ./theme.nix;
-in
+{ theme, ... }:
+
 {
   programs = {
     # Terminal emulator

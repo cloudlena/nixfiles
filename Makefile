@@ -9,3 +9,7 @@ system:
 .PHONY: home
 home:
 	nh home switch
+
+.PHONY: clean
+clean:
+	nh clean all --keep 5 --keep-since 14d
