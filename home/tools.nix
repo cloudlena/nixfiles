@@ -40,6 +40,20 @@ in
     # System information
     fastfetch.enable = true;
 
+    # Screenshot annotation
+    satty = {
+      enable = true;
+      settings = {
+        general = {
+          early-exit = true;
+          initial-tool = "brush";
+        };
+      };
+    };
+
+    # AI coding assistant
+    claude-code.enable = true;
+
     # File manager
     yazi.enable = true;
 
@@ -77,6 +91,7 @@ in
     taskwarrior = {
       enable = true;
       package = pkgs.taskwarrior3;
+      colorTheme = "dark-violets-256";
     };
 
     # Media player
@@ -90,12 +105,6 @@ in
 
     # AI CLI
     aichat.enable = true;
-
-    # AI coding agent
-    opencode = {
-      enable = true;
-      settings.theme = theme.slug;
-    };
 
     # Go
     go.enable = true;
@@ -151,6 +160,7 @@ in
     presenterm
     pwgen
     python3
+    qrencode
     quickemu
     rustc
     shellcheck
@@ -200,12 +210,13 @@ in
       spotify = {
         name = "Spotify";
         genericName = "Music Player";
+        icon = "${config.gtk.iconTheme.package}/share/icons/${theme.icons}/32x32/apps/spotify.svg";
         exec = "brave --app=https://open.spotify.com/";
         categories = [
-          "Application"
-          "Music"
+          "AudioVideo"
+          "Audio"
+          "Player"
         ];
-        icon = "${config.gtk.iconTheme.package}/share/icons/${theme.icons}/32x32/apps/spotify.svg";
       };
     };
   };
