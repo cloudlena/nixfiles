@@ -37,8 +37,23 @@ in
     };
     gitui.enable = true;
 
+    claude-code = {
+      enable = true;
+    };
+
     # System information
     fastfetch.enable = true;
+
+    # Screenshot annotation
+    satty = {
+      enable = true;
+      settings = {
+        general = {
+          early-exit = true;
+          initial-tool = "brush";
+        };
+      };
+    };
 
     # File manager
     yazi.enable = true;
@@ -77,6 +92,7 @@ in
     taskwarrior = {
       enable = true;
       package = pkgs.taskwarrior3;
+      colorTheme = "dark-violets-256";
     };
 
     # Media player
@@ -151,6 +167,7 @@ in
     presenterm
     pwgen
     python3
+    qrencode
     quickemu
     rustc
     shellcheck

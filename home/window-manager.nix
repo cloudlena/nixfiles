@@ -23,32 +23,26 @@ in
         gaps_out = 0;
         "col.active_border" = "rgb(${theme.colors.primary})";
       };
+      animations.enabled = false;
       input = {
         kb_options = "caps:escape,compose:ralt";
-        touchpad.natural_scroll = true;
         special_fallthrough = true;
+        touchpad.natural_scroll = true;
       };
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_min_speed_to_force = 5;
-      };
+      gestures.workspace_swipe_min_speed_to_force = 5;
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
       };
       cursor.inactive_timeout = 8;
+      ecosystem = {
+        no_update_news = true;
+        no_donation_nag = true;
+      };
       monitor = [
         "eDP-1,preferred,auto,1.5"
         ",preferred,auto-center-up,auto"
       ];
-      # Smart gaps
-      windowrule = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ];
-      animations.enabled = false;
-      dwindle = {
-        # Put new splits on the right/bottom
-        force_split = 2;
-        special_scale_factor = 0.95;
-      };
       bind = [
         # Window manager
         "$mod, Tab, focusurgentorlast"
@@ -68,7 +62,7 @@ in
 
         # Screenshots
         ", Print, exec, mkdir -p $screenshotsDir; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"$screenshotsDir/$(date +'%F-%H%M%S').png\""
-        "SHIFT, Print, exec, mkdir -p $screenshotsDir; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" -t ppm - | ${pkgs.satty}/bin/satty --early-exit --initial-tool brush --filename - --output-filename \"$screenshotsDir/$(date +'%F-%H%M%S').png\""
+        "SHIFT, Print, exec, mkdir -p $screenshotsDir; ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" -t ppm - | ${pkgs.satty}/bin/satty --filename - --output-filename \"$screenshotsDir/$(date +'%F-%H%M%S').png\""
 
         # Move window focus
         "$mod, H, movefocus, l"
@@ -129,9 +123,13 @@ in
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
-      ecosystem = {
-        "no_update_news" = true;
-        "no_donation_nag" = true;
+      windowrule = [ "bordersize 0, floating:0, onworkspace:w[tv1]" ]; # Smart gaps
+      gesture = [
+        "3, horizontal, workspace"
+      ];
+      dwindle = {
+        force_split = 2; # Put new splits on the right/bottom
+        special_scale_factor = 0.95;
       };
     };
   };
@@ -299,5 +297,9 @@ in
       name = theme.icons;
       package = pkgs.papirus-icon-theme;
     };
+  };
+
+  qt = {
+    style.name = "adwaita-dark";
   };
 }
