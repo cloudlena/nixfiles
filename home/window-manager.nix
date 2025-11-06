@@ -15,7 +15,7 @@
     enable = true;
     settings = {
       "$mod" = "SUPER";
-      "$launcherCmd" = "${pkgs.fuzzel}/bin/fuzzel --prompt '󱉺 ' --icon-theme ${theme.icons}";
+      "$launcherCmd" = "${pkgs.vicinae}/bin/vicinae vicinae://toggle";
       "$osdCmd" =
         "${pkgs.swayosd}/bin/swayosd-client --monitor \"$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[] | select(.focused == true).name')\"";
       "$screenshotsDir" = "${config.xdg.userDirs.pictures}/Screenshots";
@@ -52,16 +52,15 @@
         "$mod, F, fullscreen"
         "$mod, V, togglefloating"
         "$mod, Y, pin"
-        "$mod, G, togglegroup"
-        "$mod, T, changegroupactive"
 
         # Shortcuts
         ", XF86Search, exec, $launcherCmd"
         "$mod, Space, exec, $launcherCmd"
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
-        "$mod, C, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt '󰆏 ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "$mod, E, exec, ${pkgs.bemoji}/bin/bemoji -n"
+        "$mod, A, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/wm/switch-windows"
+        "$mod, C, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/clipboard/history"
+        "$mod, E, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/vicinae/search-emojis"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker --autocopy"
         "SUPER_CTRL, Q, exec, ${pkgs.systemd}/bin/loginctl lock-session"
 
@@ -147,26 +146,11 @@
 
   programs = {
     # Launcher
-    fuzzel = {
+    vicinae = {
       enable = true;
+      systemd.enable = true;
       settings = {
-        main = {
-          width = 70;
-          horizontal-pad = 10;
-          vertical-pad = 10;
-          inner-pad = 10;
-          line-height = 25;
-        };
-        border.width = 3;
-        colors = {
-          background = "${theme.colors.background}ff";
-          text = "${theme.colors.foreground}ff";
-          match = "${theme.colors.primary}ff";
-          selection = "${theme.colors.backgroundLight}ff";
-          selection-match = "${theme.colors.primary}ff";
-          selection-text = "${theme.colors.foreground}ff";
-          border = "${theme.colors.primary}ff";
-        };
+        theme.name = "tokyo-night";
       };
     };
 
@@ -234,9 +218,6 @@
         ];
       };
     };
-
-    # Clipboard manager
-    cliphist.enable = true;
 
     # Volume and brightness indicator
     swayosd.enable = true;

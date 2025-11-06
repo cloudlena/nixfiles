@@ -3,6 +3,45 @@
 :snowflake: My personal [NixOS](https://nixos.org/) configuration.
 It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
 
+## Features
+
+This configuration includes:
+
+- **Window Manager**: Hyprland (Wayland) with Waybar, Hyprlock, and Tokyo Night theme
+- **Terminal**: Kitty with Zsh, Starship prompt, and Tmux
+- **Editor**: Helix with comprehensive language server support
+- **Development**: Go, Python, Rust, Node.js, OpenTofu, Kubectl, and more
+- **Tools**: Claude Code, GitUI, Yazi file manager, Taskwarrior, Bottom monitor
+- **Security**: Secure boot (Lanzaboote), full disk encryption (LUKS), AppArmor
+- **Containers**: Podman with Compose support
+
+See the terminal commands section below for quick access to key tools.
+
+## Prerequisites
+
+- Git installed
+- [nh](https://github.com/viperML/nh) (NixOS helper) installed
+- [NixOS](https://nixos.org/) installed (only for the system level part)
+
+## Hardware
+
+This configuration is tailored for a **TUXEDO InfinityBook Pro 14 Gen 7** using nixos-hardware.
+If you're using different hardware, update the `nixos-hardware` module in `flake.nix`.
+
+The configuration includes:
+
+- **Secure Boot** via Lanzaboote
+- **Full Disk Encryption** with LUKS
+
+## Directory Structure
+
+- `flake.nix` - Flake configuration with system inputs and outputs
+- `flake.lock` - Locked dependency versions
+- `system/` - System-level NixOS configuration
+- `home/` - Home Manager configuration (user-level)
+- `home/theme.nix` - Tokyo Night color scheme definitions
+- `Makefile` - Convenience commands for common operations
+
 ## Installation
 
 1. Clone this repo
@@ -14,6 +53,10 @@ It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
 1. Run `make update` to update the Flake lockfile
 1. Run `make system` to update the system level components
 1. Run `make home` to update the user level components
+
+## Maintenance
+
+1. Run `make clean` to remove old system generations (keeps last 5 generations and all from last 14 days)
 
 ## Colors
 
@@ -38,12 +81,15 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Kill Active Window             | `Super + Q`                                             |
 | Toggle Fullscreen Window       | `Super + F`                                             |
 | Toggle Floating Window         | `Super + V`                                             |
+| Pin Floating Window            | `Super + Y`                                             |
 | Open Clipboard History         | `Super + C`                                             |
 | Open Emoji Picker              | `Super + E`                                             |
 | Open Color Picker              | `Super + P`                                             |
 | Lock Screen                    | `Super + Ctrl + Q`                                      |
 | Open Empty Workspace           | `Super + N`                                             |
 | Switch to Workspace            | `Super + [0-9]`                                         |
+| Switch to Previous Workspace   | `Super + [`                                             |
+| Switch to Next Workspace       | `Super + ]`                                             |
 | Move Window to Empty Workspace | `Super + Shift + N`                                     |
 | Move Window to Workspace       | `Super + Shift + [0-9]`                                 |
 | Switch to Scratchpad           | `Super + S`                                             |

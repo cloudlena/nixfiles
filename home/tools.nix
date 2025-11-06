@@ -180,7 +180,6 @@
     traceroute
     tree
     unzip
-    upterm
     usbutils
     whois
     wiremix
