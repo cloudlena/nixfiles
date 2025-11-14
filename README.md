@@ -83,6 +83,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Toggle Floating Window         | `Super + V`                                             |
 | Pin Floating Window            | `Super + Y`                                             |
 | Open Clipboard History         | `Super + C`                                             |
+| Open Window Picker             | `Super + A`                                             |
 | Open Emoji Picker              | `Super + E`                                             |
 | Open Color Picker              | `Super + P`                                             |
 | Lock Screen                    | `Super + Ctrl + Q`                                      |
