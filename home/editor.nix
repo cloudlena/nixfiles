@@ -107,6 +107,10 @@ in
     };
   };
 
+  programs = {
+    ty.enable = true;
+  };
+
   home.packages = with pkgs; [
     # Language servers
     astro-language-server
@@ -123,7 +127,6 @@ in
     svelte-language-server
     tombi
     terraform-ls
-    ty
     typescript-language-server
     vscode-langservers-extracted
     yaml-language-server
