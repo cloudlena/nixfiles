@@ -47,7 +47,7 @@
       ];
       bind = [
         # Window manager
-        "$mod, Tab, focusurgentorlast"
+        "$mod, Tab, workspace, previous_per_monitor"
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
         "$mod, V, togglefloating"
@@ -60,7 +60,7 @@
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
         "$mod, A, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/wm/switch-windows"
         "$mod, C, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/clipboard/history"
-        "$mod, E, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/vicinae/search-emojis"
+        "$mod, E, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/core/search-emojis"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker --autocopy"
         "SUPER_CTRL, Q, exec, ${pkgs.systemd}/bin/loginctl lock-session"
 
@@ -132,7 +132,7 @@
         "$mod, mouse:273, resizewindow"
       ];
       windowrule = [
-        "bordersize 0, floating:0, onworkspace:w[tv1]"
+        "border_size 0, match:float 0, match:workspace w[tv1]"
       ];
       gesture = [
         "3, horizontal, workspace"
@@ -150,7 +150,7 @@
       enable = true;
       systemd.enable = true;
       settings = {
-        theme.name = "tokyo-night";
+        theme.dark.name = "tokyo-night";
       };
     };
 
@@ -185,10 +185,13 @@
     hyprpaper = {
       enable = true;
       settings = {
-        preload = [ "${config.xdg.dataHome}/wallpapers/bespinian.png" ];
-        wallpaper = [ ",${config.xdg.dataHome}/wallpapers/bespinian.png" ];
+        wallpaper = [
+          {
+            monitor = "";
+            path = "${config.xdg.dataHome}/wallpapers/bespinian.png";
+          }
+        ];
         splash = false;
-        ipc = false;
       };
     };
 

@@ -14,13 +14,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-              };
-            };
-            swap = {
-              size = "24G"; # 1.5x RAM
-              content = {
-                type = "swap";
-                randomEncryption = true;
+                mountOptions = [ "umask=0077" ];
               };
             };
             root = {
@@ -33,6 +27,13 @@
                   format = "ext4";
                   mountpoint = "/";
                 };
+              };
+            };
+            swap = {
+              size = "24G"; # 1.5x RAM
+              content = {
+                type = "swap";
+                randomEncryption = true;
               };
             };
           };

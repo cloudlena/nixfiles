@@ -131,7 +131,10 @@
     # Go
     go.enable = true;
 
-    # Python package manager
+    # Node.js
+    npm.enable = true;
+
+    # Python
     uv.enable = true;
   };
 
@@ -144,6 +147,7 @@
     clippy
     dig
     dust
+    file
     fx
     gcc
     gimp3
@@ -151,8 +155,8 @@
     golangci-lint
     gopass
     hugo
+    image_optim
     inkscape
-    jpegoptim
     killall
     kooha
     kubectl
@@ -161,11 +165,8 @@
     libwebp
     lolcat
     moq
-    nodejs
-    nodePackages.svgo
     onefetch
     opentofu
-    optipng
     podman-compose
     presenterm
     pwgen
@@ -190,6 +191,7 @@
   ];
 
   xdg = {
+    enable = true;
     configFile = {
       "gopass/config".text = # ini
         ''
