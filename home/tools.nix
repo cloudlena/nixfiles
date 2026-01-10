@@ -231,4 +231,5 @@
       };
     };
   };
+  home.preferXdgDirectories = true;
 }

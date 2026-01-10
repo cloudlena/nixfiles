@@ -2,12 +2,12 @@
   disko.devices = {
     disk = {
       main = {
-        type = "disk";
         device = "/dev/nvme0n1";
+        type = "disk";
         content = {
           type = "gpt";
           partitions = {
-            esp = {
+            ESP = {
               type = "EF00";
               size = "500M";
               content = {

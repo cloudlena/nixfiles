@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
@@ -22,6 +22,9 @@
     "/dev/disk/by-uuid/58a9f60d-bf2d-4c94-8f08-8e29a4083728";
   boot.initrd.luks.devices."luks-58a9f60d-bf2d-4c94-8f08-8e29a4083728".keyFile =
     "/crypto_keyfile.bin";
+
+  # Restrict boot mount access
+  fileSystems."/boot".options = lib.mkForce [ "umask=0077" ];
 
   # Networking
   networking.networkmanager.enable = true;
