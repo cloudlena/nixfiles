@@ -151,6 +151,7 @@
       systemd.enable = true;
       settings = {
         theme.dark.name = "tokyo-night";
+        font.normal.family = theme.font;
       };
     };
 
