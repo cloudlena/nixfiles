@@ -49,7 +49,10 @@
     };
 
     # Merge tool
-    mergiraf.enable = true;
+    mergiraf = {
+      enable = true;
+      enableGitIntegration = true;
+    };
 
     # System information tool
     fastfetch.enable = true;
