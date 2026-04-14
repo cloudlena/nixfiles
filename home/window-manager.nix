@@ -13,6 +13,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     settings = {
       "$mod" = "SUPER";
       "$launcherCmd" = "${pkgs.vicinae}/bin/vicinae vicinae://toggle";
@@ -58,9 +59,9 @@
         "$mod, Space, exec, $launcherCmd"
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, W, exec, ${pkgs.brave}/bin/brave"
-        "$mod, A, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/wm/switch-windows"
-        "$mod, C, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/clipboard/history"
-        "$mod, E, exec, ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/core/search-emojis"
+        "$mod, A, exec, ${pkgs.vicinae}/bin/vicinae vicinae://launch/wm/switch-windows"
+        "$mod, C, exec, ${pkgs.vicinae}/bin/vicinae vicinae://launch/clipboard/history"
+        "$mod, E, exec, ${pkgs.vicinae}/bin/vicinae vicinae://launch/core/search-emojis"
         "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker --autocopy"
         "SUPER_CTRL, Q, exec, ${pkgs.systemd}/bin/loginctl lock-session"
 
@@ -152,6 +153,7 @@
       settings = {
         theme.dark.name = "tokyo-night";
         font.normal.family = theme.font;
+        pop_to_root_on_close = true;
       };
     };
 

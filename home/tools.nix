@@ -170,6 +170,7 @@
     moq
     onefetch
     opentofu
+    orca-slicer
     podman-compose
     presenterm
     pwgen

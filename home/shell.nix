@@ -56,6 +56,7 @@
         add_newline = false;
         aws.disabled = true;
         cmd_duration.disabled = true;
+        gcloud.disabled = true;
         package.disabled = true;
       };
     };
