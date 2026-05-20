@@ -40,7 +40,7 @@
       loginExtra = # shell
         ''
           if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-            exec ${pkgs.hyprland}/bin/start-hyprland
+            exec ${pkgs.mango}/bin/mango
           fi
         '';
       initContent = # shell
