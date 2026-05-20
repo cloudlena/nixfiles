@@ -145,7 +145,6 @@
 
   home.packages = with pkgs; [
     air
-    altair
     bluetui
     brave-origin
     cargo
@@ -153,7 +152,7 @@
     dig
     dust
     file
-    freecad
+    # freecad
     fx
     gcc
     gimp
@@ -192,6 +191,7 @@
     whois
     wiremix
     wl-clipboard
+    wl-mirror
     xdg-utils
     yq-go
     yubioath-flutter
