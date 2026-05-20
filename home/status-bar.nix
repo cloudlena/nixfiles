@@ -12,7 +12,7 @@
     settings = {
       mainBar = {
         layer = "top";
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [ "ext/workspaces" ];
         modules-center = [ "custom/tasks" ];
         modules-right = [
           "custom/updates"
@@ -57,6 +57,9 @@
             critical = [ "󰂃" ];
           };
           tooltip-format = "Battery at {capacity}%";
+        };
+        "ext/workspaces" = {
+          on-click = "activate";
         };
         bluetooth = {
           format = "";
