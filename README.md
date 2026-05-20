@@ -7,7 +7,7 @@ It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
 
 This configuration includes:
 
-- **Window Manager**: Hyprland (Wayland) with Waybar, Hyprlock, and Tokyo Night theme
+- **Window Manager**: mangowm (Wayland) with Waybar, Swaylock, and Tokyo Night theme
 - **Terminal**: Kitty with Zsh, Starship prompt, and Herdr
 - **Editor**: Helix with comprehensive language server support
 - **Development**: Go, Python, Rust, Node.js, OpenTofu, Kubectl, and more
@@ -72,32 +72,39 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 
 ## Key Bindings
 
-| Function                       | Keys                                                    |
-| :----------------------------- | :------------------------------------------------------ |
-| Open App Launcher              | `Super + Space`                                         |
-| Open Terminal                  | `Super + Enter`                                         |
-| Focus Last Window              | `Super + Tab`                                           |
-| Open Web Browser               | `Super + W`                                             |
-| Kill Active Window             | `Super + Q`                                             |
-| Toggle Fullscreen Window       | `Super + F`                                             |
-| Toggle Floating Window         | `Super + V`                                             |
-| Pin Floating Window            | `Super + Y`                                             |
-| Open Clipboard History         | `Super + C`                                             |
-| Open Window Picker             | `Super + A`                                             |
-| Open Emoji Picker              | `Super + E`                                             |
-| Open Color Picker              | `Super + P`                                             |
-| Lock Screen                    | `Super + Ctrl + Q`                                      |
-| Open Empty Workspace           | `Super + N`                                             |
-| Switch to Workspace            | `Super + [0-9]`                                         |
-| Switch to Previous Workspace   | `Super + [`                                             |
-| Switch to Next Workspace       | `Super + ]`                                             |
-| Move Window to Empty Workspace | `Super + Shift + N`                                     |
-| Move Window to Workspace       | `Super + Shift + [0-9]`                                 |
-| Switch to Scratchpad           | `Super + S`                                             |
-| Move Window to Scratchpad      | `Super + Shift + S`                                     |
-| Switch to Window               | `Super + [hjkl]` or `Move Mouse`                        |
-| Move Window                    | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
-| Resize Window                  | `Super + Right Mouse Button`                            |
+| Function                      | Keys                                                    |
+| :---------------------------- | :------------------------------------------------------ |
+| Open App Launcher             | `Super + Space`                                         |
+| Open Terminal                 | `Super + Enter`                                         |
+| Open Web Browser              | `Super + W`                                             |
+| Open Clipboard History        | `Super + C`                                             |
+| Open Emoji Picker             | `Super + E`                                             |
+| Lock Screen                   | `Super + Ctrl + Q`                                      |
+| Cycle Through Windows         | `Super + Tab`                                           |
+| Toggle Window Overview        | `Super + A` or `Three-Finger Swipe Up/Down`             |
+| Kill Active Window            | `Super + Q`                                             |
+| Toggle Fullscreen Window      | `Super + F`                                             |
+| Toggle Floating Window        | `Super + V`                                             |
+| Pin Window to All Tags        | `Super + Y`                                             |
+| Switch to Window              | `Super + [hjkl]` or `Move Mouse`                        |
+| Move Window                   | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
+| Resize Window                 | `Super + Right Mouse Button`                            |
+| Switch to Workspace           | `Super + [1-9]`                                         |
+| Move Window to Workspace      | `Super + Shift + [1-9]`                                 |
+| Open Empty Workspace          | `Super + N`                                             |
+| Switch to Next Workspace      | `Super + Scroll Up` or `Three-Finger Swipe Left`        |
+| Switch to Previous Workspace  | `Super + Scroll Down` or `Three-Finger Swipe Right`     |
+| Switch to Scratchpad          | `Super + S`                                             |
+| Minimize Window to Scratchpad | `Super + Shift + S`                                     |
+| Restore Minimized Window      | `Super + Ctrl + S`                                      |
+| Focus Left Monitor            | `Super + [`                                             |
+| Focus Right Monitor           | `Super + ]`                                             |
+| Move Window to Left Monitor   | `Super + Shift + [`                                     |
+| Move Window to Right Monitor  | `Super + Shift + ]`                                     |
+| Mirror Built-in Display       | `Super + M`                                             |
+| Take Screenshot               | `Print`                                                 |
+| Take and Annotate Screenshot  | `Shift + Print`                                         |
+| Reload Window Manager Config  | `Super + R`                                             |
 
 ## Terminal Commands
 
