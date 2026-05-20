@@ -35,10 +35,28 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    alsa.enable = true;
   };
 
   # Let PipeWire acquire realtime scheduling priority
   security.rtkit.enable = true;
+
+  # Let Swaylock authenticate. programs.mango does not pull in Nixpkgs'
+  # wayland-session module the way programs.hyprland did, so the PAM service it
+  # used to provide has to be requested explicitly.
+  security.pam.services.swaylock = { };
+
+  # Default font packages, also lost with wayland-session
+  fonts.enableDefaultPackages = true;
+
+  # Screen sharing
+  xdg.portal.wlr = {
+    enable = true;
+    settings.screencast = {
+      chooser_type = "simple";
+      chooser_cmd = "${pkgs.slurp}/bin/slurp -f 'Monitor: %o' -or";
+    };
+  };
 
   # Swap
   zramSwap.enable = true;
@@ -80,7 +98,14 @@
     zsh.enable = true;
 
     # Window manager
-    hyprland.enable = true;
+    mango.enable = true;
+
+    # X11 applications. Also from wayland-session, and Mango is unwrapped, so
+    # wlroots only finds Xwayland if it is on the system PATH.
+    xwayland.enable = true;
+
+    # Settings store GTK apps and Home Manager write theme settings into
+    dconf.enable = true;
 
     # Gaming
     steam.enable = true;

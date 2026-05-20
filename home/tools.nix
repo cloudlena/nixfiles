@@ -145,7 +145,6 @@
 
   home.packages = with pkgs; [
     air
-    altair
     bluetui
     brave-origin
     cargo
@@ -192,6 +191,7 @@
     whois
     wiremix
     wl-clipboard
+    wl-mirror
     xdg-utils
     yq-go
     yubioath-flutter
@@ -227,9 +227,7 @@
       enable = true;
       defaultApplications = {
         "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-        "image/png" = [ "imv.desktop" ];
-        "image/jpeg" = [ "imv.desktop" ];
-        "image/svg+xml" = [ "imv.desktop" ];
+        "image/*" = [ "imv.desktop" ];
       };
     };
   };
