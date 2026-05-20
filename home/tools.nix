@@ -25,6 +25,7 @@
           name = "Lena Fuhrimann";
           email = "6780471+cloudlena@users.noreply.github.com";
         };
+        url."git@github.com:".insteadOf = "https://github.com/";
       };
     };
 
@@ -186,6 +187,11 @@
     xdg-utils
     yq-go
     zip
+
+    foot
+    brightnessctl
+    grim
+    slurp
   ];
 
   xdg = {
