@@ -48,12 +48,6 @@
       };
     };
 
-    # Merge tool
-    mergiraf = {
-      enable = true;
-      enableGitIntegration = true;
-    };
-
     # System information tool
     fastfetch.enable = true;
 
@@ -145,7 +139,6 @@
 
   home.packages = with pkgs; [
     air
-    altair
     bluetui
     brave-origin
     cargo
@@ -175,7 +168,6 @@
     opentofu
     orca-slicer
     podman-compose
-    presenterm
     pwgen
     python3
     quickemu
@@ -192,6 +184,7 @@
     whois
     wiremix
     wl-clipboard
+    wl-mirror
     xdg-utils
     yq-go
     yubioath-flutter
@@ -227,9 +220,7 @@
       enable = true;
       defaultApplications = {
         "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-        "image/png" = [ "imv.desktop" ];
-        "image/jpeg" = [ "imv.desktop" ];
-        "image/svg+xml" = [ "imv.desktop" ];
+        "image/*" = [ "imv.desktop" ];
       };
     };
   };

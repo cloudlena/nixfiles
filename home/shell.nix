@@ -4,7 +4,7 @@
   home.shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../..";
-    a = "${pkgs.claude-code}/bin/claude";
+    a = "${config.programs.claude-code.package}/bin/claude";
     e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.yazi}/bin/yazi";
     g = "${pkgs.gitui}/bin/gitui";
@@ -40,7 +40,7 @@
       loginExtra = # shell
         ''
           if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-            exec ${pkgs.hyprland}/bin/start-hyprland
+            exec mango
           fi
         '';
       initContent = # shell
