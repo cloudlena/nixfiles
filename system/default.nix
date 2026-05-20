@@ -67,7 +67,7 @@
     zsh.enable = true;
 
     # Window manager
-    hyprland.enable = true;
+    mangowc.enable = true;
 
     # Gaming
     steam.enable = true;
