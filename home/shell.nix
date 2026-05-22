@@ -11,6 +11,8 @@
     m = "${pkgs.bottom}/bin/btm";
     o = "${pkgs.xdg-utils}/bin/xdg-open";
     t = "${pkgs.taskwarrior3}/bin/task";
+    do-not-disturb = "${pkgs.mako}/bin/makoctl mode -a do-not-disturb";
+    do-disturb = "${pkgs.mako}/bin/makoctl mode -r do-not-disturb";
   };
 
   programs = {
