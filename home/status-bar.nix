@@ -103,10 +103,6 @@
           exec = pkgs.writeShellScript "waybar-tasks" ''
             set -u
 
-            if [ ! -x "$(command -v task)" ]; then
-              exit 1
-            fi
-
             active_task=$(task rc.verbose=nothing rc.report.activedesc.filter=+ACTIVE rc.report.activedesc.columns:description rc.report.activedesc.sort:urgency- rc.report.activedesc.columns:description activedesc limit:1 | head -n 1)
             if [ -n "$active_task" ]; then
               echo "󰐌 $active_task"
@@ -128,10 +124,6 @@
         "custom/containers" = {
           exec = pkgs.writeShellScript "waybar-containers" ''
             set -u
-
-            if [ ! -x "$(command -v podman)" ]; then
-              exit 1
-            fi
 
             running_container_count=$(podman ps --noheading | wc -l)
 

@@ -218,7 +218,7 @@
         "application/pdf" = [ "org.pwmt.zathura.desktop" ];
         "image/png" = [ "imv.desktop" ];
         "image/jpeg" = [ "imv.desktop" ];
-        "image/svg" = [ "imv.desktop" ];
+        "image/svg+xml" = [ "imv.desktop" ];
       };
     };
     desktopEntries = {

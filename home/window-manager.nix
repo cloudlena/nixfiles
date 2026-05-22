@@ -251,6 +251,9 @@
         text-color = "#${theme.colors.foreground}";
         background-color = "#${theme.colors.background}";
         border-color = "#${theme.colors.primary}";
+        "mode=do-not-disturb" = {
+          invisible = 1;
+        };
       };
     };
 

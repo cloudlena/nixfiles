@@ -11,6 +11,8 @@
     m = "${pkgs.bottom}/bin/btm";
     o = "${pkgs.xdg-utils}/bin/xdg-open";
     t = "${pkgs.taskwarrior3}/bin/task";
+    do-not-disturb = "${pkgs.mako}/bin/makoctl mode -a do-not-disturb";
+    do-disturb = "${pkgs.mako}/bin/makoctl mode -r do-not-disturb";
   };
 
   programs = {
@@ -72,17 +74,10 @@
 
       # Checkout Git branches or tags using fuzzy search
       fco() {
-        local tags branches target
-        branches=$(
-          ${pkgs.git}/bin/git --no-pager branch --all \
-            --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)" \
-          | sed '/^$/d') || return
-        tags=$(${pkgs.git}/bin/git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
-        target=$(
-          (echo "$branches"; echo "$tags") |
-          ${pkgs.fzf}/bin/fzf --no-hscroll --no-multi -n 2 \
-              --ansi --preview="git --no-pager log -150 --pretty=format:%s '..{2}'") || return
-        ${pkgs.git}/bin/git checkout $(awk '{print $2}' <<<"$target" )
+        local branches branch
+        branches=$(${pkgs.git}/bin/git --no-pager branch -v) &&
+        branch=$(echo "$branches" | ${pkgs.fzf}/bin/fzf +m) &&
+        ${pkgs.git}/bin/git switch "$(echo "$branch" | awk '{print ($1 == "*") ? $2 : $1}')"
       }
 
       # Update system

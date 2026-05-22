@@ -7,10 +7,7 @@
   ];
 
   # Bootloader
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable swap on luks
   boot.initrd.luks.devices."luks-58a9f60d-bf2d-4c94-8f08-8e29a4083728".device =
