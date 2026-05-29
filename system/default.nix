@@ -59,19 +59,6 @@
     "flakes"
   ];
 
-  # Garbage collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
-
-  # System packages
-  environment.systemPackages = with pkgs; [
-    git
-    home-manager
-  ];
-
   programs = {
     # Shell
     zsh.enable = true;
@@ -81,6 +68,15 @@
 
     # Gaming
     steam.enable = true;
+
+    # Nix store garbage collection
+    nh = {
+      enable = true;
+      clean = {
+        enable = true;
+        extraArgs = "--keep 5 --keep-since 14d";
+      };
+    };
   };
 
   services = {
@@ -97,6 +93,7 @@
       openFirewall = true;
     };
 
+    # Printing service
     printing = {
       enable = true;
       openFirewall = true;
@@ -104,5 +101,5 @@
     };
   };
 
-  system.stateVersion = "26.05";
+  system.stateVersion = "26.11";
 }
