@@ -11,8 +11,8 @@
     m = "${pkgs.bottom}/bin/btm";
     o = "${pkgs.xdg-utils}/bin/xdg-open";
     t = "${pkgs.taskwarrior3}/bin/task";
-    do-not-disturb = "${pkgs.mako}/bin/makoctl mode -a do-not-disturb";
-    do-disturb = "${pkgs.mako}/bin/makoctl mode -r do-not-disturb";
+    do-not-disturb = "${pkgs.mako}/bin/makoctl mode -a do-not-disturb && pkill -RTMIN+2 waybar";
+    do-disturb = "${pkgs.mako}/bin/makoctl mode -r do-not-disturb && pkill -RTMIN+2 waybar";
   };
 
   programs = {
@@ -74,20 +74,28 @@
 
       # Checkout Git branches or tags using fuzzy search
       fco() {
-        local branches branch
-        branches=$(${pkgs.git}/bin/git --no-pager branch -v) &&
-        branch=$(echo "$branches" | ${pkgs.fzf}/bin/fzf +m) &&
-        ${pkgs.git}/bin/git switch "$(echo "$branch" | awk '{print ($1 == "*") ? $2 : $1}')"
+        local branches branch selected
+        branches=$(
+          ${pkgs.git}/bin/git --no-pager branch --sort=-committerdate
+          ${pkgs.git}/bin/git --no-pager branch -r --sort=-committerdate | grep -v ' -> ' | while read -r rb; do
+            local_name=$(echo "$rb" | awk '{n=$1; sub(/[^/]*\//, "", n); print n}')
+            if ! ${pkgs.git}/bin/git --no-pager branch --list "$local_name" | grep -q .; then
+              echo "  $local_name"
+            fi
+          done
+        ) || return
+        branch=$(echo "$branches" | ${pkgs.fzf}/bin/fzf +m) || return
+        selected=$(echo "$branch" | awk '{print ($1 == "*") ? $2 : $1}')
+        ${pkgs.git}/bin/git switch "$selected"
       }
 
       # Update system
       pacu() {
-        pushd ${config.programs.nh.flake}
-        ${pkgs.gnumake}/bin/make update
-        ${pkgs.gnumake}/bin/make system
-        ${pkgs.gnumake}/bin/make home
-        popd
-        fwupdmgr refresh
+        (cd ${config.programs.nh.flake} &&
+        ${pkgs.gnumake}/bin/make update &&
+        ${pkgs.gnumake}/bin/make system &&
+        ${pkgs.gnumake}/bin/make home) &&
+        fwupdmgr refresh &&
         fwupdmgr update
       }
 

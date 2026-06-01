@@ -211,6 +211,12 @@
         source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
         executable = true;
       };
+      "task/hooks/on-exit.waybar" = {
+        source = pkgs.writeShellScript "task-hook-waybar" ''
+          pkill -RTMIN+1 waybar || true
+        '';
+        executable = true;
+      };
     };
     mimeApps = {
       enable = true;
