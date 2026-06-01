@@ -17,6 +17,7 @@
         modules-right = [
           "custom/updates"
           "custom/containers"
+          "custom/dnd"
           "privacy"
           "wireplumber"
           "bluetooth"
@@ -103,13 +104,13 @@
           exec = pkgs.writeShellScript "waybar-tasks" ''
             set -u
 
-            active_task=$(task rc.verbose=nothing rc.report.activedesc.filter=+ACTIVE rc.report.activedesc.columns:description rc.report.activedesc.sort:urgency- rc.report.activedesc.columns:description activedesc limit:1 | head -n 1)
+            active_task=$(task rc.verbose=nothing rc.hooks=off rc.report.activedesc.filter=+ACTIVE rc.report.activedesc.columns:description rc.report.activedesc.sort:urgency- activedesc limit:1 | head -n 1)
             if [ -n "$active_task" ]; then
               echo "󰐌 $active_task"
               exit 0
             fi
 
-            ready_task=$(task rc.verbose=nothing rc.report.readydesc.filter=+READY rc.report.readydesc.columns:description rc.report.readydesc.sort:urgency- rc.report.readydesc.columns:description readydesc limit:1 | head -n 1)
+            ready_task=$(task rc.verbose=nothing rc.hooks=off rc.report.readydesc.filter=+READY rc.report.readydesc.columns:description rc.report.readydesc.sort:urgency- readydesc limit:1 | head -n 1)
             if [ -z "$ready_task" ]; then
               echo ""
               exit 0
@@ -117,8 +118,8 @@
 
             echo "󰳟 $ready_task"
           '';
-          exec-if = "which task";
-          interval = 60;
+          exec-if = "command -v task";
+          signal = 1;
           on-click = "${pkgs.kitty}/bin/kitty -e ${pkgs.taskwarrior-tui}/bin/taskwarrior-tui";
         };
         "custom/containers" = {
@@ -139,17 +140,30 @@
 
             echo "{\"text\": \"󰡨\", \"tooltip\": \"$running_container_count container$suffix running\"}"
           '';
-          exec-if = "which podman";
+          exec-if = "command -v podman";
           interval = 60;
           return-type = "json";
+        };
+        "custom/dnd" = {
+          exec = pkgs.writeShellScript "waybar-dnd" ''
+            set -u
+            if ${pkgs.mako}/bin/makoctl mode | grep -q do-not-disturb; then
+              echo '{"text": "󰂛", "tooltip": "Do not disturb enabled"}'
+            else
+              echo ""
+            fi
+          '';
+          signal = 2;
+          return-type = "json";
+          on-click = "${pkgs.mako}/bin/makoctl mode -r do-not-disturb; pkill -RTMIN+2 waybar";
         };
         "custom/updates" = {
           format = "<span size=\"120%\">{}</span>";
           exec = pkgs.writeShellScript "waybar-updates" ''
             set -u
 
-            current_timestamp=$(nix flake metadata ${config.programs.nh.flake} --json | jq '.locks.nodes.nixpkgs.locked.lastModified')
-            latest_timestamp=$(nix flake metadata github:NixOS/nixpkgs/nixos-unstable --json | jq '.locked.lastModified')
+            current_timestamp=$(nix flake metadata ${config.programs.nh.flake} --json | jq '.locks.nodes.nixpkgs.locked.lastModified') || exit 0
+            latest_timestamp=$(nix flake metadata github:NixOS/nixpkgs/nixos-unstable --json | jq '.locked.lastModified') || exit 0
 
             if [ "$latest_timestamp" -le "$current_timestamp" ]; then
               echo ""
@@ -212,7 +226,8 @@
         #wireplumber,
         #custom-updates,
         #custom-tasks,
-        #custom-containers {
+        #custom-containers,
+        #custom-dnd {
           margin: 4px;
           padding: 0 13px;
           border-radius: 9999px;
@@ -228,6 +243,12 @@
           color: #${theme.colors.primary};
           font-weight: bold;
           padding: 0 15px 0 12px;
+        }
+
+        #custom-dnd {
+          padding-right: 17px;
+          color: #${theme.colors.warning};
+          font-weight: bold;
         }
 
         #privacy,
