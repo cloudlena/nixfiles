@@ -213,7 +213,7 @@
       };
       "task/hooks/on-exit.waybar" = {
         source = pkgs.writeShellScript "task-hook-waybar" ''
-          pkill -x -RTMIN+1 waybar || true
+          pkill -RTMIN+1 '^\.waybar' || true
         '';
         executable = true;
       };

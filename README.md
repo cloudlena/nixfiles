@@ -45,6 +45,7 @@ The configuration includes:
 ## Installation
 
 1. Clone this repo
+1. (Fresh install only) Partition and format the disk with `nix run github:nix-community/disko -- --mode disko ./system/disks.nix`
 1. Run `make system` to install the system level components
 1. Run `make home` to install the user level components
 
