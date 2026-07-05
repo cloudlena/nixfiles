@@ -14,7 +14,10 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
+                mountOptions = [
+                  "fmask=0077"
+                  "dmask=0077"
+                ];
               };
             };
             root = {
@@ -22,18 +25,12 @@
               content = {
                 type = "luks";
                 name = "root";
+                settings.allowDiscards = true;
                 content = {
                   type = "filesystem";
                   format = "ext4";
                   mountpoint = "/";
                 };
-              };
-            };
-            swap = {
-              size = "24G"; # 1.5x RAM
-              content = {
-                type = "swap";
-                randomEncryption = true;
               };
             };
           };

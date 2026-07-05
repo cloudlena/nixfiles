@@ -16,6 +16,9 @@
     };
 
     # Terminal multiplexer
+    herdr = {
+      enable = true;
+    };
     tmux = {
       enable = true;
       keyMode = "vi";

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -7,14 +7,8 @@
   ];
 
   # Bootloader
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-58a9f60d-bf2d-4c94-8f08-8e29a4083728".device =
-    "/dev/disk/by-uuid/58a9f60d-bf2d-4c94-8f08-8e29a4083728";
-
-  # Restrict boot mount access
-  fileSystems."/boot".options = lib.mkForce [ "umask=0077" ];
 
   # Networking
   networking.networkmanager.enable = true;
@@ -22,16 +16,11 @@
   # Time zone
   time.timeZone = "Europe/Zurich";
 
-  # AppArmor
-  security.apparmor.enable = true;
-
-  # Containers
-  virtualisation.podman.enable = true;
-
-  # Bluetooth
-  hardware.bluetooth = {
+  # Printing
+  services.printing = {
     enable = true;
-    powerOnBoot = false;
+    openFirewall = true;
+    drivers = [ pkgs.brlaser ];
   };
 
   # Sound
@@ -39,6 +28,21 @@
     enable = true;
     pulse.enable = true;
   };
+
+  # Swap
+  zramSwap.enable = true;
+
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
+
+  # AppArmor
+  security.apparmor.enable = true;
+
+  # Containers
+  virtualisation.podman.enable = true;
 
   # Users
   users.users.lena = {
@@ -91,13 +95,6 @@
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
-    };
-
-    # Printing service
-    printing = {
-      enable = true;
-      openFirewall = true;
-      drivers = [ pkgs.brlaser ];
     };
   };
 
