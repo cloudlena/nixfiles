@@ -8,7 +8,7 @@ It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
 This configuration includes:
 
 - **Window Manager**: Hyprland (Wayland) with Waybar, Hyprlock, and Tokyo Night theme
-- **Terminal**: Kitty with Zsh, Starship prompt, and Tmux
+- **Terminal**: Kitty with Zsh, Starship prompt, and Herdr
 - **Editor**: Helix with comprehensive language server support
 - **Development**: Go, Python, Rust, Node.js, OpenTofu, Kubectl, and more
 - **Tools**: Claude Code, GitUI, Yazi file manager, Taskwarrior, Bottom monitor
