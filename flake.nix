@@ -19,6 +19,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       nixos-hardware,
       lanzaboote,
@@ -46,6 +47,8 @@
         inherit pkgs;
         modules = [ ./home ];
       };
+
+      checks.${system}.home = self.homeConfigurations.lena.activationPackage;
 
       formatter.${system} = pkgs.nixfmt-tree;
     };

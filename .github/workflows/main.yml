@@ -15,6 +15,6 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v31
       - name: Check formatting
-        run: nix run nixpkgs#nixfmt-tree -- --ci
+        run: nix fmt -- --ci
       - name: Check flake
-        run: nix flake check
+        run: nix flake check --no-build

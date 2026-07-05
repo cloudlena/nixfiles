@@ -274,6 +274,7 @@
 
   # Cursor
   home.pointerCursor = {
+    enable = true;
     package = pkgs.posy-cursors;
     name = "Posy_Cursor";
   };
@@ -298,6 +299,7 @@
       name = theme.icons;
       package = pkgs.papirus-icon-theme;
     };
+    gtk4.theme = config.gtk.theme;
   };
 
   qt = {

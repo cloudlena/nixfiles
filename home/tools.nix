@@ -92,12 +92,6 @@
     # Quick navigation
     zoxide.enable = true;
 
-    # Password manager
-    browserpass = {
-      enable = true;
-      browsers = [ "brave" ];
-    };
-
     # JSON parser
     jq.enable = true;
 
@@ -151,6 +145,7 @@
     dig
     dust
     file
+    freecad
     fx
     gcc
     gimp3
