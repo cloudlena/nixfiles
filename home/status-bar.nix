@@ -202,6 +202,7 @@
           margin: 4px;
           padding: 0 8px;
           border-radius: 9999px;
+          color: #${theme.colors.foreground};
         }
 
         #workspaces button:hover {
