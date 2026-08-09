@@ -94,6 +94,9 @@
       enable = true;
       nssmdns4 = true;
     };
+
+    # Smart Card service
+    pcscd.enable = true;
   };
 
   system.stateVersion = "26.11";

@@ -139,7 +139,7 @@
     air
     altair
     bluetui
-    brave
+    brave-origin
     cargo
     clippy
     dig
@@ -148,7 +148,7 @@
     freecad
     fx
     gcc
-    gimp3
+    gimp
     gnumake
     golangci-lint
     gopass
@@ -159,7 +159,7 @@
     kooha
     kubectl
     kubectx
-    libreoffice
+    libreoffice-fresh
     libwebp
     lolcat
     moq
@@ -170,7 +170,6 @@
     presenterm
     pwgen
     python3
-    qrencode
     quickemu
     rustc
     shellcheck
@@ -179,6 +178,7 @@
     timewarrior
     traceroute
     tree
+    tuicr
     unzip
     usbutils
     whois
@@ -186,6 +186,7 @@
     wl-clipboard
     xdg-utils
     yq-go
+    yubioath-flutter
     zip
   ];
 
@@ -227,7 +228,7 @@
         name = "Spotify";
         genericName = "Music Player";
         icon = "${config.gtk.iconTheme.package}/share/icons/${theme.icons}/32x32/apps/spotify.svg";
-        exec = "brave --app=https://open.spotify.com/";
+        exec = "${pkgs.brave-origin}/bin/brave-origin --app=https://open.spotify.com";
         categories = [
           "AudioVideo"
           "Audio"
