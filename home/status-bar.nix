@@ -201,7 +201,10 @@
         #workspaces button {
           margin: 4px;
           padding: 0 8px;
+          border: none;
           border-radius: 9999px;
+          background: transparent;
+          box-shadow: none;
           color: #${theme.colors.foreground};
         }
 

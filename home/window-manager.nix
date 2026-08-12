@@ -6,55 +6,6 @@
   ...
 }:
 
-let
-  gtk3Css = ''
-    @define-color theme_bg_color #${theme.colors.background};
-    @define-color theme_fg_color #${theme.colors.foreground};
-    @define-color theme_base_color #${theme.colors.backgroundDark};
-    @define-color theme_text_color #${theme.colors.foreground};
-    @define-color theme_selected_bg_color #${theme.colors.primary};
-    @define-color theme_selected_fg_color #${theme.colors.backgroundDark};
-    @define-color insensitive_bg_color #${theme.colors.background};
-    @define-color insensitive_fg_color alpha(#${theme.colors.foreground}, 0.5);
-    @define-color borders #${theme.colors.backgroundLight};
-    @define-color success_color #${theme.colors.success};
-    @define-color warning_color #${theme.colors.warning};
-    @define-color error_color #${theme.colors.danger};
-  '';
-
-  gtk4Css = ''
-    :root {
-      --window-bg-color: #${theme.colors.background};
-      --window-fg-color: #${theme.colors.foreground};
-      --view-bg-color: #${theme.colors.backgroundDark};
-      --view-fg-color: #${theme.colors.foreground};
-      --headerbar-bg-color: #${theme.colors.backgroundDark};
-      --headerbar-fg-color: #${theme.colors.foreground};
-      --sidebar-bg-color: #${theme.colors.backgroundDark};
-      --sidebar-fg-color: #${theme.colors.foreground};
-      --popover-bg-color: #${theme.colors.background};
-      --popover-fg-color: #${theme.colors.foreground};
-      --dialog-bg-color: #${theme.colors.background};
-      --dialog-fg-color: #${theme.colors.foreground};
-      --card-bg-color: #${theme.colors.backgroundLight};
-      --card-fg-color: #${theme.colors.foreground};
-      --accent-bg-color: #${theme.colors.primary};
-      --accent-fg-color: #${theme.colors.backgroundDark};
-      --accent-color: #${theme.colors.primary};
-      --destructive-bg-color: #${theme.colors.danger};
-      --destructive-fg-color: #${theme.colors.backgroundDark};
-      --success-bg-color: #${theme.colors.success};
-      --success-fg-color: #${theme.colors.backgroundDark};
-      --warning-bg-color: #${theme.colors.warning};
-      --warning-fg-color: #${theme.colors.backgroundDark};
-      --error-bg-color: #${theme.colors.danger};
-      --error-fg-color: #${theme.colors.backgroundDark};
-    }
-
-    /* Legacy names, still used by some GTK 4 */
-  ''
-  + gtk3Css;
-in
 {
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -688,27 +639,4 @@ in
     "wallpapers/bespinian.png".source = ./wallpapers/bespinian.png;
   };
 
-  gtk = {
-    enable = true;
-    colorScheme = "dark";
-    font = {
-      name = theme.font;
-      package = pkgs.nerd-fonts.fira-code;
-      size = 10;
-    };
-    iconTheme = {
-      name = theme.icons;
-      package = pkgs.papirus-icon-theme;
-    };
-    gtk3.extraCss = gtk3Css;
-    gtk4 = {
-      theme = config.gtk.theme;
-      extraCss = gtk4Css;
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk3";
-  };
 }

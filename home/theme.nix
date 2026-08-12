@@ -1,5 +1,4 @@
 {
-  name = "Tokyonight-Dark";
   slug = "tokyonight";
 
   font = "FiraCode Nerd Font";

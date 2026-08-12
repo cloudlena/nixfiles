@@ -3,6 +3,7 @@
 {
   imports = [
     ./window-manager.nix
+    ./gtk.nix
     ./status-bar.nix
     ./terminal.nix
     ./shell.nix
