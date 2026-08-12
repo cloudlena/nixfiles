@@ -133,6 +133,14 @@
 
     # Python
     uv.enable = true;
+
+    # Spotify player
+    ncspot = {
+      enable = true;
+      settings = {
+        shuffle = true;
+      };
+    };
   };
 
   home.packages = with pkgs; [
@@ -159,7 +167,7 @@
     kooha
     kubectl
     kubectx
-    libreoffice-fresh
+    libreoffice
     libwebp
     lolcat
     moq
@@ -192,6 +200,7 @@
 
   xdg = {
     enable = true;
+    userDirs.enable = true;
     configFile = {
       "gopass/config".text = # ini
         ''
@@ -221,19 +230,6 @@
         "image/png" = [ "imv.desktop" ];
         "image/jpeg" = [ "imv.desktop" ];
         "image/svg+xml" = [ "imv.desktop" ];
-      };
-    };
-    desktopEntries = {
-      spotify = {
-        name = "Spotify";
-        genericName = "Music Player";
-        icon = "${config.gtk.iconTheme.package}/share/icons/${theme.icons}/32x32/apps/spotify.svg";
-        exec = "${pkgs.brave-origin}/bin/brave-origin --app=https://open.spotify.com";
-        categories = [
-          "AudioVideo"
-          "Audio"
-          "Player"
-        ];
       };
     };
   };

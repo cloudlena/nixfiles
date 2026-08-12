@@ -48,7 +48,10 @@
         modules = [ ./home ];
       };
 
-      checks.${system}.home = self.homeConfigurations.lena.activationPackage;
+      checks.${system} = {
+        system = self.nixosConfigurations.nixos.config.system.build.toplevel;
+        home = self.homeConfigurations.lena.activationPackage;
+      };
 
       formatter.${system} = pkgs.nixfmt-tree;
     };
