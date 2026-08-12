@@ -44,7 +44,9 @@
         '';
       initContent = # shell
         ''
-          source ${config.xdg.configHome}/zsh/*
+          for f in ${config.xdg.configHome}/zsh/*(N); do
+            source "$f"
+          done
           if [[ $(tty) != /dev/tty[0-9] ]]; then
             ${pkgs.krabby}/bin/krabby random 1 --no-title --padding-left 1
           fi
@@ -69,7 +71,7 @@
     "zsh/functions.zsh".source = pkgs.writeShellScript "shell-functions" ''
       # Create a directory and enter it
       mkcd() {
-      	mkdir --parents "$@" && cd "$_" || exit
+        mkdir --parents "$@" && cd "$_" || return 1
       }
 
       # Checkout Git branches or tags using fuzzy search
@@ -101,49 +103,49 @@
 
       # Update project dependencies
       depu() {
-      	# Git submodules
-      	if [ -e .gitmodules ]; then
-      		printf "Updating Git submodules for %s...\n\n" "''${PWD##*/}"
-      		git submodule update --init --remote --rebase --recursive
-      	fi
+        # Git submodules
+        if [ -e .gitmodules ]; then
+          printf "Updating Git submodules for %s...\n\n" "''${PWD##*/}"
+          git submodule update --init --remote --rebase --recursive
+        fi
 
-      	# Nix flakes
-      	if [ -e flake.nix ]; then
-      		printf "Updating Nix flake inputs for %s...\n\n" "''${PWD##*/}"
-      		nix flake update
-      	fi
+        # Nix flakes
+        if [ -e flake.nix ]; then
+          printf "Updating Nix flake inputs for %s...\n\n" "''${PWD##*/}"
+          nix flake update
+        fi
 
-      	# npm
-      	if [ -e package-lock.json ]; then
-      		printf "Updating npm dependencies for %s...\n\n" "''${PWD##*/}"
-      		npm update
-      		npm outdated
-      	fi
+        # npm
+        if [ -e package-lock.json ]; then
+          printf "Updating npm dependencies for %s...\n\n" "''${PWD##*/}"
+          npm update
+          npm outdated
+        fi
 
-      	# Go
-      	if [ -e go.mod ]; then
-      		printf "Updating Go dependencies for %s...\n\n" "''${PWD##*/}"
-      		go get -t -u ./...
-      		go mod tidy
-      	fi
+        # Go
+        if [ -e go.mod ]; then
+          printf "Updating Go dependencies for %s...\n\n" "''${PWD##*/}"
+          go get -t -u ./...
+          go mod tidy
+        fi
 
-      	# Rust
-      	if [ -e Cargo.toml ]; then
-      		printf "Updating Cargo dependencies for %s...\n\n" "''${PWD##*/}"
-      		cargo update
-      	fi
+        # Rust
+        if [ -e Cargo.toml ]; then
+          printf "Updating Cargo dependencies for %s...\n\n" "''${PWD##*/}"
+          cargo update
+        fi
 
-      	# Python
-      	if [ -e uv.lock ]; then
-      		printf "Updating Python dependencies for %s...\n\n" "''${PWD##*/}"
-      		uv sync --upgrade
-      	fi
+        # Python
+        if [ -e uv.lock ]; then
+          printf "Updating Python dependencies for %s...\n\n" "''${PWD##*/}"
+          uv sync --upgrade
+        fi
 
-      	# OpenTofu
-      	if [ -e .terraform.lock.hcl ]; then
-      		printf "Updating OpenTofu dependencies for %s...\n\n" "''${PWD##*/}"
-      		tofu init -upgrade
-      	fi
+        # OpenTofu
+        if [ -e .terraform.lock.hcl ]; then
+          printf "Updating OpenTofu dependencies for %s...\n\n" "''${PWD##*/}"
+          tofu init -upgrade
+        fi
       }
     '';
   };

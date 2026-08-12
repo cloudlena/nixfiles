@@ -159,7 +159,7 @@
     kooha
     kubectl
     kubectx
-    libreoffice-fresh
+    libreoffice
     libwebp
     lolcat
     moq
@@ -192,6 +192,7 @@
 
   xdg = {
     enable = true;
+    userDirs.enable = true;
     configFile = {
       "gopass/config".text = # ini
         ''

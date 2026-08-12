@@ -12,7 +12,7 @@ This configuration includes:
 - **Editor**: Helix with comprehensive language server support
 - **Development**: Go, Python, Rust, Node.js, OpenTofu, Kubectl, and more
 - **Tools**: Claude Code, GitUI, Yazi file manager, Taskwarrior, Bottom monitor
-- **Security**: Secure boot (Lanzaboote), full disk encryption (LUKS), AppArmor
+- **Security**: Secure boot (Lanzaboote), full disk encryption (LUKS)
 - **Containers**: Podman with Compose support
 
 See the terminal commands section below for quick access to key tools.
@@ -20,7 +20,6 @@ See the terminal commands section below for quick access to key tools.
 ## Prerequisites
 
 - Git installed
-- [nh](https://github.com/viperML/nh) (NixOS helper) installed
 - [NixOS](https://nixos.org/) installed (only for the system level part)
 
 ## Hardware
@@ -46,8 +45,8 @@ The configuration includes:
 
 1. Clone this repo
 1. (Fresh install only) Partition and format the disk with `nix run github:nix-community/disko -- --mode disko ./system/disks.nix`
-1. Run `make system` to install the system level components
-1. Run `make home` to install the user level components
+1. Install the system level components with `sudo nixos-rebuild switch --flake .#nixos` (this also installs `nh`)
+1. Install the user level components with `nix run github:nix-community/home-manager -- switch --flake .#lena`
 
 ## Update
 
