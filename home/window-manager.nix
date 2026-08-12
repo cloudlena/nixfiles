@@ -638,5 +638,4 @@
   xdg.dataFile = {
     "wallpapers/bespinian.png".source = ./wallpapers/bespinian.png;
   };
-
 }

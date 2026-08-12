@@ -10,11 +10,20 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Pass TRIM through the LUKS layer so fstrim reaches the SSD
+  boot.initrd.luks.devices."root".allowDiscards = true;
+
   # Networking
   networking.networkmanager.enable = true;
 
   # Time zone
   time.timeZone = "Europe/Zurich";
+
+  # Locale: Swiss formats, English language
+  i18n = {
+    defaultLocale = "de_CH.UTF-8";
+    extraLocaleSettings.LC_MESSAGES = "en_US.UTF-8";
+  };
 
   # Printing
   services.printing = {
@@ -28,6 +37,9 @@
     pulse.enable = true;
   };
 
+  # Let PipeWire acquire realtime scheduling priority
+  security.rtkit.enable = true;
+
   # Swap
   zramSwap.enable = true;
 
@@ -37,11 +49,12 @@
     powerOnBoot = false;
   };
 
-  # AppArmor
-  security.apparmor.enable = true;
-
   # Containers
-  virtualisation.podman.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    defaultNetwork.settings.dns_enabled = true;
+    autoPrune.enable = true;
+  };
 
   # Users
   users.users.lena = {
