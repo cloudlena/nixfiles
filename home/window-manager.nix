@@ -175,7 +175,7 @@ in
     # Background image
     wbg = {
       enable = true;
-      image = "${config.xdg.dataHome}/wallpapers/keera.png";
+      image = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       extraArgs = [ "--stretch" ];
     };
 
