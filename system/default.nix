@@ -41,12 +41,10 @@
   # Let PipeWire acquire realtime scheduling priority
   security.rtkit.enable = true;
 
-  # Let Swaylock authenticate. programs.mango does not pull in Nixpkgs'
-  # wayland-session module the way programs.hyprland did, so the PAM service it
-  # used to provide has to be requested explicitly.
+  # Let Swaylock authenticate
   security.pam.services.swaylock = { };
 
-  # Default font packages, also lost with wayland-session
+  # Default font packages
   fonts.enableDefaultPackages = true;
 
   # Screen sharing
@@ -100,8 +98,7 @@
     # Window manager
     mango.enable = true;
 
-    # X11 applications. Also from wayland-session, and Mango is unwrapped, so
-    # wlroots only finds Xwayland if it is on the system PATH.
+    # X11 application support
     xwayland.enable = true;
 
     # Settings store GTK apps and Home Manager write theme settings into
@@ -123,9 +120,6 @@
   services = {
     # Firmware updater
     fwupd.enable = true;
-
-    # Geolocation service
-    geoclue2.enable = true;
 
     # mDNS service
     avahi = {

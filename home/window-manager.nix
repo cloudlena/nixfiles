@@ -59,8 +59,6 @@ let
         --copy-command ${pkgs.wl-clipboard}/bin/wl-copy
   '';
 
-  # Swaylock cannot blur its background the way Hyprlock did, so the blurred
-  # variant of the wallpaper is baked at build time instead
   blurredWallpaper =
     pkgs.runCommand "bespinian-blurred.png" { nativeBuildInputs = [ pkgs.imagemagick ]; }
       ''
@@ -93,8 +91,6 @@ in
         image = "${config.xdg.dataHome}/wallpapers/bespinian-blurred.png";
         font = theme.font;
 
-        # Only the ring reacts to the entered password, so the indicator stays
-        # a flat disc on the wallpaper like Hyprlock's input field did
         inside-color = theme.colors.background;
         inside-clear-color = theme.colors.background;
         inside-ver-color = theme.colors.background;
@@ -175,14 +171,15 @@ in
     # Background image
     wbg = {
       enable = true;
-      image = "${config.xdg.dataHome}/wallpapers/keera.png";
+      image = "${config.xdg.dataHome}/wallpapers/bespinian.png";
       extraArgs = [ "--stretch" ];
     };
 
     # Adjust color temperature to reduce eye strain
     gammastep = {
       enable = true;
-      provider = "geoclue2";
+      dawnTime = "7:00-9:00";
+      duskTime = "21:00-22:30";
     };
   };
 
@@ -212,7 +209,7 @@ in
 
         # Monitors
         monitorrule=name:^eDP-1$,scale:1.5
-        monitorrule=name:^DP-3$,scale:1.5
+        monitorrule=name:^DP-1$,scale:1.5
 
         # Input Devices
         xkb_rules_options=caps:escape,compose:ralt
@@ -245,7 +242,7 @@ in
         windowrule=isterm:1,appid:^kitty$
 
         # Window manager
-        bind=SUPER,Tab,switcher,all_tag_prev
+        bind=SUPER,Tab,focuslast
         bind=SUPER,a,togglejump
         bind=SUPER,q,killclient
         bind=SUPER,f,togglefullscreen
@@ -305,10 +302,10 @@ in
         bind=SUPER+CTRL,s,restore_minimized,0
 
         # Monitors
-        bind=SUPER,bracketleft,focusmon,next
-        bind=SUPER,bracketright,focusmon,prev
-        bind=SUPER+SHIFT,bracketleft,tagmon,next
-        bind=SUPER+SHIFT,bracketright,tagmon,prev
+        bind=SUPER,bracketleft,focusmon,prev
+        bind=SUPER,bracketright,focusmon,next
+        bind=SUPER+SHIFT,bracketleft,tagmon,prev
+        bind=SUPER+SHIFT,bracketright,tagmon,next
 
         # Media keys
         bindl=NONE,XF86AudioPlay,spawn,${pkgs.swayosd}/bin/swayosd-client --playerctl play-pause

@@ -27,11 +27,6 @@ See the terminal commands section below for quick access to key tools.
 This configuration is tailored for a **TUXEDO InfinityBook Pro 14 Gen 7** using nixos-hardware.
 If you're using different hardware, update the `nixos-hardware` module in `flake.nix`.
 
-The configuration includes:
-
-- **Secure Boot** via Lanzaboote
-- **Full Disk Encryption** with LUKS
-
 ## Directory Structure
 
 - `flake.nix` - Flake configuration with system inputs and outputs
@@ -56,7 +51,7 @@ The configuration includes:
 
 ## Maintenance
 
-1. Run `make clean` to remove old system generations (keeps last 5 generations and all from last 14 days)
+1. Run `make clean` to remove old system generations and user profiles (keeps last 5 and all from last 14 days)
 
 ## Colors
 
@@ -67,44 +62,46 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Foreground | ![#c0caf5](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23c0caf5&textColor=rgba(0,0,0,0)>) |
 | Background | ![#1a1b26](<https://images.placeholders.dev/?width=50&height=50&bgColor=%231a1b26&textColor=rgba(0,0,0,0)>) |
 | Primary    | ![#bb9af7](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23bb9af7&textColor=rgba(0,0,0,0)>) |
+| Success    | ![#9ece6a](<https://images.placeholders.dev/?width=50&height=50&bgColor=%239ece6a&textColor=rgba(0,0,0,0)>) |
 | Warning    | ![#e0af68](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23e0af68&textColor=rgba(0,0,0,0)>) |
 | Danger     | ![#f7768e](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23f7768e&textColor=rgba(0,0,0,0)>) |
 
 ## Key Bindings
 
-| Function                      | Keys                                                    |
-| :---------------------------- | :------------------------------------------------------ |
-| Open App Launcher             | `Super + Space`                                         |
-| Open Terminal                 | `Super + Enter`                                         |
-| Open Web Browser              | `Super + W`                                             |
-| Open Clipboard History        | `Super + C`                                             |
-| Open Emoji Picker             | `Super + E`                                             |
-| Lock Screen                   | `Super + Ctrl + Q`                                      |
-| Cycle Through Windows         | `Super + Tab`                                           |
-| Toggle Window Overview        | `Super + A` or `Three-Finger Swipe Up/Down`             |
-| Kill Active Window            | `Super + Q`                                             |
-| Toggle Fullscreen Window      | `Super + F`                                             |
-| Toggle Floating Window        | `Super + V`                                             |
-| Pin Window to All Tags        | `Super + Y`                                             |
-| Switch to Window              | `Super + [hjkl]` or `Move Mouse`                        |
-| Move Window                   | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
-| Resize Window                 | `Super + Right Mouse Button`                            |
-| Switch to Workspace           | `Super + [1-9]`                                         |
-| Move Window to Workspace      | `Super + Shift + [1-9]`                                 |
-| Open Empty Workspace          | `Super + N`                                             |
-| Switch to Next Workspace      | `Super + Scroll Up` or `Three-Finger Swipe Left`        |
-| Switch to Previous Workspace  | `Super + Scroll Down` or `Three-Finger Swipe Right`     |
-| Switch to Scratchpad          | `Super + S`                                             |
-| Minimize Window to Scratchpad | `Super + Shift + S`                                     |
-| Restore Minimized Window      | `Super + Ctrl + S`                                      |
-| Focus Left Monitor            | `Super + [`                                             |
-| Focus Right Monitor           | `Super + ]`                                             |
-| Move Window to Left Monitor   | `Super + Shift + [`                                     |
-| Move Window to Right Monitor  | `Super + Shift + ]`                                     |
-| Mirror Built-in Display       | `Super + M`                                             |
-| Take Screenshot               | `Print`                                                 |
-| Take and Annotate Screenshot  | `Shift + Print`                                         |
-| Reload Window Manager Config  | `Super + R`                                             |
+| Function                        | Keys                                                    |
+| :------------------------------ | :------------------------------------------------------ |
+| Open App Launcher               | `Super + Space`                                         |
+| Open Terminal                   | `Super + Enter`                                         |
+| Open Web Browser                | `Super + W`                                             |
+| Open Clipboard History          | `Super + C`                                             |
+| Open Emoji Picker               | `Super + E`                                             |
+| Lock Screen                     | `Super + Ctrl + Q`                                      |
+| Focus Previous Window           | `Super + Tab`                                           |
+| Toggle Window Overview          | `Super + A` or `Three-Finger Swipe Up/Down`             |
+| Kill Active Window              | `Super + Q`                                             |
+| Toggle Fullscreen Window        | `Super + F`                                             |
+| Toggle Floating Window          | `Super + V`                                             |
+| Pin Window to All Tags          | `Super + Y`                                             |
+| Switch to Window                | `Super + [hjkl]` or `Move Mouse`                        |
+| Move Window                     | `Super + Shift + [hjkl]` or `Super + Left Mouse Button` |
+| Resize Window                   | `Super + Right Mouse Button`                            |
+| Switch to Tag                   | `Super + [1-9]`                                         |
+| Move Window to Empty Tag        | `Super + Shift + N`                                     |
+| Move Window to Tag              | `Super + Shift + [1-9]`                                 |
+| Open Empty Tag                  | `Super + N`                                             |
+| Switch to Next Tag              | `Super + Scroll Up` or `Three-Finger Swipe Left`        |
+| Switch to Previous Tag          | `Super + Scroll Down` or `Three-Finger Swipe Right`     |
+| Switch to Scratchpad            | `Super + S`                                             |
+| Minimize Window to Scratchpad   | `Super + Shift + S`                                     |
+| Restore Minimized Window        | `Super + Ctrl + S`                                      |
+| Focus Previous Monitor          | `Super + [`                                             |
+| Focus Next Monitor              | `Super + ]`                                             |
+| Move Window to Previous Monitor | `Super + Shift + [`                                     |
+| Move Window to Next Monitor     | `Super + Shift + ]`                                     |
+| Mirror Built-in Display         | `Super + M`                                             |
+| Take Screenshot                 | `Print`                                                 |
+| Take and Annotate Screenshot    | `Shift + Print`                                         |
+| Reload Window Manager Config    | `Super + R`                                             |
 
 ## Terminal Commands
 
@@ -120,3 +117,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Open Task Manager           | `t`              |
 | Enable Do-Not-Disturb Mode  | `do-not-disturb` |
 | Disable Do-Not-Disturb Mode | `do-disturb`     |
+| Update Project Dependencies | `depu`           |
+| Switch Git Branch (Fuzzy)   | `fco`            |
+| Create and Enter Directory  | `mkcd`           |
+| Update System and Firmware  | `pacu`           |

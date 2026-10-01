@@ -17,7 +17,8 @@
     git = {
       enable = true;
       signing = {
-        key = null;
+        format = "ssh";
+        key = "${config.home.homeDirectory}/.ssh/id_ed25519";
         signByDefault = true;
       };
       settings = {
@@ -181,6 +182,7 @@
     tuicr
     unzip
     usbutils
+    wdisplays
     whois
     wiremix
     wl-clipboard

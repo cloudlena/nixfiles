@@ -355,7 +355,6 @@
         #battery,
         #bluetooth,
         #clock,
-        #mode,
         #network,
         #privacy,
         #wireplumber,
