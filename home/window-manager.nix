@@ -6,6 +6,32 @@
   ...
 }:
 
+let
+  screenshotDir = "${config.xdg.userDirs.pictures}/Screenshots";
+
+  screenshot = pkgs.writeShellScript "screenshot" ''
+    geometry="$(${pkgs.slurp}/bin/slurp)" || exit 0
+
+    mkdir -p "${screenshotDir}"
+    file="${screenshotDir}/$(date +'%F-%H%M%S').png"
+    ${pkgs.grim}/bin/grim -g "$geometry" - \
+      | tee "$file" \
+      | ${pkgs.wl-clipboard}/bin/wl-copy --type image/png
+    ${pkgs.libnotify}/bin/notify-send -a screenshot -i "$file" \
+      "Screenshot" "Copied to clipboard and saved to ${screenshotDir}"
+  '';
+
+  screenshotAnnotated = pkgs.writeShellScript "screenshot-annotated" ''
+    geometry="$(${pkgs.slurp}/bin/slurp)" || exit 0
+
+    mkdir -p "${screenshotDir}"
+    ${pkgs.grim}/bin/grim -g "$geometry" -t ppm - \
+      | ${pkgs.satty}/bin/satty --filename - \
+        --output-filename "${screenshotDir}/$(date +'%F-%H%M%S').png" \
+        --copy-command ${pkgs.wl-clipboard}/bin/wl-copy
+  '';
+in
+
 {
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -34,7 +60,6 @@
       # My Programs
       launcher._var = "${pkgs.vicinae}/bin/vicinae vicinae://toggle";
       osd._var = "${pkgs.swayosd}/bin/swayosd-client --monitor \"$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[] | select(.focused == true).name')\"";
-      screenshots_dir._var = "${config.xdg.userDirs.pictures}/Screenshots";
 
       # Look and Feel
       config = {
@@ -58,6 +83,8 @@
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
+          enable_swallow = true;
+          swallow_regex = "^kitty$";
         };
         cursor.inactive_timeout = 8;
         ecosystem = {
@@ -154,13 +181,13 @@
         {
           _args = [
             "Print"
-            (lib.generators.mkLuaInline "hl.dsp.exec_raw(\"mkdir -p \" .. screenshots_dir .. \"; ${pkgs.grim}/bin/grim -g \\\"$(${pkgs.slurp}/bin/slurp)\\\" \\\"\" .. screenshots_dir .. \"/$(date +'%F-%H%M%S').png\\\"\")")
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"${screenshot}\")")
           ];
         }
         {
           _args = [
             "SHIFT + Print"
-            (lib.generators.mkLuaInline "hl.dsp.exec_raw(\"mkdir -p \" .. screenshots_dir .. \"; ${pkgs.grim}/bin/grim -g \\\"$(${pkgs.slurp}/bin/slurp)\\\" -t ppm - | ${pkgs.satty}/bin/satty --filename - --output-filename \\\"\" .. screenshots_dir .. \"/$(date +'%F-%H%M%S').png\\\"\")")
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"${screenshotAnnotated}\")")
           ];
         }
 
