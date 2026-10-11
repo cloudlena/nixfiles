@@ -8,7 +8,7 @@ It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
 This configuration includes:
 
 - **Window Manager**: Hyprland (Wayland) with Waybar, Hyprlock, and Tokyo Night theme
-- **Terminal**: Kitty with Zsh, Starship prompt, and Herdr
+- **Terminal**: Kitty with Zsh, Starship prompt
 - **Editor**: Helix with comprehensive language server support
 - **Development**: Go, Python, Rust, Node.js, OpenTofu, Kubectl, and more
 - **Tools**: Claude Code, GitUI, Yazi file manager, Taskwarrior, Bottom monitor
@@ -26,11 +26,6 @@ See the terminal commands section below for quick access to key tools.
 
 This configuration is tailored for a **TUXEDO InfinityBook Pro 14 Gen 7** using nixos-hardware.
 If you're using different hardware, update the `nixos-hardware` module in `flake.nix`.
-
-The configuration includes:
-
-- **Secure Boot** via Lanzaboote
-- **Full Disk Encryption** with LUKS
 
 ## Directory Structure
 
@@ -56,7 +51,7 @@ The configuration includes:
 
 ## Maintenance
 
-1. Run `make clean` to remove old system generations (keeps last 5 generations and all from last 14 days)
+1. Run `make clean` to remove old system generations and user profiles (keeps last 5 and all from last 14 days)
 
 ## Colors
 
@@ -67,6 +62,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Foreground | ![#c0caf5](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23c0caf5&textColor=rgba(0,0,0,0)>) |
 | Background | ![#1a1b26](<https://images.placeholders.dev/?width=50&height=50&bgColor=%231a1b26&textColor=rgba(0,0,0,0)>) |
 | Primary    | ![#bb9af7](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23bb9af7&textColor=rgba(0,0,0,0)>) |
+| Success    | ![#9ece6a](<https://images.placeholders.dev/?width=50&height=50&bgColor=%239ece6a&textColor=rgba(0,0,0,0)>) |
 | Warning    | ![#e0af68](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23e0af68&textColor=rgba(0,0,0,0)>) |
 | Danger     | ![#f7768e](<https://images.placeholders.dev/?width=50&height=50&bgColor=%23f7768e&textColor=rgba(0,0,0,0)>) |
 
@@ -113,3 +109,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Open Task Manager           | `t`              |
 | Enable Do-Not-Disturb Mode  | `do-not-disturb` |
 | Disable Do-Not-Disturb Mode | `do-disturb`     |
+| Update Project Dependencies | `depu`           |
+| Switch Git Branch (Fuzzy)   | `fco`            |
+| Create and Enter Directory  | `mkcd`           |
+| Update System and Firmware  | `pacu`           |

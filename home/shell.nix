@@ -4,7 +4,7 @@
   home.shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../..";
-    a = "${pkgs.claude-code}/bin/claude";
+    a = "${config.programs.claude-code.package}/bin/claude";
     e = "${pkgs.helix}/bin/hx";
     f = "${pkgs.yazi}/bin/yazi";
     g = "${pkgs.gitui}/bin/gitui";

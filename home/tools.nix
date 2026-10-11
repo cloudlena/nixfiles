@@ -17,7 +17,8 @@
     git = {
       enable = true;
       signing = {
-        key = null;
+        format = "ssh";
+        key = "${config.home.homeDirectory}/.ssh/id_ed25519";
         signByDefault = true;
       };
       settings = {
@@ -46,12 +47,6 @@
         line-numbers-plus-style = "white #${theme.colors.successDark}";
         line-numbers-zero-style = "white";
       };
-    };
-
-    # Merge tool
-    mergiraf = {
-      enable = true;
-      enableGitIntegration = true;
     };
 
     # System information tool
@@ -145,7 +140,6 @@
 
   home.packages = with pkgs; [
     air
-    altair
     bluetui
     brave-origin
     cargo
@@ -153,14 +147,12 @@
     dig
     dust
     file
-    freecad
     fx
     gcc
     gimp
     gnumake
     golangci-lint
     gopass
-    hugo
     image_optim
     inkscape
     killall
@@ -175,7 +167,6 @@
     opentofu
     orca-slicer
     podman-compose
-    presenterm
     pwgen
     python3
     quickemu
@@ -227,9 +218,7 @@
       enable = true;
       defaultApplications = {
         "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-        "image/png" = [ "imv.desktop" ];
-        "image/jpeg" = [ "imv.desktop" ];
-        "image/svg+xml" = [ "imv.desktop" ];
+        "image/*" = [ "imv.desktop" ];
       };
     };
   };

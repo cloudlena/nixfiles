@@ -58,7 +58,6 @@ in
           name = "markdown";
           language-servers = [
             "marksman"
-            "markdown-oxide"
             "harper-ls"
           ];
           auto-format = true;
@@ -125,8 +124,8 @@ in
     ruff
     rust-analyzer
     svelte-language-server
-    tombi
     terraform-ls
+    tombi
     typescript-language-server
     vscode-langservers-extracted
     yaml-language-server

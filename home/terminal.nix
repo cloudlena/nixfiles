@@ -12,15 +12,7 @@
       };
       settings = {
         window_padding_width = 5;
-      };
-    };
-
-    # Terminal multiplexer
-    herdr = {
-      enable = true;
-      settings = {
-        onboarding = false;
-        theme.name = "tokyo-night";
+        enable_audio_bell = false;
       };
     };
   };
