@@ -615,7 +615,8 @@
     # Adjust color temperature to reduce eye strain
     gammastep = {
       enable = true;
-      provider = "geoclue2";
+      dawnTime = "7:00-9:00";
+      duskTime = "21:00-22:30";
     };
   };
 
