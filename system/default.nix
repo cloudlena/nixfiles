@@ -41,6 +41,21 @@
   # Let PipeWire acquire realtime scheduling priority
   security.rtkit.enable = true;
 
+  # Let Swaylock authenticate
+  security.pam.services.swaylock = { };
+
+  # Default font packages
+  fonts.enableDefaultPackages = true;
+
+  # Screen sharing
+  xdg.portal.wlr = {
+    enable = true;
+    settings.screencast = {
+      chooser_type = "simple";
+      chooser_cmd = "${pkgs.slurp}/bin/slurp -f 'Monitor: %o' -or";
+    };
+  };
+
   # Swap
   zramSwap.enable = true;
 
@@ -81,7 +96,13 @@
     zsh.enable = true;
 
     # Window manager
-    hyprland.enable = true;
+    mango.enable = true;
+
+    # X11 application support
+    xwayland.enable = true;
+
+    # Settings store GTK apps and Home Manager write theme settings into
+    dconf.enable = true;
 
     # Gaming
     steam.enable = true;

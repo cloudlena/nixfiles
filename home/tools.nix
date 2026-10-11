@@ -180,9 +180,11 @@
     tuicr
     unzip
     usbutils
+    wdisplays
     whois
     wiremix
     wl-clipboard
+    wl-mirror
     xdg-utils
     yq-go
     yubioath-flutter
