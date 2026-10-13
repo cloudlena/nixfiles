@@ -129,6 +129,9 @@
 
     # Smart Card service
     pcscd.enable = true;
+
+    # Secret store for the portal's Secret interface, unlocked at login
+    gnome.gnome-keyring.enable = true;
   };
 
   system.stateVersion = "26.11";
