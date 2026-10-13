@@ -5,14 +5,14 @@
     ".." = "cd ..";
     "..." = "cd ../..";
     a = "${config.programs.claude-code.package}/bin/claude";
-    e = "${pkgs.helix}/bin/hx";
-    f = "${pkgs.yazi}/bin/yazi";
-    g = "${pkgs.gitui}/bin/gitui";
-    m = "${pkgs.bottom}/bin/btm";
+    e = "${config.programs.helix.package}/bin/hx";
+    f = "${config.programs.yazi.package}/bin/yazi";
+    g = "${config.programs.gitui.package}/bin/gitui";
+    m = "${config.programs.bottom.package}/bin/btm";
     o = "${pkgs.xdg-utils}/bin/xdg-open";
-    t = "${pkgs.taskwarrior3}/bin/task";
-    do-not-disturb = "${pkgs.mako}/bin/makoctl mode -a do-not-disturb && pkill -RTMIN+2 waybar";
-    do-disturb = "${pkgs.mako}/bin/makoctl mode -r do-not-disturb && pkill -RTMIN+2 waybar";
+    t = "${config.programs.taskwarrior.package}/bin/task";
+    do-not-disturb = "${config.services.mako.package}/bin/makoctl mode -a do-not-disturb && pkill -RTMIN+2 waybar";
+    do-disturb = "${config.services.mako.package}/bin/makoctl mode -r do-not-disturb && pkill -RTMIN+2 waybar";
   };
 
   programs = {

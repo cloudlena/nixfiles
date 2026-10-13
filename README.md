@@ -1,7 +1,7 @@
 # Nixfiles
 
 :snowflake: My personal [NixOS](https://nixos.org/) configuration.
-It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
+It uses [Flakes](https://wiki.nixos.org/wiki/Flakes) under the hood.
 
 ## Features
 
@@ -39,8 +39,12 @@ If you're using different hardware, update the `nixos-hardware` module in `flake
 ## Installation
 
 1. Clone this repo
-1. (Fresh install only) Partition and format the disk with `nix run github:nix-community/disko -- --mode disko ./system/disks.nix`
-1. Install the system level components with `sudo nixos-rebuild switch --flake .#nixos` (this also installs `nh`)
+1. Install the system level components (this also installs `nh`)
+   - On a fresh install from the NixOS live ISO:
+     1. Partition, format and mount the disk with `sudo nix run github:nix-community/disko -- --mode disko ./system/disks.nix`
+     1. Regenerate the hardware configuration for the new disk with `sudo nixos-generate-config --root /mnt --show-hardware-config > system/hardware-configuration.nix`
+     1. Install with `sudo nixos-install --flake .#nixos`
+   - On an existing NixOS system: `sudo nixos-rebuild switch --flake .#nixos`
 1. Install the user level components with `nix run github:nix-community/home-manager -- switch --flake .#lena`
 
 ## Update
@@ -92,8 +96,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Switch to Next Tag              | `Super + Scroll Up` or `Three-Finger Swipe Left`        |
 | Switch to Previous Tag          | `Super + Scroll Down` or `Three-Finger Swipe Right`     |
 | Switch to Scratchpad            | `Super + S`                                             |
-| Minimize Window to Scratchpad   | `Super + Shift + S`                                     |
-| Restore Minimized Window        | `Super + Ctrl + S`                                      |
+| Move Window to Scratchpad       | `Super + Shift + S`                                     |
 | Focus Previous Monitor          | `Super + [`                                             |
 | Focus Next Monitor              | `Super + ]`                                             |
 | Move Window to Previous Monitor | `Super + Shift + [`                                     |

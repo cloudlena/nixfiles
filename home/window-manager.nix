@@ -88,7 +88,7 @@ in
     swaylock = {
       enable = true;
       settings = {
-        image = "${config.xdg.dataHome}/wallpapers/bespinian-blurred.png";
+        image = "${blurredWallpaper}";
         font = theme.font;
 
         inside-color = theme.colors.background;
@@ -139,6 +139,9 @@ in
     # Volume and brightness indicator
     swayosd.enable = true;
 
+    # Password prompt for apps asking for elevated privileges
+    polkit-gnome.enable = true;
+
     # GPG
     gpg-agent = {
       enable = true;
@@ -171,7 +174,7 @@ in
     # Background image
     wbg = {
       enable = true;
-      image = "${config.xdg.dataHome}/wallpapers/bespinian.png";
+      image = "${./wallpapers/bespinian.png}";
       extraArgs = [ "--stretch" ];
     };
 
@@ -209,14 +212,16 @@ in
 
         # Monitors
         monitor_rule=name:^eDP-1$,scale:1.5
-        monitor_rule=name:^DP-1$,scale:1.5
+        monitor_rule=name:^DP-.$,scale:1.5
 
         # Input Devices
         xkb_rules_options=caps:escape,compose:ralt
         trackpad_natural_scrolling=1
 
         # Miscellaneous
+        float_full_to_top=1
         no_border_when_single=1
+        idle_inhibit_when_fullscreen=1
         cursor_hide_timeout=8
         tag_gather=1
 
@@ -285,7 +290,7 @@ in
         bind=SUPER,8,view,8
         bind=SUPER,9,view,9
         bind=SUPER,n,view_insert,next
-        bind=SUPER,s,toggle_scratchpad
+        bind=SUPER,s,toggle_special_tag
 
         bind=SUPER+SHIFT,1,tag,1
         bind=SUPER+SHIFT,2,tag,2
@@ -297,8 +302,7 @@ in
         bind=SUPER+SHIFT,8,tag,8
         bind=SUPER+SHIFT,9,tag,9
         bind=SUPER+SHIFT,n,spawn,${tagEmpty}
-        bind=SUPER+SHIFT,s,minimized
-        bind=SUPER+CTRL,s,restore_minimized,0
+        bind=SUPER+SHIFT,s,tag_special_silent
 
         # Monitors
         bind=SUPER,bracketleft,focusmon,prev
@@ -342,11 +346,5 @@ in
       Wants = [ "graphical-session-pre.target" ];
       After = [ "graphical-session-pre.target" ];
     };
-  };
-
-  # Wallpaper
-  xdg.dataFile = {
-    "wallpapers/bespinian.png".source = ./wallpapers/bespinian.png;
-    "wallpapers/bespinian-blurred.png".source = blurredWallpaper;
   };
 }
