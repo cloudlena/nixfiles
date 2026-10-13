@@ -209,14 +209,16 @@ in
 
         # Monitors
         monitor_rule=name:^eDP-1$,scale:1.5
-        monitor_rule=name:^DP-1$,scale:1.5
+        monitor_rule=name:^DP-.$,scale:1.5
 
         # Input Devices
         xkb_rules_options=caps:escape,compose:ralt
         trackpad_natural_scrolling=1
 
         # Miscellaneous
+        float_full_to_top=1
         no_border_when_single=1
+        idle_inhibit_when_fullscreen=1
         cursor_hide_timeout=8
         tag_gather=1
 
