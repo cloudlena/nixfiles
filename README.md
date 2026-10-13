@@ -1,7 +1,7 @@
 # Nixfiles
 
 :snowflake: My personal [NixOS](https://nixos.org/) configuration.
-It uses [Flakes](https://nixos.wiki/wiki/Flakes) under the hood.
+It uses [Flakes](https://wiki.nixos.org/wiki/Flakes) under the hood.
 
 ## Features
 
@@ -92,8 +92,7 @@ The whole setup follows the [Tokyo Night](https://github.com/folke/tokyonight.nv
 | Switch to Next Tag              | `Super + Scroll Up` or `Three-Finger Swipe Left`        |
 | Switch to Previous Tag          | `Super + Scroll Down` or `Three-Finger Swipe Right`     |
 | Switch to Scratchpad            | `Super + S`                                             |
-| Minimize Window to Scratchpad   | `Super + Shift + S`                                     |
-| Restore Minimized Window        | `Super + Ctrl + S`                                      |
+| Move Window to Scratchpad       | `Super + Shift + S`                                     |
 | Focus Previous Monitor          | `Super + [`                                             |
 | Focus Next Monitor              | `Super + ]`                                             |
 | Move Window to Previous Monitor | `Super + Shift + [`                                     |

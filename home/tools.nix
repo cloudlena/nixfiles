@@ -171,6 +171,7 @@
     python3
     quickemu
     rustc
+    serve
     shellcheck
     signal-desktop
     tflint
@@ -225,4 +226,6 @@
     };
   };
   home.preferXdgDirectories = true;
+
+  home.sessionPath = [ "${config.home.homeDirectory}/go/bin" ];
 }
