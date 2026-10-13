@@ -12,7 +12,7 @@
     settings = {
       mainBar = {
         layer = "top";
-        modules-left = [ "ext/workspaces" ];
+        modules-left = [ "mango/workspaces" ];
         modules-center = [ "custom/tasks" ];
         modules-right = [
           "custom/agents"
@@ -60,7 +60,8 @@
           };
           tooltip-format = "Battery at {capacity}%";
         };
-        "ext/workspaces" = {
+        "mango/workspaces" = {
+          hide-empty = true;
           on-click = "activate";
         };
         bluetooth = {
@@ -133,8 +134,11 @@
 
             # Claude Code keeps a file per live session in this directory and
             # rewrites it whenever a session changes state, so watching the
-            # directory reacts immediately without polling the CLI in a loop
-            sessions_dir="$HOME/.claude/sessions"
+            # directory reacts immediately without polling the CLI in a loop.
+            # Waybar runs as a systemd service without the session variables,
+            # so the CLI needs to be told where the config directory is
+            export CLAUDE_CONFIG_DIR="${config.programs.claude-code.configDir}"
+            sessions_dir="$CLAUDE_CONFIG_DIR/sessions"
             mkdir -p "$sessions_dir"
 
             while true; do
@@ -373,7 +377,6 @@
           padding: 0 15px 0 11px;
         }
 
-        #mode,
         #custom-updates {
           color: #${theme.colors.primary};
           font-weight: bold;

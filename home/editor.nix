@@ -106,9 +106,7 @@ in
     };
   };
 
-  programs = {
-    ty.enable = true;
-  };
+  programs.ty.enable = true;
 
   home.packages = with pkgs; [
     # Language servers

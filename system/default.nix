@@ -7,7 +7,6 @@
   ];
 
   # Bootloader
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Pass TRIM through the LUKS layer so fstrim reaches the SSD
@@ -129,6 +128,9 @@
 
     # Smart Card service
     pcscd.enable = true;
+
+    # Secret store for the portal's Secret interface, unlocked at login
+    gnome.gnome-keyring.enable = true;
   };
 
   system.stateVersion = "26.11";

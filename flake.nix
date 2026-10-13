@@ -35,7 +35,7 @@
     in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
+        inherit pkgs;
         modules = [
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           lanzaboote.nixosModules.lanzaboote
