@@ -43,6 +43,9 @@
   # Let Swaylock authenticate
   security.pam.services.swaylock = { };
 
+  # Trusted Platform Module
+  security.tpm2.enable = true;
+
   # Default font packages
   fonts.enableDefaultPackages = true;
 
@@ -77,6 +80,7 @@
     description = "Lena";
     extraGroups = [
       "wheel"
+      "tss"
       "networkmanager"
       "dialout"
     ];

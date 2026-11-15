@@ -18,7 +18,7 @@
       enable = true;
       signing = {
         format = "ssh";
-        key = "${config.home.homeDirectory}/.ssh/id_ed25519";
+        key = "${config.home.homeDirectory}/.ssh/id_ecdsa";
         signByDefault = true;
       };
       settings = {
@@ -68,9 +68,6 @@
 
     # File manager
     yazi.enable = true;
-
-    # Encryption
-    gpg.enable = true;
 
     # Fuzzy finder
     fzf.enable = true;
@@ -139,6 +136,8 @@
   };
 
   home.packages = with pkgs; [
+    age
+    age-plugin-tpm
     air
     bluetui
     brave-origin
@@ -152,11 +151,9 @@
     gimp
     gnumake
     golangci-lint
-    gopass
     image_optim
     inkscape
     killall
-    kooha
     kubectl
     kubectx
     libreoffice
@@ -178,7 +175,6 @@
     timewarrior
     traceroute
     tree
-    tuicr
     unzip
     usbutils
     wdisplays
@@ -186,6 +182,7 @@
     wiremix
     wl-clipboard
     wl-mirror
+    wl-screenrec
     xdg-utils
     yq-go
     yubioath-flutter
@@ -195,16 +192,6 @@
   xdg = {
     enable = true;
     userDirs.enable = true;
-    configFile = {
-      "gopass/config".text = # ini
-        ''
-          [core]
-          	notifications = false
-          	showsafecontent = true
-          [mounts]
-          	path = ${config.home.homeDirectory}/.password-store
-        '';
-    };
     dataFile = {
       "task/hooks/on-modify.timewarrior" = {
         source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";

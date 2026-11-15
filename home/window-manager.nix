@@ -142,11 +142,8 @@ in
     # Password prompt for apps asking for elevated privileges
     polkit-gnome.enable = true;
 
-    # GPG
-    gpg-agent = {
-      enable = true;
-      pinentry.package = pkgs.pinentry-qt;
-    };
+    # SSH in TPM
+    ssh-tpm-agent.enable = true;
 
     # Notifications for low battery
     batsignal.enable = true;
