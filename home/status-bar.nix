@@ -297,8 +297,11 @@
           exec = pkgs.writeShellScript "waybar-updates" ''
             set -u
 
-            current_timestamp=$(timeout 30 nix flake metadata ${config.programs.nh.flake} --json | jq '.locks.nodes.nixpkgs.locked.lastModified') || exit 0
-            latest_timestamp=$(timeout 30 nix flake metadata github:NixOS/nixpkgs/nixos-unstable --json | jq '.locked.lastModified') || exit 0
+            nixpkgs_lock=$(timeout 30 nix flake metadata ${config.programs.nh.flake} --json | jq '.locks.nodes.nixpkgs') || exit 0
+            current_timestamp=$(echo "$nixpkgs_lock" | jq '.locked.lastModified')
+            # Check the same source the flake input uses, so the comparison matches what `nix flake update` would lock
+            nixpkgs_source=$(echo "$nixpkgs_lock" | jq -r '.original | if .type == "tarball" then .url else "\(.type):\(.owner)/\(.repo)\(if .ref then "/\(.ref)" else "" end)" end')
+            latest_timestamp=$(timeout 30 nix flake metadata "$nixpkgs_source" --json | jq '.locked.lastModified') || exit 0
 
             if [ "$latest_timestamp" -le "$current_timestamp" ]; then
               echo ""

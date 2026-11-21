@@ -2,9 +2,13 @@
   description = "System configuration of CloudLena";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    disko = {
+      url = "github:nix-community/disko/v1.13.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
@@ -22,6 +26,7 @@
       self,
       nixpkgs,
       nixos-hardware,
+      disko,
       lanzaboote,
       home-manager,
       ...
@@ -38,6 +43,7 @@
         inherit pkgs;
         modules = [
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+          disko.nixosModules.disko
           lanzaboote.nixosModules.lanzaboote
           ./system
         ];

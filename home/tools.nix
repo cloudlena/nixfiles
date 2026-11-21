@@ -145,6 +145,7 @@
     clippy
     dig
     dust
+    ffmpeg
     file
     fx
     gcc

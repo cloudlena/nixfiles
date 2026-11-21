@@ -3,14 +3,12 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disks.nix
     ./secure-boot.nix
   ];
 
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Pass TRIM through the LUKS layer so fstrim reaches the SSD
-  boot.initrd.luks.devices."root".allowDiscards = true;
 
   # Networking
   networking.networkmanager.enable = true;
