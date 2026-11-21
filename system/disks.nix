@@ -8,6 +8,7 @@
           type = "gpt";
           partitions = {
             ESP = {
+              label = "ESP";
               type = "EF00";
               size = "500M";
               content = {
@@ -21,6 +22,7 @@
               };
             };
             root = {
+              label = "root";
               size = "100%";
               content = {
                 type = "luks";

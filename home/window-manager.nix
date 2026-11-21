@@ -189,6 +189,7 @@ in
     fira-mono
     lato
     nerd-fonts.fira-code
+    (google-fonts.override { fonts = [ "SpaceGrotesk" ]; })
   ];
 
   # Cursor

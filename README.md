@@ -42,7 +42,7 @@ If you're using different hardware, update the `nixos-hardware` module in `flake
 1. Install the system level components (this also installs `nh`)
    - On a fresh install from the NixOS live ISO:
      1. Partition, format and mount the disk with `sudo nix run github:nix-community/disko -- --mode disko ./system/disks.nix`
-     1. Regenerate the hardware configuration for the new disk with `sudo nixos-generate-config --root /mnt --show-hardware-config > system/hardware-configuration.nix`
+     1. Regenerate the hardware configuration for the new disk with `sudo nixos-generate-config --root /mnt --no-filesystems --show-hardware-config > system/hardware-configuration.nix`
      1. Install with `sudo nixos-install --flake .#nixos`
    - On an existing NixOS system: `sudo nixos-rebuild switch --flake .#nixos`
 1. Install the user level components with `nix run github:nix-community/home-manager -- switch --flake .#lena`
